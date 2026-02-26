@@ -4,546 +4,244 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Inicio | AULA DIGITAL GRUPO CENTED</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<!-- ╔══════════════════════════════════════════╗
+     ║  CONFIGURACIÓN — edita solo este bloque  ║
+     ╚══════════════════════════════════════════╝ -->
+<script>
+  const GITHUB_CONFIG = {
+    user:   'TU_USUARIO_GITHUB',   // ← pon tu usuario de GitHub
+    repo:   'cented-aula-digital', // ← nombre del repositorio
+    branch: 'main',
+    folder: 'archivos',
+  };
+</script>
 <style>
-:root{
-  --primary:#07111f;
-  --accent:#00c2ff;
-  --accent2:#ff6b35;
-  --accent3:#00e5a0;
-  --gold:#ffd166;
-  --surface:rgba(255,255,255,0.04);
-  --surface2:rgba(255,255,255,0.08);
-  --text:#e8f4fd;
-  --text-dim:#8ba7c7;
-  --glass:rgba(255,255,255,0.05);
-  --glass-border:rgba(0,194,255,0.18);
-}
+:root{--bg:#07111f;--surface:rgba(255,255,255,0.04);--border:rgba(0,194,255,0.16);--accent:#00c2ff;--accent2:#00e5a0;--accent3:#ff6b35;--gold:#ffd166;--text:#e8f4fd;--text-dim:#8ba7c7}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--primary);
-  font-family:'Nunito',sans-serif;
-  color:var(--text);
-  overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse at 15% 25%,rgba(0,194,255,0.09) 0%,transparent 55%),
-    radial-gradient(ellipse at 85% 75%,rgba(0,229,160,0.07) 0%,transparent 55%);
-}
-
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:64px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 2.5rem;
-  background:rgba(7,17,31,0.88);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--glass-border);
-}
+body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 15% 25%,rgba(0,194,255,0.08) 0%,transparent 55%),radial-gradient(ellipse at 85% 75%,rgba(0,229,160,0.06) 0%,transparent 55%)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(7,17,31,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
-.logo-badge{
-  width:42px;height:42px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent),var(--accent3));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#07111f;
-  box-shadow:0 0 18px rgba(0,194,255,0.4);
-}
+.logo-badge{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#07111f;box-shadow:0 0 18px rgba(0,194,255,0.4)}
 .logo-info{line-height:1.2}
 .logo-info b{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;display:block}
 .logo-info span{font-size:0.65rem;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase}
 .nav-links{display:flex;gap:0.3rem;align-items:center}
-.nav-links a{
-  color:var(--text-dim);text-decoration:none;
-  font-size:0.83rem;font-weight:700;letter-spacing:0.04em;
-  padding:0.4rem 0.85rem;border-radius:7px;transition:all 0.2s;
-}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.83rem;font-weight:700;padding:0.4rem 0.85rem;border-radius:7px;transition:all 0.2s}
 .nav-links a:hover{color:var(--accent);background:rgba(0,194,255,0.1)}
-.nav-links .cta-btn{
-  background:linear-gradient(135deg,var(--accent),var(--accent3));
-  color:#07111f!important;padding:0.45rem 1.1rem;border-radius:8px;
-  font-weight:800;box-shadow:0 0 16px rgba(0,194,255,0.3);
-}
-.nav-links .cta-btn:hover{transform:translateY(-1px);box-shadow:0 0 28px rgba(0,194,255,0.5);background:linear-gradient(135deg,var(--accent),var(--accent3))!important}
-
-/* HERO */
-.hero{
-  position:relative;z-index:1;
-  min-height:100vh;
-  display:grid;grid-template-rows:1fr auto;
-}
-.hero-img{
-  position:absolute;inset:0;
-  background:url('https://static.wixstatic.com/media/ee1221_a808691ece464988a0c3755010bc2f8c~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a808691ece464988a0c3755010bc2f8c~mv2.jpg') center/cover no-repeat;
-  filter:brightness(0.35) saturate(0.7);
-}
-.hero-img::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(7,17,31,0.3) 0%,rgba(7,17,31,0.0) 30%,rgba(7,17,31,0.85) 100%);
-}
-.hero-content{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:7rem 2rem 3rem;min-height:100vh;
-}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,194,255,0.12);border:1px solid rgba(0,194,255,0.35);
-  border-radius:50px;padding:0.35rem 1.1rem;
-  font-size:0.72rem;font-weight:800;letter-spacing:0.18em;color:var(--accent);text-transform:uppercase;
-  margin-bottom:1.8rem;
-  animation:fadeUp 0.7s ease both;
-}
-.hero-eyebrow::before{content:'●';font-size:0.45rem;animation:blink 2s infinite}
+.nav-links .cta{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07111f!important;padding:0.45rem 1.1rem;border-radius:8px;font-weight:800}
+.nav-links .cta:hover{transform:translateY(-1px);box-shadow:0 0 25px rgba(0,194,255,0.4);background:linear-gradient(135deg,var(--accent),var(--accent2))!important}
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.hero-bg{position:absolute;inset:0;background:url('https://static.wixstatic.com/media/ee1221_a808691ece464988a0c3755010bc2f8c~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a808691ece464988a0c3755010bc2f8c~mv2.jpg') center/cover no-repeat;filter:brightness(0.3) saturate(0.7)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,17,31,0.2),rgba(7,17,31,0.92))}
+.hero-content{position:relative;z-index:2;text-align:center;padding:6rem 2rem 4rem;max-width:680px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,194,255,0.1);border:1px solid rgba(0,194,255,0.3);border-radius:50px;padding:0.3rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;color:var(--accent);text-transform:uppercase;margin-bottom:1.8rem;animation:fu 0.7s ease both}
+.hero-badge::before{content:'●';font-size:0.45rem;animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-.hero h1{
-  font-family:'Rajdhani',sans-serif;
-  font-size:clamp(3.5rem,10vw,7.5rem);
-  font-weight:700;line-height:0.9;letter-spacing:-0.02em;
-  animation:fadeUp 0.7s 0.1s ease both;opacity:0;
-}
-.hero h1 em{
-  font-style:normal;
-  background:linear-gradient(135deg,var(--accent),var(--accent3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-sub{
-  margin-top:1.6rem;max-width:520px;
-  font-size:1.05rem;line-height:1.75;color:var(--text-dim);
-  animation:fadeUp 0.7s 0.2s ease both;opacity:0;
-}
-.hero-cta-row{
-  margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
-  animation:fadeUp 0.7s 0.3s ease both;opacity:0;
-}
-.btn-main{
-  background:linear-gradient(135deg,var(--accent),var(--accent3));
-  color:#07111f;border:none;padding:0.9rem 2.2rem;border-radius:10px;
-  font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:800;
-  cursor:pointer;text-decoration:none;
-  box-shadow:0 0 28px rgba(0,194,255,0.35);transition:all 0.25s;
-}
-.btn-main:hover{transform:translateY(-2px);box-shadow:0 0 45px rgba(0,194,255,0.55)}
-.btn-ghost{
-  background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.2);
-  padding:0.9rem 2.2rem;border-radius:10px;
-  font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;
-  cursor:pointer;text-decoration:none;backdrop-filter:blur(5px);transition:all 0.25s;
-}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,194,255,0.07)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-/* SCROLL CARET */
-.scroll-cue{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:var(--text-dim);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;z-index:2;
-  animation:bob 2.5s ease-in-out infinite;
-}
+h1.ht{font-family:'Rajdhani',sans-serif;font-size:clamp(3.5rem,10vw,7.5rem);font-weight:700;line-height:0.9;letter-spacing:-0.02em;animation:fu 0.7s 0.1s ease both;opacity:0}
+h1.ht em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{margin-top:1.5rem;font-size:1.05rem;line-height:1.75;color:var(--text-dim);animation:fu 0.7s 0.2s ease both;opacity:0}
+.hero-btns{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fu 0.7s 0.3s ease both;opacity:0}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07111f;border:none;padding:0.9rem 2.2rem;border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:800;cursor:pointer;text-decoration:none;box-shadow:0 0 28px rgba(0,194,255,0.35);transition:all 0.25s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 45px rgba(0,194,255,0.55)}
+.btn-g{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.2);padding:0.9rem 2.2rem;border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;text-decoration:none;backdrop-filter:blur(5px);transition:all 0.25s}
+.btn-g:hover{border-color:var(--accent);color:var(--accent)}
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;color:var(--text-dim);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;animation:bob 2.5s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-
-/* SECTION UTILS */
-.section{position:relative;z-index:1;padding:5.5rem 2rem}
-.section-tag{
-  display:inline-block;font-size:0.68rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--accent);padding:0.28rem 0.85rem;
-  border:1px solid rgba(0,194,255,0.28);border-radius:50px;
-  background:rgba(0,194,255,0.07);margin-bottom:0.8rem;
-}
-.section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.1}
-.section-desc{color:var(--text-dim);margin-top:0.7rem;max-width:500px;line-height:1.75}
-.section-header{text-align:center;margin-bottom:3.5rem}
-.section-header .section-desc{margin-left:auto;margin-right:auto}
-.divider{position:relative;z-index:1;height:1px;background:linear-gradient(90deg,transparent,var(--glass-border),transparent);margin:0 5rem}
-
-/* STATS */
-.stats-row{
-  position:relative;z-index:1;
-  display:flex;justify-content:center;flex-wrap:wrap;
-  max-width:900px;margin:0 auto;
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;
-  gap:1px;
-}
-.stat-cell{
-  flex:1;min-width:150px;padding:1.6rem 2rem;text-align:center;
-  background:rgba(7,17,31,0.7);backdrop-filter:blur(10px);transition:background 0.2s;
-}
-.stat-cell:hover{background:rgba(0,194,255,0.07)}
-.stat-num{font-family:'Rajdhani',sans-serif;font-size:2.4rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat-lbl{font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.15rem}
-
-/* GRUPOS */
-.groups-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.5rem}
-.group-card{
-  position:relative;border-radius:18px;overflow:hidden;
-  border:1px solid var(--glass-border);
-  transition:transform 0.35s,box-shadow 0.35s;
-  cursor:pointer;text-decoration:none;color:var(--text);
-  display:block;
-}
-.group-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.4),0 0 35px var(--glow)}
-.group-card .card-bg{
-  height:200px;background-size:cover;background-position:center;
-  position:relative;
-}
-.group-card .card-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 30%,rgba(7,17,31,0.95) 100%);
-}
-.group-card .card-body{
-  padding:1.5rem 1.8rem 1.8rem;
-  background:var(--surface);backdrop-filter:blur(10px);
-}
-.group-card .card-accent-bar{height:3px;background:var(--bar)}
-.group-card h3{font-family:'Rajdhani',sans-serif;font-size:1.55rem;font-weight:700;margin-bottom:0.4rem}
-.group-card .time{font-size:0.82rem;color:var(--text-dim);margin-bottom:1rem}
-.group-card p{font-size:0.85rem;color:var(--text-dim);line-height:1.65;margin-bottom:1.4rem}
-.group-card .go-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:0.6rem 1.3rem;border-radius:8px;
-  font-size:0.85rem;font-weight:800;
-  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
-  transition:all 0.22s;color:var(--text);
-}
-.group-card:hover .go-btn{background:rgba(0,194,255,0.14);border-color:var(--accent);color:var(--accent)}
-.group-card.matutino{--glow:rgba(0,194,255,0.18);--bar:linear-gradient(90deg,#00c2ff,#00e5a0)}
-.group-card.vespertino{--glow:rgba(255,107,53,0.18);--bar:linear-gradient(90deg,#ffd166,#ff6b35)}
-.group-card.sabatino{--glow:rgba(185,131,255,0.18);--bar:linear-gradient(90deg,#b983ff,#00e5a0)}
-.group-card .card-icon{
-  position:absolute;bottom:1rem;right:1rem;z-index:2;
-  width:48px;height:48px;border-radius:12px;
-  background:rgba(7,17,31,0.7);backdrop-filter:blur(8px);
-  border:1px solid rgba(255,255,255,0.12);
-  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
-}
-
-/* HERRAMIENTAS */
-.tools-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1rem}
-.tool-tile{
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:14px;padding:1.5rem 1rem;text-align:center;
-  text-decoration:none;color:var(--text);transition:all 0.25s;display:block;
-}
-.tool-tile:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 10px 30px rgba(0,194,255,0.12)}
-.tool-tile .ti{font-size:2.2rem;margin-bottom:0.6rem}
-.tool-tile h5{font-size:0.82rem;font-weight:800}
-.tool-tile p{font-size:0.69rem;color:var(--text-dim);margin-top:0.25rem}
-
-/* REDES */
+.sec{position:relative;z-index:1;padding:5rem 2rem}
+.sec-tag{display:inline-block;font-size:0.68rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);padding:0.28rem 0.85rem;border:1px solid rgba(0,194,255,0.25);border-radius:50px;background:rgba(0,194,255,0.07);margin-bottom:0.8rem}
+.sec-title{font-family:'Rajdhani',sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:700;line-height:1.1}
+.sec-desc{color:var(--text-dim);margin-top:0.7rem;max-width:500px;line-height:1.75}
+.sec-header{text-align:center;margin-bottom:3rem}
+.sec-header .sec-desc{margin:0.7rem auto 0}
+.divider{position:relative;z-index:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 4rem}
+.stats-bar{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;overflow:hidden;gap:1px}
+.stat-c{flex:1;min-width:150px;padding:1.5rem 1.8rem;text-align:center;background:rgba(7,17,31,0.7);backdrop-filter:blur(10px);transition:background 0.2s}
+.stat-c:hover{background:rgba(0,194,255,0.07)}
+.stat-num{font-family:'Rajdhani',sans-serif;font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.15rem}
+.groups-grid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.gc{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:transform 0.35s,box-shadow 0.35s;cursor:pointer;text-decoration:none;color:var(--text);display:block}
+.gc:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.4),0 0 35px var(--gg)}
+.gc .g-bg{height:190px;background-size:cover;background-position:center;position:relative}
+.gc .g-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(7,17,31,0.96) 100%)}
+.gc .g-body{padding:1.4rem 1.8rem 1.8rem;background:rgba(255,255,255,0.04)}
+.gc .g-bar{height:3px;background:var(--gb)}
+.gc h3{font-family:'Rajdhani',sans-serif;font-size:1.55rem;font-weight:700;margin-bottom:0.35rem}
+.gc .gt{font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem}
+.gc .g-btn{display:inline-flex;align-items:center;gap:8px;padding:0.6rem 1.3rem;border-radius:8px;font-size:0.85rem;font-weight:800;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);transition:all 0.22s}
+.gc:hover .g-btn{background:rgba(0,194,255,0.14);border-color:var(--accent);color:var(--accent)}
+.gc .g-icon{position:absolute;bottom:1rem;right:1rem;z-index:2;width:46px;height:46px;border-radius:11px;background:rgba(7,17,31,0.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.gm{--gg:rgba(0,194,255,0.2);--gb:linear-gradient(90deg,#00c2ff,#00e5a0)}
+.gv{--gg:rgba(255,107,53,0.2);--gb:linear-gradient(90deg,#ffd166,#ff6b35)}
+.gs{--gg:rgba(185,131,255,0.2);--gb:linear-gradient(90deg,#b983ff,#00e5a0)}
+.normas-wrap{max-width:1050px;margin:0 auto 2.5rem}
+.normas-box{background:rgba(255,209,102,0.07);border:1px solid rgba(255,209,102,0.25);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem}
+.normas-box h4{font-weight:800;font-size:0.88rem;color:var(--gold)}
+.normas-box p{font-size:0.78rem;color:var(--text-dim);margin-top:0.2rem}
+.normas-box a{margin-left:auto;flex-shrink:0;white-space:nowrap;padding:0.4rem 1rem;border-radius:8px;background:rgba(255,209,102,0.12);border:1px solid rgba(255,209,102,0.28);color:var(--gold);text-decoration:none;font-size:0.78rem;font-weight:800;transition:all 0.2s}
+.normas-box a:hover{background:rgba(255,209,102,0.22)}
+.tools-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}
+.tt{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1rem;text-align:center;text-decoration:none;color:var(--text);transition:all 0.25s;display:block}
+.tt:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 10px 28px rgba(0,194,255,0.12)}
+.tt .ti{height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem}
+.tt .ti img{max-height:48px;max-width:80px;object-fit:contain}
+.tt h5{font-size:0.82rem;font-weight:800}
+.tt p{font-size:0.69rem;color:var(--text-dim);margin-top:0.25rem}
 .social-row{max-width:860px;margin:0 auto;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-.social-tile{
-  flex:1;min-width:190px;
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:14px;padding:1.6rem 1.2rem;text-align:center;
-  text-decoration:none;color:var(--text);transition:all 0.25s;
-}
-.social-tile:hover{transform:translateY(-4px)}
-.social-tile .si{font-size:2.4rem;margin-bottom:0.7rem}
-.social-tile h5{font-weight:800;font-size:0.9rem}
-.social-tile p{font-size:0.75rem;color:var(--text-dim);margin-top:0.3rem}
-.social-tile.wa{border-top:3px solid #25D366}.social-tile.wa:hover{box-shadow:0 10px 30px rgba(37,211,102,0.2)}
-.social-tile.fb{border-top:3px solid #1877F2}.social-tile.fb:hover{box-shadow:0 10px 30px rgba(24,119,242,0.2)}
-.social-tile.yt{border-top:3px solid #FF0000}.social-tile.yt:hover{box-shadow:0 10px 30px rgba(255,0,0,0.2)}
-
-/* ABOUT */
-.about-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-.about-img-wrap{border-radius:18px;overflow:hidden;border:1px solid var(--glass-border);position:relative}
-.about-img-wrap img{width:100%;display:block;filter:saturate(0.85)}
-.about-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,194,255,0.08),transparent)}
-.about-text h2{font-family:'Rajdhani',sans-serif;font-size:2.4rem;font-weight:700;margin-bottom:1rem}
-.about-text p{color:var(--text-dim);line-height:1.8;margin-bottom:1rem}
-.about-lema{
-  border-left:3px solid var(--accent);padding-left:1rem;
-  font-size:0.85rem;color:var(--text-dim);font-style:italic;margin:1.5rem 0;
-}
-.about-docente{
-  display:flex;align-items:center;gap:1rem;margin-top:1.5rem;
-  padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--glass-border);border-radius:12px;
-}
-.about-docente img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
-.about-docente h5{font-weight:800;font-size:0.9rem}
-.about-docente p{font-size:0.75rem;color:var(--text-dim);margin-top:0.2rem}
-
-/* CONTACTO */
-.contact-box{
-  max-width:680px;margin:0 auto;text-align:center;
-  background:var(--surface);border:1px solid var(--glass-border);
-  border-radius:20px;padding:3rem;
-}
+.st{flex:1;min-width:190px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.2rem;text-align:center;text-decoration:none;color:var(--text);transition:all 0.25s;display:block}
+.st:hover{transform:translateY(-4px)}
+.st .si{height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem}
+.st .si img{max-height:52px;object-fit:contain}
+.st h5{font-weight:800;font-size:0.9rem}
+.st p{font-size:0.75rem;color:var(--text-dim);margin-top:0.3rem}
+.st.wa{border-top:3px solid #25D366}.st.wa:hover{box-shadow:0 10px 28px rgba(37,211,102,0.2)}
+.st.fb{border-top:3px solid #1877F2}.st.fb:hover{box-shadow:0 10px 28px rgba(24,119,242,0.2)}
+.st.yt{border-top:3px solid #FF0000}.st.yt:hover{box-shadow:0 10px 28px rgba(255,0,0,0.2)}
+.about-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-img{border-radius:18px;overflow:hidden;border:1px solid var(--border)}
+.about-img img{width:100%;display:block;filter:saturate(0.85)}
+.about-text h2{font-family:'Rajdhani',sans-serif;font-size:2.3rem;font-weight:700;margin-bottom:1rem}
+.about-text p{color:var(--text-dim);line-height:1.8;margin-bottom:0.9rem}
+.lema{border-left:3px solid var(--accent);padding-left:1rem;font-size:0.85rem;color:var(--text-dim);font-style:italic;margin:1.2rem 0}
+.doc-box{display:flex;align-items:center;gap:1rem;margin-top:1.5rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.doc-box img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
+.doc-box h5{font-weight:800;font-size:0.9rem}
+.doc-box p{font-size:0.75rem;color:var(--text-dim);margin-top:0.15rem}
+.contact-box{max-width:680px;margin:0 auto;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3rem}
 .contact-box h3{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700}
-.contact-box p{color:var(--text-dim);margin:0.6rem 0 2rem}
-.contact-links{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center}
-.c-link{
-  display:flex;align-items:center;gap:8px;
-  padding:0.7rem 1.4rem;border-radius:10px;
-  background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);
-  color:var(--text);text-decoration:none;font-weight:700;font-size:0.87rem;
-  transition:all 0.2s;
-}
+.contact-box p{color:var(--text-dim);margin:0.5rem 0 2rem}
+.c-links{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center}
+.c-link{display:flex;align-items:center;gap:8px;padding:0.7rem 1.4rem;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text);text-decoration:none;font-weight:700;font-size:0.87rem;transition:all 0.2s}
 .c-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,194,255,0.08)}
-
-/* NORMAS */
-.normas-banner{
-  max-width:980px;margin:0 auto 2.5rem;
-  background:rgba(255,209,102,0.07);border:1px solid rgba(255,209,102,0.25);
-  border-radius:12px;padding:1.1rem 1.6rem;
-  display:flex;align-items:center;gap:1rem;
-}
-.normas-banner h4{font-weight:800;font-size:0.88rem;color:var(--gold)}
-.normas-banner p{font-size:0.78rem;color:var(--text-dim);margin-top:0.2rem}
-.normas-banner a{
-  margin-left:auto;flex-shrink:0;white-space:nowrap;
-  padding:0.4rem 1rem;border-radius:8px;
-  background:rgba(255,209,102,0.12);border:1px solid rgba(255,209,102,0.28);
-  color:var(--gold);text-decoration:none;font-size:0.78rem;font-weight:800;transition:all 0.2s;
-}
-.normas-banner a:hover{background:rgba(255,209,102,0.22)}
-
-/* FOOTER */
-footer{
-  position:relative;z-index:1;
-  background:rgba(4,10,20,0.95);border-top:1px solid var(--glass-border);
-  padding:2.5rem 2rem;text-align:center;
-}
-footer .f-logo{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.6rem}
-footer p{font-size:0.77rem;color:var(--text-dim);line-height:1.9}
+footer{position:relative;z-index:1;background:rgba(4,10,20,0.95);border-top:1px solid var(--border);padding:2.5rem;text-align:center}
+footer .f-logo{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.5rem}
+footer p{font-size:0.76rem;color:var(--text-dim);line-height:1.9}
 footer .fa{color:var(--accent)}
-
-/* REVEAL ANIMATION */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-@media(max-width:760px){
-  .nav-links a:not(.cta-btn){display:none}
-  .about-grid{grid-template-columns:1fr}
-  .about-img-wrap{display:none}
-}
+.admin-link{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;padding:0.4rem 1rem;border-radius:7px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-dim);text-decoration:none;font-size:0.75rem;font-weight:700;transition:all 0.2s}
+.admin-link:hover{border-color:var(--accent);color:var(--accent)}
+.rev{opacity:0;transform:translateY(26px);transition:opacity 0.6s ease,transform 0.6s ease}
+.rev.on{opacity:1;transform:translateY(0)}
+@media(max-width:760px){.nav-links a:not(.cta){display:none}.about-wrap{grid-template-columns:1fr}.about-img{display:none}}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="index.html">
+  <a class="nav-logo" href="#">
     <div class="logo-badge">GC</div>
-    <div class="logo-info">
-      <b>GRUPO CENTED</b>
-      <span>Altavista · Aula Digital</span>
-    </div>
+    <div class="logo-info"><b>GRUPO CENTED</b><span>Altavista · Aula Digital</span></div>
   </a>
   <div class="nav-links">
     <a href="#grupos">Grupos</a>
     <a href="#herramientas">Herramientas</a>
     <a href="#nosotros">Nosotros</a>
-    <a href="#contacto" class="cta-btn">Contacto</a>
+    <a href="#contacto" class="cta">Contacto</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-img"></div>
+  <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Plataforma Educativa Digital · 2026</div>
-    <h1>AULA<br/><em>DIGITAL</em></h1>
-    <p class="hero-sub">Bienvenido al espacio digital del <strong style="color:var(--text)">Grupo CENTED Altavista</strong>. Selecciona tu grupo, accede a tus clases, guías y materiales de práctica.</p>
-    <div class="hero-cta-row">
-      <a href="#grupos" class="btn-main">Seleccionar mi grupo →</a>
-      <a href="#nosotros" class="btn-ghost">Conocer más</a>
+    <div class="hero-badge">Plataforma Educativa Digital · 2026</div>
+    <h1 class="ht">AULA<br/><em>DIGITAL</em></h1>
+    <p class="hero-sub">Bienvenido al espacio digital del <strong style="color:var(--text)">Grupo CENTED Altavista</strong>. Selecciona tu grupo y accede a tus clases, prácticas y materiales.</p>
+    <div class="hero-btns">
+      <a href="#grupos" class="btn-p">Seleccionar mi grupo →</a>
+      <a href="#nosotros" class="btn-g">Conocer más</a>
     </div>
   </div>
-  <div class="scroll-cue">
-    <span>Explorar</span>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
+  <div class="scroll-cue"><span>Explorar</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
 </div>
 
-<!-- STATS -->
-<div class="section" style="padding-top:3rem;padding-bottom:3rem">
-  <div class="stats-row reveal">
-    <div class="stat-cell"><div class="stat-num">3</div><div class="stat-lbl">Grupos activos</div></div>
-    <div class="stat-cell"><div class="stat-num">6</div><div class="stat-lbl">Materias técnicas</div></div>
-    <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-lbl">Guías y recursos</div></div>
-    <div class="stat-cell"><div class="stat-num">25</div><div class="stat-lbl">Años de experiencia</div></div>
+<div class="sec" style="padding-top:3rem;padding-bottom:3rem">
+  <div class="stats-bar rev">
+    <div class="stat-c"><div class="stat-num">3</div><div class="stat-lbl">Grupos activos</div></div>
+    <div class="stat-c"><div class="stat-num">6</div><div class="stat-lbl">Materias técnicas</div></div>
+    <div class="stat-c"><div class="stat-num" id="stat-docs">—</div><div class="stat-lbl">Documentos subidos</div></div>
+    <div class="stat-c"><div class="stat-num">25</div><div class="stat-lbl">Años de experiencia</div></div>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- GRUPOS -->
-<div class="section" id="grupos">
-  <div class="section-header reveal">
-    <div class="section-tag">📅 Horarios</div>
-    <h2 class="section-title">Selecciona tu <span style="color:var(--accent)">Grupo</span></h2>
-    <p class="section-desc">Elige el grupo correspondiente a tu horario de inscripción para acceder a tus clases, prácticas y materiales.</p>
+<div class="sec" id="grupos">
+  <div class="sec-header rev">
+    <div class="sec-tag">📅 Horarios</div>
+    <h2 class="sec-title">Selecciona tu <span style="color:var(--accent)">Grupo</span></h2>
+    <p class="sec-desc">Elige el grupo de tu horario para acceder a tus clases, prácticas y materiales.</p>
   </div>
-
-  <div class="normas-banner reveal">
-    <span style="font-size:1.5rem;flex-shrink:0">⚠️</span>
-    <div>
-      <h4>Normas de Convivencia</h4>
-      <p>Lee y respeta las normas del aula digital antes de participar en el grupo.</p>
+  <div class="normas-wrap rev">
+    <div class="normas-box">
+      <span style="font-size:1.5rem;flex-shrink:0">⚠️</span>
+      <div><h4>Normas de Convivencia</h4><p>Lee y respeta las normas del aula digital antes de participar.</p></div>
+      <a href="#">Ver normas</a>
     </div>
-    <a href="#">Ver normas</a>
   </div>
-
-  <div class="groups-wrap">
-    <!-- MATUTINO -->
-    <a href="grupo-matutino.html" class="group-card matutino reveal">
-      <div class="card-accent-bar"></div>
-      <div class="card-bg" style="background-image:url('https://static.wixstatic.com/media/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png/v1/fill/w_556,h_371,q_90,enc_avif,quality_auto/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png')">
-        <div class="card-icon">🌅</div>
-      </div>
-      <div class="card-body">
-        <h3>Grupo Matutino</h3>
-        <div class="time">⏰ Lunes a Viernes · 7:00 AM – 12:00 PM</div>
-        <p>Accede a tus clases, prácticas, guías y materiales del turno de la mañana.</p>
-        <div class="go-btn">Ingresar al aula <span>→</span></div>
-      </div>
+  <div class="groups-grid">
+    <a href="grupo-matutino.html" class="gc gm rev">
+      <div class="g-bar"></div>
+      <div class="g-bg" style="background-image:url('https://static.wixstatic.com/media/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png/v1/fill/w_556,h_371,q_90,enc_avif,quality_auto/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png')"><div class="g-icon">🌅</div></div>
+      <div class="g-body"><h3>Grupo Matutino</h3><div class="gt">⏰ Lunes a Viernes · 7:00 AM – 12:00 PM</div><div class="g-btn">Ingresar al aula →</div></div>
     </a>
-
-    <!-- VESPERTINO -->
-    <a href="grupo-vespertino.html" class="group-card vespertino reveal">
-      <div class="card-accent-bar"></div>
-      <div class="card-bg" style="background-image:url('https://static.wixstatic.com/media/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png/v1/fill/w_559,h_371,q_90,enc_avif,quality_auto/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png')">
-        <div class="card-icon">🌇</div>
-      </div>
-      <div class="card-body">
-        <h3>Grupo Vespertino</h3>
-        <div class="time">⏰ Lunes a Viernes · 1:00 PM – 6:00 PM</div>
-        <p>Accede a tus clases, prácticas, guías y materiales del turno de la tarde.</p>
-        <div class="go-btn">Ingresar al aula <span>→</span></div>
-      </div>
+    <a href="grupo-vespertino.html" class="gc gv rev">
+      <div class="g-bar"></div>
+      <div class="g-bg" style="background-image:url('https://static.wixstatic.com/media/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png/v1/fill/w_559,h_371,q_90,enc_avif,quality_auto/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png')"><div class="g-icon">🌇</div></div>
+      <div class="g-body"><h3>Grupo Vespertino</h3><div class="gt">⏰ Lunes a Viernes · 1:00 PM – 6:00 PM</div><div class="g-btn">Ingresar al aula →</div></div>
     </a>
-
-    <!-- SABATINO -->
-    <a href="grupo-sabatino.html" class="group-card sabatino reveal">
-      <div class="card-accent-bar"></div>
-      <div class="card-bg" style="background-image:url('https://static.wixstatic.com/media/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg/v1/fill/w_980,h_614,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg')">
-        <div class="card-icon">📚</div>
-      </div>
-      <div class="card-body">
-        <h3>Grupo Sabatino</h3>
-        <div class="time">⏰ Sábados · 8:00 AM – 5:00 PM</div>
-        <p>Accede a tus clases, prácticas, guías y materiales del turno del sábado.</p>
-        <div class="go-btn">Ingresar al aula <span>→</span></div>
-      </div>
+    <a href="grupo-sabatino.html" class="gc gs rev">
+      <div class="g-bar"></div>
+      <div class="g-bg" style="background-image:url('https://static.wixstatic.com/media/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg/v1/fill/w_980,h_614,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg')"><div class="g-icon">📚</div></div>
+      <div class="g-body"><h3>Grupo Sabatino</h3><div class="gt">⏰ Sábados · 8:00 AM – 5:00 PM</div><div class="g-btn">Ingresar al aula →</div></div>
     </a>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- HERRAMIENTAS IA -->
-<div class="section" id="herramientas">
-  <div class="section-header reveal">
-    <div class="section-tag">🤖 Asistencia IA & Web</div>
-    <h2 class="section-title">Herramientas <span style="color:var(--accent3)">Digitales</span></h2>
-    <p class="section-desc">Recursos y herramientas web recomendadas por el docente para potenciar tu aprendizaje.</p>
-  </div>
-  <div class="tools-grid reveal">
-    <a href="https://gemini.google.com/app" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png" style="width:48px;height:48px;object-fit:contain;border-radius:8px"/></div>
-      <h5>Gemini</h5><p>IA de Google</p>
-    </a>
-    <a href="https://copilot.microsoft.com/" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png/v1/crop/x_228,y_19,w_1426,h_1882/fill/w_60,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png" style="width:48px;height:48px;object-fit:contain"/></div>
-      <h5>Copilot</h5><p>IA de Microsoft</p>
-    </a>
-    <a href="https://www.photoroom.com/es/herramientas/eliminador-de-fondos" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png" style="width:48px;height:48px;object-fit:contain;border-radius:8px"/></div>
-      <h5>Photoroom</h5><p>Eliminador fondos</p>
-    </a>
-    <a href="https://dlbunny.com/es/youtube" target="_blank" class="tool-tile">
-      <div class="ti">⬇️</div>
-      <h5>DLBunny</h5><p>Descargar videos</p>
-    </a>
-    <a href="https://fonts.google.com/" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png" style="width:48px;height:48px;object-fit:contain"/></div>
-      <h5>Google Fonts</h5><p>Tipografías gratis</p>
-    </a>
-    <a href="https://filebin.net/3dfedfo41lp5u6j5" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png" style="width:48px;height:48px;object-fit:contain;border-radius:8px"/></div>
-      <h5>FileBin</h5><p>Compartir archivos</p>
-    </a>
-    <a href="https://ar.pinterest.com/" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_7876a14aa2d2463ca002b5ac87aea8b1~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_7876a14aa2d2463ca002b5ac87aea8b1~mv2.png" style="width:48px;height:48px;object-fit:contain"/></div>
-      <h5>Pinterest</h5><p>Inspiración visual</p>
-    </a>
-    <a href="https://seeklogo.com/" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png/v1/fill/w_100,h_50,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png" style="width:80px;height:32px;object-fit:contain"/></div>
-      <h5>Seek Logo</h5><p>Banco de logos</p>
-    </a>
-    <a href="https://www.pexels.com/es-es/" target="_blank" class="tool-tile">
-      <div class="ti"><img src="https://static.wixstatic.com/media/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png/v1/fill/w_120,h_35,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png" style="width:80px;height:32px;object-fit:contain"/></div>
-      <h5>Pexels</h5><p>Fotos gratuitas</p>
-    </a>
+<div class="sec" id="herramientas">
+  <div class="sec-header rev"><div class="sec-tag">🤖 IA & Web</div><h2 class="sec-title">Herramientas <span style="color:var(--accent2)">Digitales</span></h2><p class="sec-desc">Recursos y herramientas web recomendadas por el docente para potenciar tu aprendizaje.</p></div>
+  <div class="tools-grid rev">
+    <a href="https://gemini.google.com/app" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png"/></div><h5>Gemini</h5><p>IA de Google</p></a>
+    <a href="https://copilot.microsoft.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png/v1/crop/x_228,y_19,w_1426,h_1882/fill/w_60,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png"/></div><h5>Copilot</h5><p>IA de Microsoft</p></a>
+    <a href="https://www.photoroom.com/es/herramientas/eliminador-de-fondos" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png"/></div><h5>Photoroom</h5><p>Eliminar fondos</p></a>
+    <a href="https://dlbunny.com/es/youtube" target="_blank" class="tt"><div class="ti" style="font-size:2.2rem">⬇️</div><h5>DLBunny</h5><p>Descargar videos</p></a>
+    <a href="https://fonts.google.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png"/></div><h5>Google Fonts</h5><p>Tipografías gratis</p></a>
+    <a href="https://filebin.net/3dfedfo41lp5u6j5" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png"/></div><h5>FileBin</h5><p>Compartir archivos</p></a>
+    <a href="https://ar.pinterest.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_7876a14aa2d2463ca002b5ac87aea8b1~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_7876a14aa2d2463ca002b5ac87aea8b1~mv2.png"/></div><h5>Pinterest</h5><p>Inspiración visual</p></a>
+    <a href="https://seeklogo.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png/v1/fill/w_180,h_70,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png"/></div><h5>Seek Logo</h5><p>Banco de logos</p></a>
+    <a href="https://www.pexels.com/es-es/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png/v1/fill/w_140,h_40,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png"/></div><h5>Pexels</h5><p>Fotos gratuitas</p></a>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- REDES SOCIALES -->
-<div class="section">
-  <div class="section-header reveal">
-    <div class="section-tag">📱 Comunidad</div>
-    <h2 class="section-title">Nuestras <span style="color:var(--gold)">Redes Sociales</span></h2>
-    <p class="section-desc">Únete a nuestra comunidad y mantente al tanto de todas las novedades y comunicados.</p>
-  </div>
-  <div class="social-row reveal">
-    <a href="https://chat.whatsapp.com/LImpnjogjcUKiBJNeNu2FP" target="_blank" class="social-tile wa">
-      <div class="si">
-        <img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png" style="width:48px;height:48px;object-fit:contain"/>
-      </div>
-      <h5>WhatsApp Matutino</h5>
-      <p>Grupo oficial turno mañana</p>
-    </a>
-    <a href="https://chat.whatsapp.com/HAdxuMHzKgaHz2fveoQn5d" target="_blank" class="social-tile wa">
-      <div class="si">
-        <img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png" style="width:48px;height:48px;object-fit:contain"/>
-      </div>
-      <h5>WhatsApp Vespertino</h5>
-      <p>Grupo oficial turno tarde</p>
-    </a>
-    <a href="https://www.facebook.com/people/Grupo-Cented-Altavista/100064221211722/" target="_blank" class="social-tile fb">
-      <div class="si">
-        <img src="https://static.wixstatic.com/media/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png/v1/fill/w_131,h_131,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png" style="width:48px;height:48px;object-fit:contain"/>
-      </div>
-      <h5>Facebook</h5>
-      <p>Grupo Cented Altavista</p>
-    </a>
-    <a href="https://music.youtube.com/playlist?list=PLyFNynFmNxw-IRwT0j6UKyPUOVVwqqbS8&jct=Yw9NnyhqPIYkKgV4LYI0Pg" target="_blank" class="social-tile yt">
-      <div class="si">
-        <img src="https://static.wixstatic.com/media/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png/v1/fill/w_79,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png" style="width:48px;height:48px;object-fit:contain"/>
-      </div>
-      <h5>YouTube Music</h5>
-      <p>Playlist oficial del aula</p>
-    </a>
+<div class="sec">
+  <div class="sec-header rev"><div class="sec-tag">📱 Comunidad</div><h2 class="sec-title">Nuestras <span style="color:var(--gold)">Redes Sociales</span></h2></div>
+  <div class="social-row rev">
+    <a href="https://chat.whatsapp.com/LImpnjogjcUKiBJNeNu2FP" target="_blank" class="st wa"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png"/></div><h5>WhatsApp Matutino</h5><p>Grupo oficial turno mañana</p></a>
+    <a href="https://chat.whatsapp.com/HAdxuMHzKgaHz2fveoQn5d" target="_blank" class="st wa"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png"/></div><h5>WhatsApp Vespertino</h5><p>Grupo oficial turno tarde</p></a>
+    <a href="https://www.facebook.com/people/Grupo-Cented-Altavista/100064221211722/" target="_blank" class="st fb"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png/v1/fill/w_131,h_131,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png"/></div><h5>Facebook</h5><p>Grupo Cented Altavista</p></a>
+    <a href="https://music.youtube.com/playlist?list=PLyFNynFmNxw-IRwT0j6UKyPUOVVwqqbS8" target="_blank" class="st yt"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png/v1/fill/w_79,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png"/></div><h5>YouTube Music</h5><p>Playlist oficial del aula</p></a>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- ACERCA DE -->
-<div class="section" id="nosotros">
-  <div class="about-grid">
-    <div class="about-img-wrap reveal">
-      <img src="https://static.wixstatic.com/media/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg/v1/fill/w_933,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg" alt="Grupo CENTED"/>
-    </div>
-    <div class="about-text reveal">
-      <div class="section-tag">🏫 Institución</div>
+<div class="sec" id="nosotros">
+  <div class="about-wrap">
+    <div class="about-img rev"><img src="https://static.wixstatic.com/media/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg/v1/fill/w_933,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg" alt="Grupo CENTED"/></div>
+    <div class="about-text rev">
+      <div class="sec-tag">🏫 Institución</div>
       <h2>Acerca de <span style="color:var(--accent)">CENTED</span></h2>
-      <p>Bienvenido al <strong style="color:var(--text)">Grupo CENTED Altavista</strong>, donde nuestra historia y propósitos se entrelazan para engrandecer tu futuro. Fundada en el año 2000, llevamos 25 años formando técnicos altamente capacitados.</p>
-      <p>Como institución dedicada a ti, querido estudiante, nos comprometemos a ofrecerte una educación de calidad que te prepare para enfrentar los desafíos del mundo actual.</p>
-      <div class="about-lema">"Artificium Technicorum cum Excellentia et Innovatione" — Forjando Técnicos con Excelencia e Innovación</div>
-      <div class="about-docente">
+      <p>Bienvenido al <strong style="color:var(--text)">Grupo CENTED Altavista</strong>. Fundada en el año 2000, llevamos 25 años formando técnicos altamente capacitados en diversas disciplinas.</p>
+      <p>Nos comprometemos a ofrecerte una educación de calidad que te prepare para enfrentar los desafíos del mundo actual y real.</p>
+      <div class="lema">"Artificium Technicorum cum Excellentia et Innovatione"<br/>Forjando Técnicos con Excelencia e Innovación</div>
+      <div class="doc-box">
         <img src="https://static.wixstatic.com/media/ee1221_51b0afc67f2c4a98aab5ad7f510de678~mv2.jpg/v1/fill/w_80,h_80,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4af5b805-d407-4f6c-a509-436b3c14ee5a.jpg" alt="Docente" onerror="this.style.display='none'"/>
-        <div>
-          <h5>Tec. Mauricio Manuel Alvarado Rivera</h5>
-          <p>Docente · Departamento de Sistemas Informáticos</p>
-        </div>
+        <div><h5>Tec. Mauricio Manuel Alvarado Rivera</h5><p>Docente · Sistemas Informáticos</p></div>
       </div>
     </div>
   </div>
@@ -551,13 +249,12 @@ footer .fa{color:var(--accent)}
 
 <div class="divider"></div>
 
-<!-- CONTACTO -->
-<div class="section" id="contacto">
-  <div class="contact-box reveal">
+<div class="sec" id="contacto">
+  <div class="contact-box rev">
     <div style="font-size:3rem;margin-bottom:1rem">📞</div>
     <h3>Contacta a tu Docente</h3>
     <p>¿Tienes dudas o necesitas orientación? Comunícate directamente.</p>
-    <div class="contact-links">
+    <div class="c-links">
       <a href="mailto:mau.alv1101@gmail.com" class="c-link">✉️ mau.alv1101@gmail.com</a>
       <a href="tel:+50376565020" class="c-link">📱 +503 7656-5020</a>
       <a href="tel:+50376433416" class="c-link">🏫 +503 7643-3416</a>
@@ -567,16 +264,25 @@ footer .fa{color:var(--accent)}
 
 <footer>
   <div class="f-logo">GRUPO <span class="fa">CENTED</span> ALTAVISTA</div>
-  <p>
-    El editor se reserva uso, edición, distribución y accesibilidad.<br/>
-    <span class="fa">Derechos Reservados © 2027 Grupo CENTED</span> · Departamento de Sistemas Informáticos<br/>
-    Última actualización: 18/02/26
-  </p>
+  <p>El editor se reserva uso, edición, distribución y accesibilidad.<br/><span class="fa">Derechos Reservados © 2027 Grupo CENTED</span> · Departamento de Sistemas Informáticos<br/>Última actualización: 18/02/26</p>
+  <a href="admin.html" class="admin-link">🔐 Panel Docente</a>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+async function countDocs(){
+  if(GITHUB_CONFIG.user==='TU_USUARIO_GITHUB')return;
+  try{
+    let t=0;
+    for(const g of['matutino','vespertino','sabatino','todos']){
+      const r=await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}/${g}`);
+      if(r.ok){const d=await r.json();if(Array.isArray(d))t+=d.length}
+    }
+    document.getElementById('stat-docs').textContent=t||'0';
+  }catch(e){}
+}
+countDocs();
 </script>
 </body>
 </html>

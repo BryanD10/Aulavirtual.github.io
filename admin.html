@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Panel Docente | AULA DIGITAL CENTED</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#060d18;
+  --surface:#0c1a2e;
+  --surface2:#112240;
+  --border:rgba(99,179,237,0.15);
+  --accent:#63b3ed;
+  --accent2:#68d391;
+  --accent3:#f6ad55;
+  --danger:#fc8181;
+  --text:#e2e8f0;
+  --text-dim:#718096;
+  --text-muted:#4a5568;
+  --radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* BG pattern */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(99,179,237,0.04) 1px,transparent 0);
+  background-size:32px 32px}
+
+/* ── LOGIN ── */
+#login-screen{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg);
+}
+.login-box{
+  width:100%;max-width:420px;padding:2.5rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 0 60px rgba(99,179,237,0.07);
+}
+.login-logo{text-align:center;margin-bottom:2rem}
+.login-logo .badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:64px;height:64px;border-radius:16px;margin-bottom:1rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:var(--bg);
+  box-shadow:0 0 30px rgba(99,179,237,0.3);
+}
+.login-logo h1{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700}
+.login-logo p{color:var(--text-dim);font-size:0.82rem;margin-top:0.3rem}
+.field{margin-bottom:1.2rem}
+.field label{display:block;font-size:0.78rem;font-weight:800;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.45rem}
+.field input{
+  width:100%;background:var(--bg);border:1px solid var(--border);
+  color:var(--text);padding:0.75rem 1rem;border-radius:9px;
+  font-family:'Nunito',sans-serif;font-size:0.92rem;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,179,237,0.12)}
+.field .hint{font-size:0.72rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.5}
+.field .hint a{color:var(--accent);text-decoration:none}
+.field .hint a:hover{text-decoration:underline}
+.btn-login{
+  width:100%;padding:0.85rem;border:none;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:800;
+  cursor:pointer;transition:all 0.25s;margin-top:0.5rem;
+  box-shadow:0 0 20px rgba(99,179,237,0.25);
+}
+.btn-login:hover{transform:translateY(-1px);box-shadow:0 0 35px rgba(99,179,237,0.4)}
+.login-error{
+  background:rgba(252,129,129,0.1);border:1px solid rgba(252,129,129,0.3);
+  color:var(--danger);border-radius:8px;padding:0.7rem 1rem;
+  font-size:0.82rem;margin-top:1rem;display:none;
+}
+
+/* ── APP SHELL ── */
+#app{display:none;position:relative;z-index:1}
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:260px;
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:100;
+}
+.sidebar-logo{padding:1.8rem 1.5rem 1.2rem;border-bottom:1px solid var(--border)}
+.sidebar-logo .s-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:700;color:var(--bg);
+  box-shadow:0 0 16px rgba(99,179,237,0.3);margin-bottom:0.7rem;
+}
+.sidebar-logo h2{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;line-height:1.2}
+.sidebar-logo span{font-size:0.67rem;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase}
+
+.sidebar-repo{
+  margin:1rem;padding:0.75rem 1rem;
+  background:rgba(99,179,237,0.07);border:1px solid rgba(99,179,237,0.2);
+  border-radius:9px;
+}
+.sidebar-repo .repo-label{font-size:0.67rem;font-weight:800;letter-spacing:0.1em;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.3rem}
+.sidebar-repo .repo-name{font-size:0.82rem;font-weight:700;color:var(--accent);word-break:break-all}
+
+.nav-section{padding:0.5rem 1rem;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted)}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:0.65rem 1.2rem;margin:0.15rem 0.6rem;
+  border-radius:9px;cursor:pointer;
+  font-size:0.85rem;font-weight:700;color:var(--text-dim);
+  transition:all 0.18s;border:1px solid transparent;
+}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text)}
+.nav-item.active{background:rgba(99,179,237,0.1);color:var(--accent);border-color:rgba(99,179,237,0.2)}
+.nav-item .ni{width:20px;text-align:center;font-size:1rem}
+
+.sidebar-footer{margin-top:auto;padding:1rem 1.2rem;border-top:1px solid var(--border)}
+.logout-btn{
+  display:flex;align-items:center;gap:8px;width:100%;
+  padding:0.6rem 1rem;border-radius:8px;border:1px solid rgba(252,129,129,0.2);
+  background:rgba(252,129,129,0.07);color:var(--danger);
+  font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;
+  transition:all 0.2s;
+}
+.logout-btn:hover{background:rgba(252,129,129,0.15)}
+
+/* MAIN CONTENT */
+.main{margin-left:260px;min-height:100vh;padding:2.5rem 2.5rem 4rem}
+.page-header{margin-bottom:2rem}
+.page-header h1{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700}
+.page-header p{color:var(--text-dim);margin-top:0.3rem;font-size:0.88rem}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* STATS OVERVIEW */
+.stats-overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.3rem 1.5rem;
+}
+.stat-card .sc-label{font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim)}
+.stat-card .sc-val{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;margin-top:0.3rem}
+.stat-card .sc-sub{font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem}
+.stat-card.blue .sc-val{color:var(--accent)}
+.stat-card.green .sc-val{color:var(--accent2)}
+.stat-card.orange .sc-val{color:var(--accent3)}
+.stat-card.red .sc-val{color:var(--danger)}
+
+/* UPLOAD ZONE */
+.upload-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;margin-bottom:1.5rem;
+}
+.upload-card h3{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row.one{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group label{font-size:0.75rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim)}
+.form-group select,
+.form-group input[type="text"],
+.form-group textarea{
+  background:var(--bg);border:1px solid var(--border);color:var(--text);
+  padding:0.7rem 0.9rem;border-radius:9px;
+  font-family:'Nunito',sans-serif;font-size:0.88rem;outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.form-group select:focus,
+.form-group input[type="text"]:focus,
+.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,179,237,0.1)}
+.form-group textarea{resize:vertical;min-height:80px}
+
+/* DROP ZONE */
+.drop-zone{
+  border:2px dashed var(--border);border-radius:12px;
+  padding:2.5rem;text-align:center;cursor:pointer;
+  transition:all 0.25s;position:relative;overflow:hidden;
+  background:rgba(99,179,237,0.02);
+}
+.drop-zone:hover,.drop-zone.dragover{
+  border-color:var(--accent);background:rgba(99,179,237,0.06);
+}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-icon{font-size:2.5rem;margin-bottom:0.8rem}
+.drop-zone h4{font-weight:800;font-size:0.95rem;margin-bottom:0.4rem}
+.drop-zone p{font-size:0.78rem;color:var(--text-dim)}
+.drop-zone .file-types{
+  display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem;
+}
+.file-type-tag{
+  padding:0.2rem 0.6rem;border-radius:50px;font-size:0.65rem;font-weight:800;
+  background:rgba(99,179,237,0.1);color:var(--accent);border:1px solid rgba(99,179,237,0.2);
+}
+
+/* SELECTED FILES */
+#selected-files{margin-top:1rem}
+.sel-file{
+  display:flex;align-items:center;gap:10px;
+  padding:0.75rem 1rem;background:rgba(104,211,145,0.07);
+  border:1px solid rgba(104,211,145,0.2);border-radius:9px;margin-bottom:0.5rem;
+}
+.sel-file .sf-icon{font-size:1.2rem;flex-shrink:0}
+.sel-file .sf-info{flex:1}
+.sel-file .sf-name{font-size:0.85rem;font-weight:700}
+.sel-file .sf-size{font-size:0.72rem;color:var(--text-dim)}
+.sel-file .sf-remove{background:none;border:none;color:var(--danger);cursor:pointer;font-size:1rem;padding:0.2rem}
+
+/* PROGRESS */
+.progress-bar-wrap{
+  background:rgba(99,179,237,0.1);border-radius:50px;height:8px;overflow:hidden;margin-top:0.8rem;
+  display:none;
+}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:50px;width:0%;transition:width 0.4s ease}
+
+/* UPLOAD BTN */
+.btn-upload{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:0.85rem 2rem;border:none;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.92rem;font-weight:800;
+  cursor:pointer;transition:all 0.25s;box-shadow:0 0 20px rgba(99,179,237,0.25);
+  margin-top:1.2rem;
+}
+.btn-upload:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(99,179,237,0.4)}
+.btn-upload:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;flex-direction:column;gap:0.6rem}
+.toast{
+  padding:0.9rem 1.4rem;border-radius:10px;font-size:0.85rem;font-weight:700;
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+  animation:slideIn 0.3s ease;min-width:280px;max-width:380px;
+  display:flex;align-items:center;gap:10px;
+}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
+.toast.success{background:#1a3a2a;border:1px solid rgba(104,211,145,0.3);color:var(--accent2)}
+.toast.error{background:#3a1a1a;border:1px solid rgba(252,129,129,0.3);color:var(--danger)}
+.toast.info{background:#1a2a3a;border:1px solid rgba(99,179,237,0.3);color:var(--accent)}
+
+/* FILES LIST */
+.files-toolbar{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.search-box{
+  flex:1;min-width:200px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);padding:0.65rem 1rem;border-radius:9px;
+  font-family:'Nunito',sans-serif;font-size:0.88rem;outline:none;
+  transition:border-color 0.2s;
+}
+.search-box:focus{border-color:var(--accent)}
+.filter-select{
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);padding:0.65rem 1rem;border-radius:9px;
+  font-family:'Nunito',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;
+}
+
+.files-table{width:100%;border-collapse:collapse}
+.files-table th{
+  text-align:left;padding:0.7rem 1rem;
+  font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-dim);border-bottom:1px solid var(--border);
+}
+.files-table td{
+  padding:0.85rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:0.85rem;vertical-align:middle;
+}
+.files-table tr:hover td{background:rgba(255,255,255,0.02)}
+.file-name-cell{display:flex;align-items:center;gap:10px}
+.file-ext{
+  width:36px;height:36px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.ext-pdf{background:rgba(252,129,129,0.12)}
+.ext-doc,.ext-docx{background:rgba(99,179,237,0.12)}
+.ext-ppt,.ext-pptx{background:rgba(246,173,85,0.12)}
+.ext-zip,.ext-rar{background:rgba(183,148,244,0.12)}
+.ext-other{background:rgba(113,128,150,0.12)}
+.fn-title{font-weight:700;font-size:0.88rem}
+.fn-desc{font-size:0.72rem;color:var(--text-dim);margin-top:0.1rem}
+.group-pill{
+  display:inline-block;padding:0.22rem 0.7rem;border-radius:50px;
+  font-size:0.68rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;
+}
+.pill-m{background:rgba(99,179,237,0.12);color:var(--accent);border:1px solid rgba(99,179,237,0.2)}
+.pill-v{background:rgba(246,173,85,0.12);color:var(--accent3);border:1px solid rgba(246,173,85,0.2)}
+.pill-s{background:rgba(183,148,244,0.12);color:#b794f4;border:1px solid rgba(183,148,244,0.2)}
+.pill-all{background:rgba(104,211,145,0.12);color:var(--accent2);border:1px solid rgba(104,211,145,0.2)}
+.action-btns{display:flex;gap:0.4rem}
+.btn-sm{
+  padding:0.35rem 0.75rem;border-radius:7px;font-size:0.75rem;font-weight:700;
+  cursor:pointer;border:1px solid;transition:all 0.18s;font-family:'Nunito',sans-serif;
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+}
+.btn-copy{background:rgba(99,179,237,0.1);border-color:rgba(99,179,237,0.25);color:var(--accent)}
+.btn-copy:hover{background:rgba(99,179,237,0.2)}
+.btn-delete{background:rgba(252,129,129,0.1);border-color:rgba(252,129,129,0.2);color:var(--danger)}
+.btn-delete:hover{background:rgba(252,129,129,0.2)}
+.btn-view{background:rgba(104,211,145,0.1);border-color:rgba(104,211,145,0.2);color:var(--accent2)}
+.btn-view:hover{background:rgba(104,211,145,0.2)}
+
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--text-dim)}
+.empty-state .es-icon{font-size:3rem;margin-bottom:1rem;opacity:0.5}
+.empty-state h4{font-weight:700;margin-bottom:0.4rem}
+.empty-state p{font-size:0.82rem}
+
+/* SETTINGS */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem}
+.settings-card h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:8px}
+.btn-save{
+  padding:0.65rem 1.4rem;border:none;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;
+  cursor:pointer;transition:all 0.2s;margin-top:1rem;
+}
+.btn-save:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(99,179,237,0.3)}
+
+/* Loading spinner */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(6,13,24,0.3);border-top-color:var(--bg);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* CONFIRM MODAL */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);
+  z-index:500;display:none;align-items:center;justify-content:center;
+}
+.modal-bg.open{display:flex}
+.modal-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;max-width:420px;width:90%;
+}
+.modal-box h3{font-family:'Rajdhani',sans-serif;font-size:1.4rem;margin-bottom:0.7rem}
+.modal-box p{font-size:0.85rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem}
+.modal-btns{display:flex;gap:0.75rem;justify-content:flex-end}
+.btn-cancel{padding:0.6rem 1.2rem;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-dim);font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer}
+.btn-confirm-del{padding:0.6rem 1.2rem;border-radius:8px;border:none;background:var(--danger);color:white;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;cursor:pointer}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .main{margin-left:0;padding:1.5rem}
+  .form-row{grid-template-columns:1fr}
+  .settings-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="badge">GC</div>
+      <h1>Panel Docente</h1>
+      <p>AULA DIGITAL · GRUPO CENTED ALTAVISTA</p>
+    </div>
+    <div class="field">
+      <label>Usuario</label>
+      <input type="text" id="login-user" placeholder="docente" autocomplete="username"/>
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+    <div class="field">
+      <label>GitHub Token (Personal Access Token)</label>
+      <input type="password" id="login-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/>
+      <div class="hint">
+        Necesitas un token con permisos <strong>repo</strong>. 
+        <a href="https://github.com/settings/tokens/new" target="_blank">Crear token aquí →</a><br/>
+        Se guarda solo en tu navegador (localStorage), nunca se envía a ningún servidor.
+      </div>
+    </div>
+    <button class="btn-login" onclick="doLogin()">Ingresar al panel</button>
+    <div class="login-error" id="login-error">Usuario o contraseña incorrectos.</div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="s-badge">GC</div>
+      <h2>CENTED Admin</h2>
+      <span>Panel Docente</span>
+    </div>
+    <div class="sidebar-repo">
+      <div class="repo-label">Repositorio activo</div>
+      <div class="repo-name" id="sidebar-repo-name">—</div>
+    </div>
+    <div class="nav-section">General</div>
+    <div class="nav-item active" onclick="showPanel('dashboard',this)"><span class="ni">📊</span> Dashboard</div>
+    <div class="nav-item" onclick="showPanel('upload',this)"><span class="ni">⬆️</span> Subir documento</div>
+    <div class="nav-item" onclick="showPanel('files',this)"><span class="ni">📂</span> Mis archivos</div>
+    <div class="nav-section">Configuración</div>
+    <div class="nav-item" onclick="showPanel('settings',this)"><span class="ni">⚙️</span> Configuración</div>
+    <div class="nav-item" onclick="window.open('index.html','_blank')"><span class="ni">🌐</span> Ver aula</div>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">🚪 Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="page-header">
+        <h1>📊 Dashboard</h1>
+        <p>Resumen del aula digital · <span id="dash-repo-label">Configura tu repositorio en Ajustes</span></p>
+      </div>
+      <div class="stats-overview">
+        <div class="stat-card blue"><div class="sc-label">Archivos totales</div><div class="sc-val" id="stat-total">—</div><div class="sc-sub">en el repositorio</div></div>
+        <div class="stat-card green"><div class="sc-label">Matutino</div><div class="sc-val" id="stat-mat">—</div><div class="sc-sub">documentos</div></div>
+        <div class="stat-card orange"><div class="sc-label">Vespertino</div><div class="sc-val" id="stat-ves">—</div><div class="sc-sub">documentos</div></div>
+        <div class="stat-card red"><div class="sc-label">Sabatino</div><div class="sc-val" id="stat-sab">—</div><div class="sc-sub">documentos</div></div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem">
+        <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.2rem">🕐 Archivos recientes</h3>
+        <div id="recent-files">
+          <div class="empty-state"><div class="es-icon">📭</div><h4>Sin archivos aún</h4><p>Configura tu repositorio en Ajustes y sube el primer documento.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── UPLOAD ── -->
+    <div class="panel" id="panel-upload">
+      <div class="page-header">
+        <h1>⬆️ Subir Documento</h1>
+        <p>El archivo se sube directamente a tu repositorio de GitHub y queda disponible para los alumnos al instante.</p>
+      </div>
+
+      <div class="upload-card">
+        <h3>📋 Información del documento</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Grupo destino</label>
+            <select id="up-group">
+              <option value="matutino">🌅 Grupo Matutino</option>
+              <option value="vespertino">🌇 Grupo Vespertino</option>
+              <option value="sabatino">📚 Grupo Sabatino</option>
+              <option value="todos">🌐 Todos los grupos</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Categoría / Materia</label>
+            <select id="up-category">
+              <option value="informatica">💻 Informática (I_I)</option>
+              <option value="ofimatica">📊 Ofimática (M_O)</option>
+              <option value="diseno">🎨 Diseño Gráfico (D_G)</option>
+              <option value="redes">🌐 Redes y Datos (D_R_D)</option>
+              <option value="bases-datos">🗄️ Bases de Datos (M_B_D)</option>
+              <option value="mantenimiento">🔧 Mantenimiento (S_M_C)</option>
+              <option value="general">📌 General / Varios</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Título del documento</label>
+            <input type="text" id="up-title" placeholder="Ej: Guía de Diseño — Unidad 2"/>
+          </div>
+          <div class="form-group">
+            <label>Unidad / Semana (opcional)</label>
+            <input type="text" id="up-unit" placeholder="Ej: Unidad 1, Semana 3"/>
+          </div>
+        </div>
+        <div class="form-row one">
+          <div class="form-group">
+            <label>Descripción breve (opcional)</label>
+            <textarea id="up-desc" placeholder="Breve descripción del contenido del documento..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="upload-card">
+        <h3>📁 Seleccionar archivo</h3>
+        <div class="drop-zone" id="drop-zone">
+          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip,.rar,.png,.jpg,.jpeg,.mp4,.txt" onchange="handleFiles(this.files)"/>
+          <div class="drop-icon">📂</div>
+          <h4>Arrastra aquí o haz clic para seleccionar</h4>
+          <p>Máximo 25 MB por archivo · Múltiples archivos permitidos</p>
+          <div class="file-types">
+            <span class="file-type-tag">PDF</span>
+            <span class="file-type-tag">DOCX</span>
+            <span class="file-type-tag">PPTX</span>
+            <span class="file-type-tag">XLSX</span>
+            <span class="file-type-tag">ZIP</span>
+            <span class="file-type-tag">JPG/PNG</span>
+          </div>
+        </div>
+        <div id="selected-files"></div>
+        <div class="progress-bar-wrap" id="progress-wrap">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <button class="btn-upload" id="btn-upload" onclick="uploadFiles()">
+          <span id="upload-btn-text">⬆️ Subir a GitHub</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── FILES ── -->
+    <div class="panel" id="panel-files">
+      <div class="page-header">
+        <h1>📂 Archivos subidos</h1>
+        <p>Gestiona todos los documentos del repositorio.</p>
+      </div>
+      <div class="files-toolbar">
+        <input class="search-box" type="text" placeholder="🔍 Buscar archivo..." id="search-input" oninput="filterFiles()"/>
+        <select class="filter-select" id="filter-group" onchange="filterFiles()">
+          <option value="">Todos los grupos</option>
+          <option value="matutino">🌅 Matutino</option>
+          <option value="vespertino">🌇 Vespertino</option>
+          <option value="sabatino">📚 Sabatino</option>
+          <option value="todos">🌐 Todos</option>
+        </select>
+        <button class="btn-sm btn-copy" onclick="loadFiles()" style="border-radius:9px;padding:0.55rem 1rem">🔄 Actualizar</button>
+      </div>
+      <div id="files-table-wrap">
+        <div class="empty-state"><div class="es-icon">📭</div><h4>Cargando archivos...</h4><p>Configura el repositorio en Ajustes primero.</p></div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="panel" id="panel-settings">
+      <div class="page-header">
+        <h1>⚙️ Configuración</h1>
+        <p>Ajusta el repositorio de GitHub y las opciones del panel.</p>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3>🐙 GitHub Repository</h3>
+          <div class="form-group" style="margin-bottom:1rem">
+            <label>Usuario de GitHub</label>
+            <input type="text" id="cfg-user" placeholder="Ej: mau-alv1101"/>
+          </div>
+          <div class="form-group" style="margin-bottom:1rem">
+            <label>Nombre del repositorio</label>
+            <input type="text" id="cfg-repo" placeholder="Ej: cented-aula-digital"/>
+          </div>
+          <div class="form-group" style="margin-bottom:1rem">
+            <label>Rama principal</label>
+            <input type="text" id="cfg-branch" placeholder="main"/>
+          </div>
+          <div class="form-group">
+            <label>Carpeta de archivos</label>
+            <input type="text" id="cfg-folder" placeholder="archivos"/>
+            <div class="hint" style="font-size:0.72rem;color:var(--text-muted);margin-top:0.4rem">Los documentos se guardarán en <code style="color:var(--accent)">repo/archivos/grupo/archivo.pdf</code></div>
+          </div>
+          <button class="btn-save" onclick="saveConfig()">💾 Guardar configuración</button>
+        </div>
+
+        <div class="settings-card">
+          <h3>🔐 Credenciales</h3>
+          <div class="form-group" style="margin-bottom:1rem">
+            <label>Cambiar contraseña del panel</label>
+            <input type="password" id="cfg-newpass" placeholder="Nueva contraseña"/>
+          </div>
+          <div class="form-group">
+            <label>Confirmar contraseña</label>
+            <input type="password" id="cfg-newpass2" placeholder="Repetir contraseña"/>
+          </div>
+          <button class="btn-save" onclick="changePassword()">🔑 Actualizar contraseña</button>
+
+          <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+            <h3 style="font-size:1rem;margin-bottom:0.8rem">🌐 URL del Aula Pública</h3>
+            <div id="public-url" style="font-size:0.82rem;color:var(--accent);word-break:break-all;background:rgba(99,179,237,0.07);padding:0.6rem 0.8rem;border-radius:8px;border:1px solid rgba(99,179,237,0.15)">—</div>
+            <button class="btn-sm btn-copy" style="margin-top:0.6rem" onclick="copyPublicUrl()">📋 Copiar URL</button>
+          </div>
+        </div>
+
+        <div class="settings-card" style="grid-column:1/-1">
+          <h3>📖 Guía de uso rápido</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:0.5rem">
+            <div style="background:rgba(99,179,237,0.06);border:1px solid rgba(99,179,237,0.15);border-radius:10px;padding:1.2rem">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem">1️⃣</div>
+              <h5 style="font-weight:800;font-size:0.88rem;margin-bottom:0.4rem">Crear repositorio</h5>
+              <p style="font-size:0.78rem;color:var(--text-dim)">Ve a github.com/new y crea un repositorio público llamado <code style="color:var(--accent)">cented-aula-digital</code></p>
+            </div>
+            <div style="background:rgba(104,211,145,0.06);border:1px solid rgba(104,211,145,0.15);border-radius:10px;padding:1.2rem">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem">2️⃣</div>
+              <h5 style="font-weight:800;font-size:0.88rem;margin-bottom:0.4rem">Generar token</h5>
+              <p style="font-size:0.78rem;color:var(--text-dim)">En GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic). Marca permiso <code style="color:var(--accent2)">repo</code>.</p>
+            </div>
+            <div style="background:rgba(246,173,85,0.06);border:1px solid rgba(246,173,85,0.15);border-radius:10px;padding:1.2rem">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem">3️⃣</div>
+              <h5 style="font-weight:800;font-size:0.88rem;margin-bottom:0.4rem">Activar Pages</h5>
+              <p style="font-size:0.78rem;color:var(--text-dim)">En el repo → Settings → Pages → Source: <code style="color:var(--accent3)">Deploy from branch (main)</code>. ¡Tu aula queda en línea gratis!</p>
+            </div>
+            <div style="background:rgba(183,148,244,0.06);border:1px solid rgba(183,148,244,0.15);border-radius:10px;padding:1.2rem">
+              <div style="font-size:1.5rem;margin-bottom:0.5rem">4️⃣</div>
+              <h5 style="font-weight:800;font-size:0.88rem;margin-bottom:0.4rem">Subir documentos</h5>
+              <p style="font-size:0.78rem;color:var(--text-dim)">Desde este panel → "Subir documento" → elige grupo y archivo → ¡listo! Los alumnos lo ven al instante.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-bg" id="confirm-modal">
+  <div class="modal-box">
+    <h3>⚠️ Confirmar eliminación</h3>
+    <p id="confirm-msg">¿Estás seguro de que deseas eliminar este archivo? Esta acción no se puede deshacer.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn-confirm-del" id="confirm-ok">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="toast-container" id="toasts"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+const ADMIN_USER = 'docente';
+let ADMIN_PASS = localStorage.getItem('cented_pass') || 'cented2026';
+let GH_TOKEN = '';
+let allFiles = [];
+let selectedFiles = [];
+let deleteCallback = null;
+
+// ══════════════════════════════════════════
+//  AUTH
+// ══════════════════════════════════════════
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  const t = document.getElementById('login-token').value.trim();
+  if (u !== ADMIN_USER || p !== ADMIN_PASS) {
+    document.getElementById('login-error').style.display = 'block';
+    return;
+  }
+  GH_TOKEN = t;
+  localStorage.setItem('cented_token', t);
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  initApp();
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('login-token').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  GH_TOKEN = '';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-pass').value = '';
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+function initApp() {
+  loadConfig();
+  updateSidebarRepo();
+  loadFiles();
+  // restore token field
+  document.getElementById('login-token').value = GH_TOKEN || localStorage.getItem('cented_token') || '';
+  GH_TOKEN = GH_TOKEN || localStorage.getItem('cented_token') || '';
+}
+
+// ══════════════════════════════════════════
+//  CONFIG
+// ══════════════════════════════════════════
+function getConfig() {
+  return {
+    user:   localStorage.getItem('cented_gh_user')   || '',
+    repo:   localStorage.getItem('cented_gh_repo')   || '',
+    branch: localStorage.getItem('cented_gh_branch') || 'main',
+    folder: localStorage.getItem('cented_gh_folder') || 'archivos',
+  };
+}
+
+function loadConfig() {
+  const c = getConfig();
+  document.getElementById('cfg-user').value   = c.user;
+  document.getElementById('cfg-repo').value   = c.repo;
+  document.getElementById('cfg-branch').value = c.branch;
+  document.getElementById('cfg-folder').value = c.folder;
+  updatePublicUrl();
+}
+
+function saveConfig() {
+  localStorage.setItem('cented_gh_user',   document.getElementById('cfg-user').value.trim());
+  localStorage.setItem('cented_gh_repo',   document.getElementById('cfg-repo').value.trim());
+  localStorage.setItem('cented_gh_branch', document.getElementById('cfg-branch').value.trim() || 'main');
+  localStorage.setItem('cented_gh_folder', document.getElementById('cfg-folder').value.trim() || 'archivos');
+  updateSidebarRepo();
+  updatePublicUrl();
+  toast('✅ Configuración guardada', 'success');
+  loadFiles();
+}
+
+function updateSidebarRepo() {
+  const c = getConfig();
+  const label = c.user && c.repo ? `${c.user}/${c.repo}` : 'Sin configurar';
+  document.getElementById('sidebar-repo-name').textContent = label;
+  document.getElementById('dash-repo-label').textContent = c.user && c.repo ? `${c.user}/${c.repo}` : 'Configura tu repositorio en Ajustes';
+}
+
+function updatePublicUrl() {
+  const c = getConfig();
+  const url = c.user && c.repo ? `https://${c.user}.github.io/${c.repo}/` : '—';
+  document.getElementById('public-url').textContent = url;
+}
+
+function copyPublicUrl() {
+  const url = document.getElementById('public-url').textContent;
+  if (url === '—') return;
+  navigator.clipboard.writeText(url).then(() => toast('📋 URL copiada', 'info'));
+}
+
+function changePassword() {
+  const p1 = document.getElementById('cfg-newpass').value;
+  const p2 = document.getElementById('cfg-newpass2').value;
+  if (!p1) return toast('⚠️ Ingresa una contraseña', 'error');
+  if (p1 !== p2) return toast('⚠️ Las contraseñas no coinciden', 'error');
+  ADMIN_PASS = p1;
+  localStorage.setItem('cented_pass', p1);
+  document.getElementById('cfg-newpass').value = '';
+  document.getElementById('cfg-newpass2').value = '';
+  toast('🔑 Contraseña actualizada', 'success');
+}
+
+// ══════════════════════════════════════════
+//  PANEL NAVIGATION
+// ══════════════════════════════════════════
+function showPanel(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  if(id === 'files') loadFiles();
+  if(id === 'settings') loadConfig();
+  if(id === 'dashboard') loadDashboard();
+}
+
+// ══════════════════════════════════════════
+//  GITHUB API
+// ══════════════════════════════════════════
+async function ghRequest(method, path, body) {
+  const token = GH_TOKEN || localStorage.getItem('cented_token');
+  const res = await fetch(`https://api.github.com${path}`, {
+    method,
+    headers: {
+      'Authorization': `token ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  return res;
+}
+
+// ══════════════════════════════════════════
+//  LOAD FILES
+// ══════════════════════════════════════════
+async function loadFiles() {
+  const c = getConfig();
+  if (!c.user || !c.repo) {
+    renderFilesTable([]);
+    return;
+  }
+  try {
+    const groups = ['matutino','vespertino','sabatino','todos'];
+    let files = [];
+    for (const g of groups) {
+      const path = `/repos/${c.user}/${c.repo}/contents/${c.folder}/${g}`;
+      const res = await ghRequest('GET', path);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          data.forEach(f => { f._group = g; files.push(f); });
+        }
+      }
+    }
+    allFiles = files;
+    renderFilesTable(files);
+    updateDashboardStats(files);
+    renderRecentFiles(files);
+  } catch(e) {
+    toast('⚠️ Error al cargar archivos: ' + e.message, 'error');
+  }
+}
+
+function renderFilesTable(files) {
+  const wrap = document.getElementById('files-table-wrap');
+  if (!files.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="es-icon">📭</div><h4>No hay archivos aún</h4><p>Usa "Subir documento" para agregar el primer material.</p></div>`;
+    return;
+  }
+  const rows = files.map(f => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    const icon = extIcon(ext);
+    const cls  = extClass(ext);
+    const gpill = groupPill(f._group);
+    const meta = parseMeta(f.name);
+    return `<tr>
+      <td><div class="file-name-cell">
+        <div class="file-ext ${cls}">${icon}</div>
+        <div><div class="fn-title">${meta.title || f.name}</div><div class="fn-desc">${f.name}</div></div>
+      </div></td>
+      <td>${gpill}</td>
+      <td>${(f.size/1024).toFixed(1)} KB</td>
+      <td><div class="action-btns">
+        <a class="btn-sm btn-view" href="${f.download_url}" target="_blank">👁 Ver</a>
+        <button class="btn-sm btn-copy" onclick="copyLink('${f.download_url}')">📋 Copiar link</button>
+        <button class="btn-sm btn-delete" onclick="confirmDelete('${f._group}','${f.name}','${f.sha}')">🗑 Eliminar</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+  wrap.innerHTML = `<table class="files-table">
+    <thead><tr><th>Archivo</th><th>Grupo</th><th>Tamaño</th><th>Acciones</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function filterFiles() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const g = document.getElementById('filter-group').value;
+  const filtered = allFiles.filter(f => {
+    const matchQ = !q || f.name.toLowerCase().includes(q);
+    const matchG = !g || f._group === g;
+    return matchQ && matchG;
+  });
+  renderFilesTable(filtered);
+}
+
+function updateDashboardStats(files) {
+  document.getElementById('stat-total').textContent = files.length;
+  document.getElementById('stat-mat').textContent = files.filter(f=>f._group==='matutino').length;
+  document.getElementById('stat-ves').textContent = files.filter(f=>f._group==='vespertino').length;
+  document.getElementById('stat-sab').textContent = files.filter(f=>f._group==='sabatino').length;
+}
+
+function renderRecentFiles(files) {
+  const wrap = document.getElementById('recent-files');
+  const recent = [...files].reverse().slice(0, 6);
+  if (!recent.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="es-icon">📭</div><h4>Sin archivos aún</h4></div>`;
+    return;
+  }
+  wrap.innerHTML = recent.map(f => {
+    const ext = f.name.split('.').pop().toLowerCase();
+    return `<div style="display:flex;align-items:center;gap:10px;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+      <div class="file-ext ${extClass(ext)}" style="width:32px;height:32px;border-radius:7px;font-size:1rem">${extIcon(ext)}</div>
+      <div style="flex:1"><div style="font-size:0.85rem;font-weight:700">${f.name}</div><div style="font-size:0.72rem;color:var(--text-dim)">${groupPill(f._group)}</div></div>
+      <a style="font-size:0.75rem;color:var(--accent);text-decoration:none" href="${f.download_url}" target="_blank">Ver →</a>
+    </div>`;
+  }).join('');
+}
+
+function loadDashboard() {
+  loadFiles();
+}
+
+// ══════════════════════════════════════════
+//  UPLOAD
+// ══════════════════════════════════════════
+function handleFiles(fileList) {
+  selectedFiles = Array.from(fileList);
+  const wrap = document.getElementById('selected-files');
+  wrap.innerHTML = selectedFiles.map((f, i) => `
+    <div class="sel-file" id="selfile-${i}">
+      <div class="sf-icon">${extIcon(f.name.split('.').pop().toLowerCase())}</div>
+      <div class="sf-info">
+        <div class="sf-name">${f.name}</div>
+        <div class="sf-size">${(f.size/1024).toFixed(1)} KB</div>
+      </div>
+      <button class="sf-remove" onclick="removeFile(${i})" title="Quitar">✕</button>
+    </div>`).join('');
+}
+
+function removeFile(i) {
+  selectedFiles.splice(i, 1);
+  handleFiles(selectedFiles);
+}
+
+// Drag & drop
+const dz = document.getElementById('drop-zone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragover'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+
+async function uploadFiles() {
+  if (!selectedFiles.length) return toast('⚠️ Selecciona al menos un archivo', 'error');
+  const c = getConfig();
+  if (!c.user || !c.repo) return toast('⚠️ Configura el repositorio primero en Ajustes', 'error');
+  const token = GH_TOKEN || localStorage.getItem('cented_token');
+  if (!token) return toast('⚠️ No hay GitHub token. Cierra sesión y vuelve a ingresar', 'error');
+
+  const group    = document.getElementById('up-group').value;
+  const category = document.getElementById('up-category').value;
+  const title    = document.getElementById('up-title').value.trim();
+  const unit     = document.getElementById('up-unit').value.trim();
+
+  const btn = document.getElementById('btn-upload');
+  const txt = document.getElementById('upload-btn-text');
+  btn.disabled = true;
+  txt.innerHTML = '<span class="spinner"></span> Subiendo...';
+
+  const progressWrap = document.getElementById('progress-wrap');
+  const progressBar  = document.getElementById('progress-bar');
+  progressWrap.style.display = 'block';
+
+  let done = 0;
+  for (const file of selectedFiles) {
+    try {
+      // Sanitize filename
+      const safeName = buildFileName(file.name, category, unit);
+      const path = `${c.folder}/${group}/${safeName}`;
+
+      // Read file as base64
+      const b64 = await fileToBase64(file);
+
+      // Check if file exists (to get sha for update)
+      let sha = undefined;
+      const checkRes = await ghRequest('GET', `/repos/${c.user}/${c.repo}/contents/${path}`);
+      if (checkRes.ok) {
+        const existing = await checkRes.json();
+        sha = existing.sha;
+      }
+
+      const commitMsg = `📚 Subir: ${title || file.name} [${group}]`;
+      const body = { message: commitMsg, content: b64, branch: c.branch };
+      if (sha) body.sha = sha;
+
+      const res = await ghRequest('PUT', `/repos/${c.user}/${c.repo}/contents/${path}`, body);
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || 'Error desconocido');
+      }
+
+      done++;
+      progressBar.style.width = `${(done/selectedFiles.length)*100}%`;
+      toast(`✅ Subido: ${file.name}`, 'success');
+    } catch(e) {
+      toast(`❌ Error en ${file.name}: ${e.message}`, 'error');
+    }
+  }
+
+  btn.disabled = false;
+  txt.textContent = '⬆️ Subir a GitHub';
+  setTimeout(() => { progressWrap.style.display='none'; progressBar.style.width='0%'; }, 2000);
+
+  // Reset form
+  selectedFiles = [];
+  document.getElementById('selected-files').innerHTML = '';
+  document.getElementById('up-title').value = '';
+  document.getElementById('up-unit').value = '';
+  document.getElementById('up-desc').value = '';
+  document.getElementById('file-input').value = '';
+  loadFiles();
+}
+
+function buildFileName(original, category, unit) {
+  const ext = original.split('.').pop();
+  const base = original.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9\-_áéíóúÁÉÍÓÚüÜñÑ ]/g, '').trim().replace(/\s+/g, '_');
+  const prefix = unit ? `${unit.replace(/\s+/g,'_')}_` : '';
+  return `${category}_${prefix}${base}.${ext}`;
+}
+
+function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ══════════════════════════════════════════
+//  DELETE
+// ══════════════════════════════════════════
+function confirmDelete(group, name, sha) {
+  document.getElementById('confirm-msg').textContent = `¿Eliminar "${name}" del grupo ${group}? Esta acción no se puede deshacer.`;
+  document.getElementById('confirm-modal').classList.add('open');
+  document.getElementById('confirm-ok').onclick = () => deleteFile(group, name, sha);
+}
+function closeConfirm() {
+  document.getElementById('confirm-modal').classList.remove('open');
+}
+
+async function deleteFile(group, name, sha) {
+  closeConfirm();
+  const c = getConfig();
+  const path = `${c.folder}/${group}/${name}`;
+  try {
+    const res = await ghRequest('DELETE', `/repos/${c.user}/${c.repo}/contents/${path}`, {
+      message: `🗑️ Eliminar: ${name}`,
+      sha,
+      branch: c.branch
+    });
+    if (!res.ok) throw new Error((await res.json()).message);
+    toast('🗑️ Archivo eliminado', 'success');
+    loadFiles();
+  } catch(e) {
+    toast('❌ Error al eliminar: ' + e.message, 'error');
+  }
+}
+
+function copyLink(url) {
+  navigator.clipboard.writeText(url).then(() => toast('📋 Link copiado', 'info'));
+}
+
+// ══════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════
+function extIcon(ext) {
+  const map = {pdf:'📄',doc:'📝',docx:'📝',ppt:'📊',pptx:'📊',xls:'📈',xlsx:'📈',zip:'📦',rar:'📦',png:'🖼️',jpg:'🖼️',jpeg:'🖼️',mp4:'🎬',txt:'📃'};
+  return map[ext] || '📎';
+}
+function extClass(ext) {
+  if (['pdf'].includes(ext)) return 'ext-pdf';
+  if (['doc','docx'].includes(ext)) return 'ext-doc';
+  if (['ppt','pptx'].includes(ext)) return 'ext-ppt';
+  if (['zip','rar'].includes(ext)) return 'ext-zip';
+  return 'ext-other';
+}
+function groupPill(g) {
+  const map = {matutino:'<span class="group-pill pill-m">🌅 Matutino</span>',vespertino:'<span class="group-pill pill-v">🌇 Vespertino</span>',sabatino:'<span class="group-pill pill-s">📚 Sabatino</span>',todos:'<span class="group-pill pill-all">🌐 Todos</span>'};
+  return map[g] || g;
+}
+function parseMeta(name) {
+  return { title: name.replace(/_/g,' ').replace(/\.[^.]+$/,'') };
+}
+
+function toast(msg, type='info') {
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.textContent = msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(() => { el.style.animation='slideOut 0.3s ease forwards'; setTimeout(()=>el.remove(), 300); }, 3500);
+}
+
+// Close modal on bg click
+document.getElementById('confirm-modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeConfirm(); });
+
+// Auto-restore session token
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('cented_token');
+  if (saved) document.getElementById('login-token').value = saved;
+});
+</script>
+</body>
+</html>
