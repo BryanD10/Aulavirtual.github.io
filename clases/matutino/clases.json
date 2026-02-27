@@ -5,13 +5,67 @@
       "numero": "02",
       "tipo": "teoria",
       "titulo": "El cipitio",
-      "materia": "DiseÃÂÃÂ±o Grafico",
+      "materia": "DiseÃÂÃÂÃÂÃÂ±o Grafico",
       "nivel": "Basico",
       "categoria": "Practica 2",
       "videoUrl": "https://youtu.be/fSmfXq1T1Yc?si=YbwKKyoOlAyLVYk6",
       "objetivos": [],
       "pasos": []
+    },
+    {
+      "numero": "01",
+      "tipo": "practica",
+      "titulo": "Crea Tipografía con Formas",
+      "materia": "Diseño Grafico",
+      "nivel": "Basico",
+      "categoria": "Practica 1",
+      "videoUrl": "https://youtu.be/4XNC7XYEHBc",
+      "descripcion": "Esta práctica de diseño gráfico en Affinity consiste en integrar texto de forma orgánica en un objeto (en este caso, una banana) utilizando herramientas de deformación de malla y máscaras de capa. \n\nEl objetivo es que la tipografía parezca ser parte física del objeto, adaptándose a su curvatura y volumen.",
+      "herramientaUrl": "https://youtu.be/4XNC7XYEHBc",
+      "objetivos": [
+        "Familiarizarte con el programa "
+      ],
+      "pasos": [
+        {
+          "titulo": "Configuración y Preparación",
+          "descripcion": "Crea un nuevo documento. El video sugiere un tamaño de video vertical (1080 x 1920 px).\n\nPega la imagen de la fruta u objeto que vayas a utilizar.",
+          "ejemplo": "",
+          "tip": "# Ya te subi los archivos necesarios en el aula DESCARGALOS"
+        },
+        {
+          "titulo": "Selección y Recorte del Objeto",
+          "descripcion": "Selecciona la herramienta Pincel de Selección.\n\nPasa el pincel por dentro de la banana para seleccionarla.",
+          "tip": "Si se selecciona algo de más, mantén presionada la tecla Alt mientras das clic para restar esa parte de la selección."
+        },
+        {
+          "titulo": "Duplica la capa ",
+          "descripcion": "Presiona Control + J para crear una nueva capa solo con el recorte y elimina la imagen original de fondo.",
+          "tip": "#Recuerda este comandó siempre "
+        },
+        {
+          "titulo": "Creación del Texto",
+          "descripcion": "Usa la Herramienta de Texto Artístico y escribe la palabra (ejemplo: \"BANANA\"). (Presiona la tecla T)\n\nSe recomienda una fuente gruesa como \"Anton\" para que el efecto se note mejor. (Selecciona la fuente dada por el docente)\n\nEscala el texto para que cubra el ancho de la banana."
+        },
+        {
+          "titulo": "Deformación de Malla (Mesh Warp)",
+          "descripcion": "Con el texto seleccionado, busca la herramienta Formación de Malla (dentro del grupo de la herramienta mover).\n\nAparecerán puntos en las esquinas y líneas. Arrastra los puntos para que las letras sigan la curva de la banana.\n\nAsegúrate de que los extremos de la primera y última letra coincidan exactamente con el borde de la banana para que la transición sea fluida.",
+          "tip": "# Para seleccionar la herramienta Mesh Warp da un clic derecho el la herramienta mover , en el menú desplegado selecciona Deformación de Malla"
+        },
+        {
+          "titulo": "El Efecto de Integración (Máscaras)",
+          "descripcion": "Duplica la capa de la banana (Control + J).\n\nHaz Control + Clic sobre la miniatura de la capa de texto para crear una selección con la forma de las letras.\n\nCon esa selección activa, añade una Máscara de Capa a las capas de la banana. Esto hará que la textura de la fruta \"rellene\" el texto."
+        },
+        {
+          "titulo": "Detalle con el Pincel",
+          "descripcion": "Selecciona la Herramienta Pincel y asegúrate de estar en la máscara de capa.\n\nUsa el color Negro para ocultar partes y el Blanco para mostrar.\n\nPinta suavemente en las uniones para que parezca que la cáscara se funde con el texto.",
+          "tip": "# Recuerda : negro (destructivo) / blanco (regenerativo)  "
+        },
+        {
+          "titulo": "La Sombra",
+          "descripcion": "Crea una elipse negra debajo de la banana.\n\nVe a la pestaña de filtros (ícono de reloj de arena) y selecciona Desenfoque Gaussiano.\n\nSube el radio hasta que parezca una sombra suave y baja la Opacidad de la capa para que no sea un negro muy intenso. "
+        }
+      ]
     }
   ],
-  "updated": "2026-02-27T14:22:40.381Z"
+  "updated": "2026-02-27T14:39:22.287Z"
 }
