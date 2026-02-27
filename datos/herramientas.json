@@ -1,24 +1,24 @@
 {
   "herramientas": [
     {
-      "icono": "🎨",
+      "icono": "ð¨",
       "nombre": "Canva",
-      "subtitulo": "Diseño Gráfico",
+      "subtitulo": "DiseÃ±o GrÃ¡fico",
       "url": "https://www.canva.com/",
-      "descripcion": "Diseño gráfico profesional en línea. Afiches, presentaciones y más.",
+      "descripcion": "DiseÃ±o grÃ¡fico profesional en lÃ­nea. Afiches, presentaciones y mÃ¡s.",
       "pasos": [
         "Registrarse gratis en canva.com",
-        "Elegir formato (afiche, presentación…)",
+        "Elegir formato (afiche, presentaciÃ³nâ¦)",
         "Personalizar con el panel lateral",
         "Descargar en JPG, PNG o PDF"
       ]
     },
     {
-      "icono": "✂️",
+      "icono": "âï¸",
       "nombre": "Photoroom",
       "subtitulo": "Eliminar fondos",
       "url": "https://www.photoroom.com/es/herramientas/eliminador-de-fondos",
-      "descripcion": "Elimina fondos con IA automáticamente. Sin instalación.",
+      "descripcion": "Elimina fondos con IA automÃ¡ticamente. Sin instalaciÃ³n.",
       "pasos": [
         "Entrar a photoroom.com",
         "Subir la imagen",
@@ -27,11 +27,11 @@
       ]
     },
     {
-      "icono": "🖼️",
+      "icono": "ð¼ï¸",
       "nombre": "Photopea",
       "subtitulo": "Editor de fotos",
       "url": "https://www.photopea.com/",
-      "descripcion": "Editor de imágenes avanzado, similar a Photoshop, en el navegador.",
+      "descripcion": "Editor de imÃ¡genes avanzado, similar a Photoshop, en el navegador.",
       "pasos": [
         "Ir a photopea.com",
         "Abrir o crear nuevo documento",
@@ -40,11 +40,11 @@
       ]
     },
     {
-      "icono": "📊",
+      "icono": "ð",
       "nombre": "Office Online",
-      "subtitulo": "Word · Excel · PPT",
+      "subtitulo": "Word Â· Excel Â· PPT",
       "url": "https://www.office.com/",
-      "descripcion": "Suite ofimática completa en el navegador.",
+      "descripcion": "Suite ofimÃ¡tica completa en el navegador.",
       "pasos": [
         "Ingresar a office.com",
         "Elegir la app (Word/Excel/PPT)",
@@ -53,23 +53,23 @@
       ]
     },
     {
-      "icono": "🖼️",
+      "icono": "ð¼ï¸",
       "nombre": "pinterest",
-      "subtitulo": "Busca inspiración e contenido de imágenes",
+      "subtitulo": "Busca inspiraciÃ³n e contenido de imÃ¡genes",
       "url": "https://ar.pinterest.com/",
       "descripcion": "",
       "pasos": []
     },
     {
-      "icono": "🐰",
+      "icono": "ð°",
       "nombre": "Dlbunny",
       "subtitulo": "Descarga de video/audio de YouTube",
       "url": "https://dlbunny.com/es/youtube",
-      "descripcion": "DLBunny es una popular herramienta de descarga gratuita de vídeo corto que soporta múltiples idiomas, incluyendo inglés, francés, alemán, español, árabe, chino, japonés, coreano, vietnamita, etc. Puede usarlo para descargar sus vídeos favoritos, imágenes o archivos de audio (completamente gratis).",
+      "descripcion": "DLBunny es una popular herramienta de descarga gratuita de vÃ­deo corto que soporta mÃºltiples idiomas, incluyendo inglÃ©s, francÃ©s, alemÃ¡n, espaÃ±ol, Ã¡rabe, chino, japonÃ©s, coreano, vietnamita, etc. Puede usarlo para descargar sus vÃ­deos favoritos, imÃ¡genes o archivos de audio (completamente gratis).",
       "pasos": []
     },
     {
-      "icono": "🔠",
+      "icono": "ð ",
       "nombre": "Google Fuentes",
       "subtitulo": "FUENTES",
       "url": "https://fonts.google.com/",
@@ -77,29 +77,29 @@
       "pasos": []
     },
     {
-      "icono": "🔡",
+      "icono": "ð¡",
       "nombre": "Dafont",
       "subtitulo": "FUENTES",
       "url": "https://www.dafont.com/es/",
-      "descripcion": "Explora y inspírate de fuentes",
+      "descripcion": "Explora y inspÃ­rate de fuentes",
       "pasos": []
     },
     {
-      "icono": "⏺️",
+      "icono": "âºï¸",
       "nombre": "Seeklogo",
       "subtitulo": "ICONOS",
       "url": "https://seeklogo.com/",
-      "descripcion": "Busca y explora logos, iconos e imágenes.",
+      "descripcion": "Busca y explora logos, iconos e imÃ¡genes.",
       "pasos": []
     },
     {
-      "icono": "🌈",
+      "icono": "ð",
       "nombre": "Texturelabs",
       "subtitulo": "TEXTURA",
       "url": "https://texturelabs.org/",
-      "descripcion": "Descarga y busca texturas únicas para diseños",
+      "descripcion": "Descarga y busca texturas Ãºnicas para diseÃ±os",
       "pasos": []
     }
   ],
-  "updated": "2026-02-27T15:20:59.177Z"
+  "updated": "2026-02-27T15:27:31.745Z"
 }
