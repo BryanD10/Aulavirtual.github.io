@@ -351,7 +351,10 @@ select option{background:#0c1a2e}
 <div id="app">
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <div class="s-badge">GC</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem">
+        <div class="s-badge">GC</div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:0.38rem 0.85rem;border-radius:8px;border:2px solid #68d391;background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:800;text-decoration:none;transition:all 0.2s;white-space:nowrap" onmouseover="this.style.background='rgba(104,211,145,0.3)'" onmouseout="this.style.background='rgba(104,211,145,0.15)'">← Aula</a>
+      </div>
       <h2>CENTED Admin</h2>
       <span>Panel Docente</span>
     </div>
@@ -780,6 +783,29 @@ select option{background:#0c1a2e}
     <div class="form-row one">
       <div class="form-group"><label>Link de herramienta / tarea (opcional)</label><input type="url" id="cm-herramienta" placeholder="https://www.canva.com/"/></div>
     </div>
+    <!-- VISIBILIDAD Y GRUPOS -->
+    <div style="background:rgba(99,179,237,0.06);border:1px solid rgba(99,179,237,0.18);border-radius:12px;padding:1.2rem;margin:0.5rem 0 1rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div>
+          <div style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem">Visibilidad para alumnos</div>
+          <div style="display:flex;gap:0.5rem">
+            <button type="button" id="vis-on" onclick="setVisible(true)" style="padding:0.4rem 1rem;border-radius:8px;border:1px solid rgba(104,211,145,0.4);background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer">✅ Visible</button>
+            <button type="button" id="vis-off" onclick="setVisible(false)" style="padding:0.4rem 1rem;border-radius:8px;border:1px solid rgba(252,129,129,0.3);background:rgba(252,129,129,0.08);color:var(--danger);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer">🔒 Oculta</button>
+          </div>
+          <input type="hidden" id="cm-visible" value="true"/>
+          <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.4rem">Si está oculta los alumnos ven el título pero no pueden abrirla.</p>
+        </div>
+        <div>
+          <div style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem">Grupos que pueden verla</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-matutino" value="matutino" style="accent-color:var(--accent)"> 🌅 Matutino</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-vespertino" value="vespertino" style="accent-color:var(--accent3)"> 🌇 Vespertino</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-sabatino" value="sabatino" style="accent-color:var(--purple)"> 📚 Sabatino</label>
+          </div>
+          <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.4rem">Si no marcas ninguno, la clase aparece en todos los grupos.</p>
+        </div>
+      </div>
+    </div>
 
     <!-- Objetivos -->
     <div style="margin:1.2rem 0">
@@ -987,8 +1013,9 @@ async function loadClasesFromGH(){
   if(result){
     const all=result.data.clases||result.data||[];
     clasesFileSha=result.sha;
-    if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria');
-    else clasesData=all.filter(cl=>cl.tipo==='teoria');
+    const filtrarGrupo = cl => !cl.grupos || cl.grupos.length===0 || cl.grupos.includes(clasesGroup);
+    if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria').filter(filtrarGrupo);
+    else clasesData=all.filter(cl=>cl.tipo==='teoria').filter(filtrarGrupo);
     // Store full array for save
     window._allClases=all;
   } else {
@@ -1015,7 +1042,9 @@ function renderClasesList(){
         <div class="ci-title">${cl.titulo||'Sin título'}</div>
         <div class="ci-meta">${[cl.materia,cl.nivel].filter(Boolean).join(' · ')}</div>
         <div class="ci-badges">
+          ${cl.visible===false?'<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.3)">🔒 Oculta</span>':'<span class="ci-badge vis-badge" style="background:rgba(104,211,145,0.1);color:#68d391;border-color:rgba(104,211,145,0.3)">✅ Visible</span>'}
           ${cl.categoria?`<span class="ci-badge">${cl.categoria}</span>`:''}
+          ${cl.grupos&&cl.grupos.length&&cl.grupos.length<3?`<span class="ci-badge" style="background:rgba(99,179,237,0.1);color:var(--accent);border-color:rgba(99,179,237,0.3)">${cl.grupos.join(' · ')}</span>`:''}
           ${cl.pasos&&cl.pasos.length?`<span class="ci-badge" style="background:rgba(104,211,145,0.1);color:var(--accent2);border-color:rgba(104,211,145,0.2)">${cl.pasos.length} pasos</span>`:''}
           ${cl.objetivos&&cl.objetivos.length?`<span class="ci-badge" style="background:rgba(183,148,244,0.1);color:var(--purple);border-color:rgba(183,148,244,0.2)">${cl.objetivos.length} objetivos</span>`:''}
           ${cl.videoUrl?`<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.2)">📹 Video</span>`:''}
@@ -1041,12 +1070,26 @@ function openClaseModal(idx){
   document.getElementById('cm-video').value=cl.videoUrl||'';
   document.getElementById('cm-descripcion').value=cl.descripcion||'';
   document.getElementById('cm-herramienta').value=cl.herramientaUrl||'';
+  setVisible(cl.visible!==false);
+  const grps=cl.grupos||[];
+  ['matutino','vespertino','sabatino'].forEach(g=>{
+    const cb=document.getElementById('grp-'+g);
+    if(cb) cb.checked = grps.length===0 || grps.includes(g);
+  });
   editObjetivos=[...(cl.objetivos||[''])];
   editPasos=[...(cl.pasos||[{titulo:'',descripcion:''}])];
   renderObjetivos();
   renderPasos();
   previewClaseVideo();
   document.getElementById('clase-modal').classList.add('open');
+}
+
+function setVisible(v){
+  document.getElementById('cm-visible').value = v ? 'true' : 'false';
+  document.getElementById('vis-on').style.background  = v ? 'rgba(104,211,145,0.3)' : 'rgba(104,211,145,0.08)';
+  document.getElementById('vis-on').style.borderColor = v ? '#68d391' : 'rgba(104,211,145,0.2)';
+  document.getElementById('vis-off').style.background  = !v ? 'rgba(252,129,129,0.25)' : 'rgba(252,129,129,0.06)';
+  document.getElementById('vis-off').style.borderColor = !v ? 'var(--danger)' : 'rgba(252,129,129,0.2)';
 }
 function closeClaseModal(){document.getElementById('clase-modal').classList.remove('open');}
 
@@ -1092,6 +1135,11 @@ async function guardarClase(){
     videoUrl: document.getElementById('cm-video').value.trim(),
     descripcion:document.getElementById('cm-descripcion').value.trim(),
     herramientaUrl:document.getElementById('cm-herramienta').value.trim(),
+    visible: document.getElementById('cm-visible').value !== 'false',
+    grupos: ['matutino','vespertino','sabatino'].filter(g=>{
+      const cb=document.getElementById('grp-'+g);
+      return cb && cb.checked;
+    }),
     objetivos:editObjetivos.filter(o=>o.trim()),
     pasos:    editPasos.filter(p=>p.titulo||p.descripcion),
   };
