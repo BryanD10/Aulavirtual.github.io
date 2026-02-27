@@ -62,7 +62,12 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .logout-btn:hover{background:rgba(252,129,129,0.15)}
 
 /* ══ MAIN ══ */
-.main{margin-left:240px;min-height:100vh;padding:2.5rem 2.5rem 4rem}
+.topbar{position:sticky;top:0;z-index:90;margin-left:240px;background:rgba(6,13,24,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0.7rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.topbar-left{display:flex;align-items:center;gap:0.75rem}
+.topbar-title{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text)}
+.btn-regresar{display:inline-flex;align-items:center;gap:7px;padding:0.5rem 1.1rem;border-radius:9px;border:1px solid rgba(104,211,145,0.5);background:rgba(104,211,145,0.12);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;text-decoration:none;transition:all 0.2s;white-space:nowrap}
+.btn-regresar:hover{background:rgba(104,211,145,0.25);transform:translateX(-2px)}
+.main{margin-left:240px;min-height:100vh;padding:2rem 2.5rem 4rem}
 .page-header{margin-bottom:2rem}
 .page-header h1{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700}
 .page-header p{color:var(--text-dim);margin-top:0.3rem;font-size:0.88rem}
@@ -351,13 +356,19 @@ select option{background:#0c1a2e}
 <div id="app">
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <div class="s-badge">GC</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem">
+        <div class="s-badge">GC</div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:0.35rem 0.75rem;border-radius:8px;border:2px solid #68d391;background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='rgba(104,211,145,0.3)'" onmouseout="this.style.background='rgba(104,211,145,0.15)'">← Aula</a>
+      </div>
       <h2>CENTED Admin</h2>
       <span>Panel Docente</span>
     </div>
     <div class="sidebar-repo">
       <div class="repo-label">Repositorio</div>
       <div class="repo-name" id="sidebar-repo-name">BryanD10/Aulavirtual.github.io</div>
+    </div>
+    <div style="padding:0 0.6rem 0.4rem">
+      <a href="index.html" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:0.65rem 1rem;border-radius:10px;border:1px solid rgba(104,211,145,0.4);background:rgba(104,211,145,0.12);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.84rem;font-weight:800;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='rgba(104,211,145,0.22)'" onmouseout="this.style.background='rgba(104,211,145,0.12)'">← Regresar al Aula</a>
     </div>
     <div class="nav-section">Principal</div>
     <div class="nav-item active" onclick="showPanel('dashboard',this)"><span class="ni">📊</span> Dashboard</div>
@@ -372,12 +383,18 @@ select option{background:#0c1a2e}
     <div class="nav-item" onclick="showPanel('ia',this)"><span class="ni">🤖</span> Asistentes IA</div>
     <div class="nav-section">Ajustes</div>
     <div class="nav-item" onclick="showPanel('settings',this)"><span class="ni">⚙️</span> Configuración</div>
-    <div class="nav-item" onclick="window.open('index.html','_blank')" style="color:var(--accent2);border-color:rgba(104,211,145,0.25);background:rgba(104,211,145,0.07)"><span class="ni">🌐</span> Ver Aula</div>
     <div class="sidebar-footer">
-      <a href="index.html" style="display:flex;align-items:center;gap:8px;width:100%;padding:0.6rem 1rem;border-radius:8px;border:1px solid rgba(104,211,145,0.25);background:rgba(104,211,145,0.08);color:var(--accent2);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;text-decoration:none;transition:all 0.2s;margin-bottom:0.5rem" onmouseover="this.style.background='rgba(104,211,145,0.18)'" onmouseout="this.style.background='rgba(104,211,145,0.08)'">🏫 ← Regresar al Aula</a>
       <button class="logout-btn" onclick="doLogout()">🚪 Cerrar sesión</button>
     </div>
   </aside>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-title" id="topbar-panel-name">📊 Dashboard</span>
+    </div>
+    <a href="index.html" class="btn-regresar">🏫 ← Regresar al Aula</a>
+  </div>
 
   <main class="main">
 
@@ -410,7 +427,7 @@ select option{background:#0c1a2e}
           <div style="font-weight:800;font-size:0.9rem">Subir Documento</div>
           <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.2rem">PDF, DOCX, PPTX y más</div>
         </div>
-        <div onclick="showPanel('settings',document.querySelector('.nav-item:nth-child(12)'))" style="background:var(--surface);border:1px solid rgba(183,148,244,0.25);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div onclick="showPanel('settings',document.querySelectorAll('.nav-item')[10])" style="background:var(--surface);border:1px solid rgba(183,148,244,0.25);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
           <div style="font-size:1.8rem;margin-bottom:0.5rem">🔐</div>
           <div style="font-weight:800;font-size:0.9rem">Cambiar Contraseña</div>
           <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.2rem">Configuración del panel</div>
@@ -1357,4 +1374,4 @@ window.addEventListener('load',()=>{
 });
 </script>
 </body>
-</html>vvvvvvvvvv
+</html>
