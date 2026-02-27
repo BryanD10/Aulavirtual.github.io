@@ -51,7 +51,55 @@
         "Crear o subir archivo",
         "Compartir enlace al docente"
       ]
+    },
+    {
+      "icono": "🖼️",
+      "nombre": "pinterest",
+      "subtitulo": "Busca inspiración e contenido de imágenes",
+      "url": "https://ar.pinterest.com/",
+      "descripcion": "",
+      "pasos": []
+    },
+    {
+      "icono": "🐰",
+      "nombre": "Dlbunny",
+      "subtitulo": "Descarga de video/audio de YouTube",
+      "url": "https://dlbunny.com/es/youtube",
+      "descripcion": "DLBunny es una popular herramienta de descarga gratuita de vídeo corto que soporta múltiples idiomas, incluyendo inglés, francés, alemán, español, árabe, chino, japonés, coreano, vietnamita, etc. Puede usarlo para descargar sus vídeos favoritos, imágenes o archivos de audio (completamente gratis).",
+      "pasos": []
+    },
+    {
+      "icono": "🔠",
+      "nombre": "Google Fuentes",
+      "subtitulo": "FUENTES",
+      "url": "https://fonts.google.com/",
+      "descripcion": "Descarga fuentes de manera profesional",
+      "pasos": []
+    },
+    {
+      "icono": "🔡",
+      "nombre": "Dafont",
+      "subtitulo": "FUENTES",
+      "url": "https://www.dafont.com/es/",
+      "descripcion": "Explora y inspírate de fuentes",
+      "pasos": []
+    },
+    {
+      "icono": "⏺️",
+      "nombre": "Seeklogo",
+      "subtitulo": "ICONOS",
+      "url": "https://seeklogo.com/",
+      "descripcion": "Busca y explora logos, iconos e imágenes.",
+      "pasos": []
+    },
+    {
+      "icono": "🌈",
+      "nombre": "Texturelabs",
+      "subtitulo": "TEXTURA",
+      "url": "https://texturelabs.org/",
+      "descripcion": "Descarga y busca texturas únicas para diseños",
+      "pasos": []
     }
   ],
-  "updated": "2026-02-27T15:07:32.577Z"
+  "updated": "2026-02-27T15:20:53.553Z"
 }
