@@ -1,0 +1,17 @@
+{
+  "grupo": "matutino",
+  "clases": [
+    {
+      "numero": "01",
+      "tipo": "practica",
+      "titulo": "VALIENDO EN LOS PARCIALES",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "AVANZADO",
+      "categoria": "Practica1",
+      "videoUrl": "https://youtu.be/4nWXujGi90Y?si=_KVZNkpD2-ff_qyn",
+      "objetivos": [],
+      "pasos": []
+    }
+  ],
+  "updated": "2026-02-27T03:53:40.686Z"
+}
