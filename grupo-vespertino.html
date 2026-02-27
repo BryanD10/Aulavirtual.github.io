@@ -415,16 +415,11 @@ footer a{color:#8b5cf6;text-decoration:none;font-weight:600}
         </div>
       </div>
     </div>
-    <!-- External tools -->
+    <!-- External tools - cargado desde GitHub -->
     <div style="margin-top:2rem" class="rv">
       <div class="sh" style="margin-bottom:1.2rem"><div class="stag">🔗 Herramientas Web</div><h2>Recursos en línea</h2></div>
-      <div class="tgrid">
-        <div class="tc"><div class="tc-hd"><div class="tci">🎨</div><div><h3>Canva</h3><span>Diseño Gráfico</span></div></div><p>Diseño gráfico profesional en línea. Afiches, presentaciones y más.</p><div class="tc-steps"><h4>Pasos</h4><ol><li>Registrarse gratis en canva.com</li><li>Elegir formato (afiche, presentación…)</li><li>Personalizar con el panel lateral</li><li>Descargar en JPG, PNG o PDF</li></ol></div><a href="https://www.canva.com/" target="_blank" class="tcl">Abrir Canva →</a></div>
-        <div class="tc"><div class="tc-hd"><div class="tci">✂️</div><div><h3>Photoroom</h3><span>Eliminar fondos</span></div></div><p>Elimina fondos con IA automáticamente. Sin instalación.</p><div class="tc-steps"><h4>Pasos</h4><ol><li>Entrar a photoroom.com</li><li>Subir la imagen</li><li>El fondo se elimina solo</li><li>Descargar PNG transparente</li></ol></div><a href="https://www.photoroom.com/es/herramientas/eliminador-de-fondos" target="_blank" class="tcl">Abrir →</a></div>
-        <div class="tc"><div class="tc-hd"><div class="tci">🗄️</div><div><h3>DB Fiddle</h3><span>SQL Online</span></div></div><p>Practica SQL en el navegador. MySQL, PostgreSQL y SQLite.</p><div class="tc-steps"><h4>Pasos</h4><ol><li>Abrir db-fiddle.com</li><li>Elegir motor (MySQL)</li><li>Escribir CREATE TABLE a la izquierda</li><li>Consultas a la derecha → Run</li></ol></div><a href="https://www.db-fiddle.com/" target="_blank" class="tcl">Abrir →</a></div>
-        <div class="tc"><div class="tc-hd"><div class="tci">📐</div><div><h3>Draw.io</h3><span>Diagramas ER</span></div></div><p>Diagramas Entidad-Relación y de red gratis.</p><div class="tc-steps"><h4>Pasos</h4><ol><li>Ir a app.diagrams.net</li><li>Seleccionar Entity Relation</li><li>Arrastrar entidades y conectar</li><li>Exportar como imagen</li></ol></div><a href="https://app.diagrams.net/" target="_blank" class="tcl">Abrir →</a></div>
-        <div class="tc"><div class="tc-hd"><div class="tci">🌐</div><div><h3>Cisco Skills</h3><span>Redes</span></div></div><p>Cursos de Cisco con Packet Tracer incluido.</p><div class="tc-steps"><h4>Pasos</h4><ol><li>Registrarse en skillsforall.com</li><li>Buscar "Networking Basics"</li><li>Completar módulos interactivos</li><li>Descargar Packet Tracer</li></ol></div><a href="https://skillsforall.com/" target="_blank" class="tcl">Abrir →</a></div>
-        <div class="tc"><div class="tc-hd"><div class="tci">📊</div><div><h3>Office Online</h3><span>Word · Excel · PPT</span></div></div><p>Suite ofimática completa en el navegador.</p><div class="tc-steps"><h4>Pasos</h4><ol><li>Ingresar a office.com</li><li>Elegir la app (Word/Excel/PPT)</li><li>Crear o subir archivo</li><li>Compartir enlace al docente</li></ol></div><a href="https://www.office.com/" target="_blank" class="tcl">Abrir →</a></div>
+      <div class="tgrid" id="herramientas-grid">
+        <div class="empty" style="grid-column:1/-1"><div class="ei">⏳</div><h4>Cargando herramientas...</h4></div>
       </div>
     </div>
   </div>
@@ -482,15 +477,15 @@ function go(id, btn) {
   document.querySelectorAll('.nl a').forEach(a=>{if(a.textContent.toLowerCase().includes(id.slice(0,4)))a.classList.add('on');});
   if(id==='materiales'&&!mLoaded)loadMats();
   if(id==='videos'&&!vLoaded)loadVids();
+  if(id==='herramientas'&&!herrLoaded)loadHerramientas();
   rv();
-  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // ══════════════════════════════════════════════
 //  ACCORDION
 // ══════════════════════════════════════════════
 function tAcc(el){el.classList.toggle('open')}
-function tPrac(card){card.classList.toggle('open');rv()}
+function tPrac(card){card.classList.toggle('open');}
 
 // ══════════════════════════════════════════════
 //  LOAD CLASES
@@ -715,8 +710,47 @@ function ei(e){const m={pdf:'📄',doc:'📝',docx:'📝',ppt:'📊',pptx:'📊'
 function ec(e){if(e==='pdf')return'fpdf';if(['doc','docx'].includes(e))return'fdoc';if(['ppt','pptx'].includes(e))return'fppt';if(['zip','rar'].includes(e))return'fzip';if(['png','jpg','jpeg'].includes(e))return'fimg';if(['mp4','mov'].includes(e))return'fvid';return'foth';}
 function rv(){const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:.06});document.querySelectorAll('.rv:not(.on)').forEach(el=>obs.observe(el));}
 
+
+// ══════════════════════════════════════════════
+//  HERRAMIENTAS DINÁMICAS (desde GitHub)
+// ══════════════════════════════════════════════
+const HERR_FALLBACK=[
+  {icono:'🎨',nombre:'Canva',subtitulo:'Diseño Gráfico',url:'https://www.canva.com/',descripcion:'Diseño gráfico profesional en línea. Afiches, presentaciones y más.',pasos:['Registrarse gratis en canva.com','Elegir formato (afiche, presentación…)','Personalizar con el panel lateral','Descargar en JPG, PNG o PDF']},
+  {icono:'✂️',nombre:'Photoroom',subtitulo:'Eliminar fondos',url:'https://www.photoroom.com/es/herramientas/eliminador-de-fondos',descripcion:'Elimina fondos con IA automáticamente. Sin instalación.',pasos:['Entrar a photoroom.com','Subir la imagen','El fondo se elimina solo','Descargar PNG transparente']},
+  {icono:'🖼️',nombre:'Photopea',subtitulo:'Editor de fotos',url:'https://www.photopea.com/',descripcion:'Editor de imágenes similar a Photoshop en el navegador.',pasos:['Ir a photopea.com','Abrir o crear nuevo documento','Usar las herramientas del panel izquierdo','Guardar/exportar tu trabajo']},
+  {icono:'🗄️',nombre:'DB Fiddle',subtitulo:'SQL Online',url:'https://www.db-fiddle.com/',descripcion:'Practica SQL en el navegador. MySQL, PostgreSQL y SQLite.',pasos:['Abrir db-fiddle.com','Elegir motor (MySQL)','Escribir CREATE TABLE a la izquierda','Consultas a la derecha → Run']},
+  {icono:'📐',nombre:'Draw.io',subtitulo:'Diagramas ER',url:'https://app.diagrams.net/',descripcion:'Diagramas Entidad-Relación y de red gratis.',pasos:['Ir a app.diagrams.net','Seleccionar Entity Relation','Arrastrar entidades y conectar','Exportar como imagen']},
+  {icono:'🌐',nombre:'Cisco Skills',subtitulo:'Redes',url:'https://skillsforall.com/',descripcion:'Cursos de Cisco con Packet Tracer incluido.',pasos:['Registrarse en skillsforall.com','Buscar "Networking Basics"','Completar módulos interactivos','Descargar Packet Tracer']},
+  {icono:'📊',nombre:'Office Online',subtitulo:'Word · Excel · PPT',url:'https://www.office.com/',descripcion:'Suite ofimática completa en el navegador.',pasos:['Ingresar a office.com','Elegir la app (Word/Excel/PPT)','Crear o subir archivo','Compartir enlace al docente']},
+];
+
+let herrLoaded=false;
+async function loadHerramientas(){
+  const grid=document.getElementById('herramientas-grid');
+  if(!grid)return;
+  const url=`https://raw.githubusercontent.com/${GH.user}/${GH.repo}/${GH.branch}/datos/herramientas.json?t=`+Date.now();
+  let lista=HERR_FALLBACK;
+  try{
+    const r=await fetch(url);
+    if(r.ok){const d=await r.json();lista=d.herramientas||d;}
+  }catch(e){}
+  herrLoaded=true;
+  const snH=document.getElementById('sn-herr');
+  if(snH)snH.textContent=lista.length;
+  grid.innerHTML=lista.map(h=>`
+    <div class="tc">
+      <div class="tc-hd">
+        <div class="tci">${h.icono||'🔗'}</div>
+        <div><h3>${h.nombre||''}</h3><span>${h.subtitulo||''}</span></div>
+      </div>
+      <p>${h.descripcion||''}</p>
+      ${h.pasos&&h.pasos.length?`<div class="tc-steps"><h4>Pasos</h4><ol>${h.pasos.map(p=>`<li>${p}</li>`).join('')}</ol></div>`:''}
+      <a href="${h.url||'#'}" target="_blank" class="tcl">Abrir ${h.nombre} →</a>
+    </div>`).join('');
+}
+
 // init
-window.addEventListener('DOMContentLoaded',()=>{loadClases();rv();});
+window.addEventListener('DOMContentLoaded',()=>{loadClases();loadHerramientas();rv();});
 </script>
 </body>
 </html>
