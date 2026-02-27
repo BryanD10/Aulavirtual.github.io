@@ -563,6 +563,7 @@ select option{background:#0c1a2e}
         </select>
         <button class="btn-upload sm green" onclick="openClaseModal(null)">➕ Nueva clase</button>
         <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadClasesFromGH()">🔄 Recargar</button>
+        <button class="btn-sm btn-edit" style="padding:0.55rem 1rem;border-radius:9px" onclick="repararEncoding()" title="Vuelve a guardar el JSON con encoding correcto para arreglar caracteres rotos">🔧 Reparar tildes</button>
         <span id="clases-count" style="font-size:0.82rem;color:var(--text-dim);margin-left:auto"></span>
       </div>
 
@@ -912,7 +913,7 @@ async function ghReq(method,path,body){
   const res=await fetch('https://api.github.com'+path,{method,headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:body?JSON.stringify(body):undefined});
   return res;
 }
-async function ghGet(path){const c=getConfig();try{const r=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+path);if(r.ok){const d=await r.json();const json=JSON.parse(atob(d.content.replace(/\n/g,'')));return{data:json,sha:d.sha};}return null;}catch(e){return null;}}
+async function ghGet(path){const c=getConfig();try{const r=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+path);if(r.ok){const d=await r.json();const raw=d.content.replace(/\n/g,'');const bytes=Uint8Array.from(atob(raw),ch=>ch.charCodeAt(0));const json=JSON.parse(new TextDecoder('utf-8').decode(bytes));return{data:json,sha:d.sha};}return null;}catch(e){return null;}}
 async function ghPut(path,data,sha,msg){const c=getConfig();const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);let b64="";for(let i=0;i<_by.length;i++)b64+=String.fromCharCode(_by[i]);b64=btoa(b64);const body={message:msg||'📚 Actualizar '+path,content:b64,branch:c.branch};if(sha)body.sha=sha;const r=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!r.ok){const e=await r.json();throw new Error(e.message);}return r;}
 
 // ══════════════════════════════════════════
@@ -995,6 +996,35 @@ let editClaseIdx=null;
 let editObjetivos=[];
 let editPasos=[];
 
+
+// ── Reparar encoding de JSON corrupto en GitHub ──
+async function repararEncoding(){
+  if(!confirm('Esto vuelve a guardar el JSON de clases en GitHub con encoding correcto.\n¿Continuar?'))return;
+  toast('🔧 Reparando encoding...','info');
+  // Leer con raw fetch (no atob) para obtener el texto tal cual
+  const c2=getConfig();
+  const path=`clases/${clasesGroup}/clases.json`;
+  try{
+    // Usar raw.githubusercontent para obtener el texto directamente sin base64
+    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/${path}?t=`+Date.now();
+    const r=await fetch(rawUrl);
+    if(!r.ok){toast('❌ No existe el archivo aún','error');return;}
+    const text=await r.text();
+    // Intentar parsear - si hay caracteres corruptos, mostrar advertencia
+    let data;
+    try{data=JSON.parse(text);}
+    catch(e){toast('❌ JSON inválido: '+e.message,'error');return;}
+    // Reescribir con encoding correcto
+    // Primero obtener SHA
+    const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/${path}`);
+    let sha=null;
+    if(metaR.ok){const meta=await metaR.json();sha=meta.sha;}
+    await ghPut(path,data,sha,'🔧 Reparar encoding UTF-8');
+    // Recargar
+    await loadClasesFromGH();
+    toast('✅ Encoding reparado y guardado','success');
+  }catch(e){toast('❌ Error: '+e.message,'error');}
+}
 function initClasesPanel(){loadClasesFromGH();}
 function selectClasesGroup(g,btn){clasesGroup=g;document.querySelectorAll('#clases-group-tabs .inner-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');loadClasesFromGH();}
 
