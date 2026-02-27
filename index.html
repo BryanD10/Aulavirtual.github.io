@@ -3,138 +3,154 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Inicio | AULA DIGITAL GRUPO CENTED</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
-<!-- ╔══════════════════════════════════════════╗
-     ║  CONFIGURACIÓN — edita solo este bloque  ║
-     ╚══════════════════════════════════════════╝ -->
-<script>
-  const GITHUB_CONFIG = {
-    user:   'TU_USUARIO_GITHUB',   // ← pon tu usuario de GitHub
-    repo:   'cented-aula-digital', // ← nombre del repositorio
-    branch: 'main',
-    folder: 'archivos',
-  };
-</script>
+<title>Inicio | GRUPO CENTED · Aula Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script>const GH={user:'BryanD10',repo:'Aulavirtual.github.io',branch:'main',folder:'archivos'};</script>
 <style>
-:root{--bg:#07111f;--surface:rgba(255,255,255,0.04);--border:rgba(0,194,255,0.16);--accent:#00c2ff;--accent2:#00e5a0;--accent3:#ff6b35;--gold:#ffd166;--text:#e8f4fd;--text-dim:#8ba7c7}
+:root{--bg:#faf8f4;--bg2:#fff;--border:#ede8df;--orange:#f97316;--od:#ea580c;--ol:#fff7ed;--om:#fed7aa;--text:#1c1917;--td:#57534e;--tm:#a8a29e;--sh1:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);--sh2:0 4px 16px rgba(0,0,0,.08);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 15% 25%,rgba(0,194,255,0.08) 0%,transparent 55%),radial-gradient(ellipse at 85% 75%,rgba(0,229,160,0.06) 0%,transparent 55%)}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(7,17,31,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
-.logo-badge{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#07111f;box-shadow:0 0 18px rgba(0,194,255,0.4)}
-.logo-info{line-height:1.2}
-.logo-info b{font-family:'Rajdhani',sans-serif;font-size:1.05rem;font-weight:700;display:block}
-.logo-info span{font-size:0.65rem;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase}
-.nav-links{display:flex;gap:0.3rem;align-items:center}
-.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.83rem;font-weight:700;padding:0.4rem 0.85rem;border-radius:7px;transition:all 0.2s}
-.nav-links a:hover{color:var(--accent);background:rgba(0,194,255,0.1)}
-.nav-links .cta{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07111f!important;padding:0.45rem 1.1rem;border-radius:8px;font-weight:800}
-.nav-links .cta:hover{transform:translateY(-1px);box-shadow:0 0 25px rgba(0,194,255,0.4);background:linear-gradient(135deg,var(--accent),var(--accent2))!important}
-.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.hero-bg{position:absolute;inset:0;background:url('https://static.wixstatic.com/media/ee1221_a808691ece464988a0c3755010bc2f8c~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a808691ece464988a0c3755010bc2f8c~mv2.jpg') center/cover no-repeat;filter:brightness(0.3) saturate(0.7)}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,17,31,0.2),rgba(7,17,31,0.92))}
-.hero-content{position:relative;z-index:2;text-align:center;padding:6rem 2rem 4rem;max-width:680px}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,194,255,0.1);border:1px solid rgba(0,194,255,0.3);border-radius:50px;padding:0.3rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:0.15em;color:var(--accent);text-transform:uppercase;margin-bottom:1.8rem;animation:fu 0.7s ease both}
-.hero-badge::before{content:'●';font-size:0.45rem;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-h1.ht{font-family:'Rajdhani',sans-serif;font-size:clamp(3.5rem,10vw,7.5rem);font-weight:700;line-height:0.9;letter-spacing:-0.02em;animation:fu 0.7s 0.1s ease both;opacity:0}
-h1.ht em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{margin-top:1.5rem;font-size:1.05rem;line-height:1.75;color:var(--text-dim);animation:fu 0.7s 0.2s ease both;opacity:0}
-.hero-btns{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fu 0.7s 0.3s ease both;opacity:0}
-.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07111f;border:none;padding:0.9rem 2.2rem;border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:800;cursor:pointer;text-decoration:none;box-shadow:0 0 28px rgba(0,194,255,0.35);transition:all 0.25s}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 45px rgba(0,194,255,0.55)}
-.btn-g{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.2);padding:0.9rem 2.2rem;border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;text-decoration:none;backdrop-filter:blur(5px);transition:all 0.25s}
-.btn-g:hover{border-color:var(--accent);color:var(--accent)}
-@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;color:var(--text-dim);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;animation:bob 2.5s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-.sec{position:relative;z-index:1;padding:5rem 2rem}
-.sec-tag{display:inline-block;font-size:0.68rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);padding:0.28rem 0.85rem;border:1px solid rgba(0,194,255,0.25);border-radius:50px;background:rgba(0,194,255,0.07);margin-bottom:0.8rem}
-.sec-title{font-family:'Rajdhani',sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:700;line-height:1.1}
-.sec-desc{color:var(--text-dim);margin-top:0.7rem;max-width:500px;line-height:1.75}
+body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);overflow-x:hidden}
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:60px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+.nb{display:flex;align-items:center;gap:10px;text-decoration:none}
+.ni{width:36px;height:36px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff}
+.nt strong{font-size:.9rem;font-weight:800;display:block;color:var(--text);line-height:1.2}
+.nt span{font-size:.68rem;color:var(--tm)}
+.nl{display:flex;gap:.2rem}
+.nl a{color:var(--td);text-decoration:none;font-size:.84rem;font-weight:600;padding:.38rem .85rem;border-radius:8px;transition:all .15s}
+.nl a:hover{color:var(--text)}
+.nl .cta{background:var(--orange);color:#fff!important;font-weight:700;padding:.42rem 1.1rem;box-shadow:0 2px 8px rgba(249,115,22,.3)}
+.nl .cta:hover{background:var(--od)}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#fef9f3 0%,#fff7ec 55%,#fef3e2 100%);padding:5rem 2rem 4rem;position:relative;overflow:hidden;min-height:90vh;display:flex;align-items:center}
+.hero::before{content:'';position:absolute;top:-80px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,.1),transparent 70%);pointer-events:none}
+.hero-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 430px;gap:4rem;align-items:center;width:100%}
+.hbadge{display:inline-flex;align-items:center;gap:6px;background:var(--ol);border:1px solid var(--om);border-radius:50px;padding:.28rem .9rem;font-size:.72rem;font-weight:700;color:var(--od);margin-bottom:1.1rem}
+.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;line-height:1.08;margin-bottom:1.1rem}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p.sub{font-size:.97rem;color:var(--td);line-height:1.78;margin-bottom:2rem;max-width:500px}
+.hbtns{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.btn-p{display:inline-flex;align-items:center;gap:7px;background:var(--orange);color:#fff;padding:.75rem 1.6rem;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;border:none;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 2px 8px rgba(249,115,22,.3)}
+.btn-p:hover{background:var(--od);transform:translateY(-1px)}
+.btn-s{display:inline-flex;align-items:center;gap:7px;background:var(--bg2);color:var(--td);padding:.75rem 1.2rem;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;border:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .15s}
+.btn-s:hover{border-color:var(--orange);color:var(--orange)}
+.hstats{display:flex;gap:1rem;flex-wrap:wrap}
+.hsc{display:flex;align-items:center;gap:9px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.65rem 1.1rem;box-shadow:var(--sh1)}
+.hsi{width:32px;height:32px;border-radius:8px;background:var(--ol);display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.hsn{font-weight:800;font-size:1.15rem;display:block;line-height:1.1}
+.hsl{font-size:.67rem;color:var(--tm)}
+
+/* GROUP CARDS */
+.gcards{display:flex;flex-direction:column;gap:1rem}
+.gc{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.3rem 1.5rem;text-decoration:none;color:var(--text);transition:all .2s;box-shadow:var(--sh1);display:block}
+.gc:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.gc.active{border-color:var(--orange);box-shadow:0 0 0 2px rgba(249,115,22,.15)}
+.gc-top{display:flex;align-items:center;gap:12px;margin-bottom:.6rem}
+.gc-ico{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff}
+.m{background:linear-gradient(135deg,#f97316,#fb923c)}.v{background:linear-gradient(135deg,#8b5cf6,#a78bfa)}.s{background:linear-gradient(135deg,#059669,#34d399)}
+.gc strong{font-weight:800;font-size:.93rem;display:block}
+.gc em{font-size:.72rem;color:var(--tm);font-style:normal}
+.gc p{font-size:.8rem;color:var(--td);line-height:1.6;margin-bottom:.7rem}
+.gc-link{font-size:.8rem;font-weight:700;color:var(--orange);display:inline-flex;align-items:center;gap:4px}
+.gc-link.v{color:#8b5cf6}.gc-link.s{color:#059669}
+
+/* SECTIONS */
+.sec{padding:5rem 2rem}
+.sec-alt{background:var(--bg2)}
+.wrap{max-width:1120px;margin:0 auto}
+.stag{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8b5cf6;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:50px;padding:.22rem .7rem;margin-bottom:.55rem}
+.sec h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;line-height:1.1;margin-bottom:.4rem}
+.sec .sub{font-size:.9rem;color:var(--td);line-height:1.75;max-width:560px}
 .sec-header{text-align:center;margin-bottom:3rem}
-.sec-header .sec-desc{margin:0.7rem auto 0}
-.divider{position:relative;z-index:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 4rem}
-.stats-bar{max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;overflow:hidden;gap:1px}
-.stat-c{flex:1;min-width:150px;padding:1.5rem 1.8rem;text-align:center;background:rgba(7,17,31,0.7);backdrop-filter:blur(10px);transition:background 0.2s}
-.stat-c:hover{background:rgba(0,194,255,0.07)}
-.stat-num{font-family:'Rajdhani',sans-serif;font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat-lbl{font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.15rem}
-.groups-grid{max-width:1050px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.gc{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:transform 0.35s,box-shadow 0.35s;cursor:pointer;text-decoration:none;color:var(--text);display:block}
-.gc:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.4),0 0 35px var(--gg)}
-.gc .g-bg{height:190px;background-size:cover;background-position:center;position:relative}
-.gc .g-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(7,17,31,0.96) 100%)}
-.gc .g-body{padding:1.4rem 1.8rem 1.8rem;background:rgba(255,255,255,0.04)}
-.gc .g-bar{height:3px;background:var(--gb)}
-.gc h3{font-family:'Rajdhani',sans-serif;font-size:1.55rem;font-weight:700;margin-bottom:0.35rem}
-.gc .gt{font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem}
-.gc .g-btn{display:inline-flex;align-items:center;gap:8px;padding:0.6rem 1.3rem;border-radius:8px;font-size:0.85rem;font-weight:800;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);transition:all 0.22s}
-.gc:hover .g-btn{background:rgba(0,194,255,0.14);border-color:var(--accent);color:var(--accent)}
-.gc .g-icon{position:absolute;bottom:1rem;right:1rem;z-index:2;width:46px;height:46px;border-radius:11px;background:rgba(7,17,31,0.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:1.4rem}
-.gm{--gg:rgba(0,194,255,0.2);--gb:linear-gradient(90deg,#00c2ff,#00e5a0)}
-.gv{--gg:rgba(255,107,53,0.2);--gb:linear-gradient(90deg,#ffd166,#ff6b35)}
-.gs{--gg:rgba(185,131,255,0.2);--gb:linear-gradient(90deg,#b983ff,#00e5a0)}
-.normas-wrap{max-width:1050px;margin:0 auto 2.5rem}
-.normas-box{background:rgba(255,209,102,0.07);border:1px solid rgba(255,209,102,0.25);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem}
-.normas-box h4{font-weight:800;font-size:0.88rem;color:var(--gold)}
-.normas-box p{font-size:0.78rem;color:var(--text-dim);margin-top:0.2rem}
-.normas-box a{margin-left:auto;flex-shrink:0;white-space:nowrap;padding:0.4rem 1rem;border-radius:8px;background:rgba(255,209,102,0.12);border:1px solid rgba(255,209,102,0.28);color:var(--gold);text-decoration:none;font-size:0.78rem;font-weight:800;transition:all 0.2s}
-.normas-box a:hover{background:rgba(255,209,102,0.22)}
-.tools-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}
-.tt{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1rem;text-align:center;text-decoration:none;color:var(--text);transition:all 0.25s;display:block}
-.tt:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 10px 28px rgba(0,194,255,0.12)}
-.tt .ti{height:48px;display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem}
-.tt .ti img{max-height:48px;max-width:80px;object-fit:contain}
-.tt h5{font-size:0.82rem;font-weight:800}
-.tt p{font-size:0.69rem;color:var(--text-dim);margin-top:0.25rem}
-.social-row{max-width:860px;margin:0 auto;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-.st{flex:1;min-width:190px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.2rem;text-align:center;text-decoration:none;color:var(--text);transition:all 0.25s;display:block}
-.st:hover{transform:translateY(-4px)}
-.st .si{height:52px;display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem}
-.st .si img{max-height:52px;object-fit:contain}
-.st h5{font-weight:800;font-size:0.9rem}
-.st p{font-size:0.75rem;color:var(--text-dim);margin-top:0.3rem}
-.st.wa{border-top:3px solid #25D366}.st.wa:hover{box-shadow:0 10px 28px rgba(37,211,102,0.2)}
-.st.fb{border-top:3px solid #1877F2}.st.fb:hover{box-shadow:0 10px 28px rgba(24,119,242,0.2)}
-.st.yt{border-top:3px solid #FF0000}.st.yt:hover{box-shadow:0 10px 28px rgba(255,0,0,0.2)}
-.about-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-.about-img{border-radius:18px;overflow:hidden;border:1px solid var(--border)}
-.about-img img{width:100%;display:block;filter:saturate(0.85)}
-.about-text h2{font-family:'Rajdhani',sans-serif;font-size:2.3rem;font-weight:700;margin-bottom:1rem}
-.about-text p{color:var(--text-dim);line-height:1.8;margin-bottom:0.9rem}
-.lema{border-left:3px solid var(--accent);padding-left:1rem;font-size:0.85rem;color:var(--text-dim);font-style:italic;margin:1.2rem 0}
-.doc-box{display:flex;align-items:center;gap:1rem;margin-top:1.5rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px}
-.doc-box img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
-.doc-box h5{font-weight:800;font-size:0.9rem}
-.doc-box p{font-size:0.75rem;color:var(--text-dim);margin-top:0.15rem}
-.contact-box{max-width:680px;margin:0 auto;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3rem}
-.contact-box h3{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700}
-.contact-box p{color:var(--text-dim);margin:0.5rem 0 2rem}
-.c-links{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center}
-.c-link{display:flex;align-items:center;gap:8px;padding:0.7rem 1.4rem;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text);text-decoration:none;font-weight:700;font-size:0.87rem;transition:all 0.2s}
-.c-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,194,255,0.08)}
-footer{position:relative;z-index:1;background:rgba(4,10,20,0.95);border-top:1px solid var(--border);padding:2.5rem;text-align:center}
-footer .f-logo{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.5rem}
-footer p{font-size:0.76rem;color:var(--text-dim);line-height:1.9}
-footer .fa{color:var(--accent)}
-.admin-link{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;padding:0.4rem 1rem;border-radius:7px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-dim);text-decoration:none;font-size:0.75rem;font-weight:700;transition:all 0.2s}
-.admin-link:hover{border-color:var(--accent);color:var(--accent)}
-.rev{opacity:0;transform:translateY(26px);transition:opacity 0.6s ease,transform 0.6s ease}
-.rev.on{opacity:1;transform:translateY(0)}
-@media(max-width:760px){.nav-links a:not(.cta){display:none}.about-wrap{grid-template-columns:1fr}.about-img{display:none}}
+.sec-header .sub{margin:0 auto}
+
+/* GROUPS GRID */
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.gcard{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--sh1);transition:all .2s;text-decoration:none;color:var(--text);display:block}
+.gcard:hover{box-shadow:var(--sh2);transform:translateY(-5px)}
+.gcard-img{height:160px;background-size:cover;background-position:center;position:relative}
+.gcard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.4))}
+.gcard-bar{height:4px;background:var(--gb)}
+.gcard-body{padding:1.3rem 1.5rem 1.6rem}
+.gcard-body h3{font-size:1.2rem;font-weight:800;margin-bottom:.3rem}
+.gcard-body .gt{font-size:.78rem;color:var(--tm);margin-bottom:1rem}
+.gcard-cta{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;color:var(--orange);padding:.45rem 1rem;border-radius:8px;background:var(--ol);border:1px solid var(--om);transition:all .2s}
+.gcard:hover .gcard-cta{background:var(--orange);color:#fff}
+.gm{--gb:linear-gradient(90deg,#f97316,#fb923c)}
+.gv{--gb:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+.gs{--gb:linear-gradient(90deg,#059669,#34d399)}
+
+/* TOOLS */
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.9rem}
+.tt{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.2rem .9rem;text-align:center;text-decoration:none;color:var(--text);transition:all .2s;box-shadow:var(--sh1);display:block}
+.tt:hover{transform:translateY(-3px);border-color:var(--orange);box-shadow:var(--sh2)}
+.tt .ti{height:44px;display:flex;align-items:center;justify-content:center;margin-bottom:.6rem;font-size:1.8rem}
+.tt .ti img{max-height:44px;max-width:70px;object-fit:contain}
+.tt h5{font-size:.8rem;font-weight:700}
+.tt p{font-size:.67rem;color:var(--tm);margin-top:.1rem}
+
+/* IA */
+.iag{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.iac{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.4rem;box-shadow:var(--sh1);transition:all .2s;text-decoration:none;color:var(--text);display:block;position:relative;overflow:hidden}
+.iac::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ic)}
+.iac:hover{box-shadow:var(--sh2);transform:translateY(-4px)}
+.iac .il{font-size:2.1rem;margin-bottom:.6rem}
+.iac h3{font-size:.93rem;font-weight:800;margin-bottom:.35rem}
+.iac p{font-size:.77rem;color:var(--td);line-height:1.6}
+.iac .io{margin-top:.75rem;display:inline-flex;align-items:center;gap:4px;font-size:.73rem;font-weight:700;color:var(--orange);padding:.27rem .65rem;border-radius:6px;background:var(--ol);border:1px solid var(--om)}
+.ig{--ic:linear-gradient(90deg,#4285f4,#34a853)}
+.ico{--ic:linear-gradient(90deg,#0078d4,#50c8ff)}
+.igt{--ic:linear-gradient(90deg,#10a37f,#0d7a5e)}
+.ipp{--ic:linear-gradient(90deg,#20b8cd,#0099b8)}
+
+/* SOCIAL */
+.sg{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.sc{flex:1;min-width:180px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.1rem;text-align:center;text-decoration:none;color:var(--text);transition:all .2s;box-shadow:var(--sh1);display:block}
+.sc:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
+.sc .si{height:50px;display:flex;align-items:center;justify-content:center;margin-bottom:.65rem}
+.sc .si img{max-height:50px;object-fit:contain}
+.sc h5{font-weight:800;font-size:.88rem}
+.sc p{font-size:.73rem;color:var(--tm);margin-top:.25rem}
+.wa-s{border-top:3px solid #25D366}.fb-s{border-top:3px solid #1877F2}.yt-s{border-top:3px solid #FF0000}
+
+/* ABOUT */
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.about-img{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh2)}
+.about-img img{width:100%;display:block}
+.lema{border-left:3px solid var(--orange);background:var(--ol);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:.84rem;color:var(--td);font-style:italic;margin:1.2rem 0;line-height:1.7}
+.doc-box{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--ol);border:1px solid var(--om);border-radius:12px;margin-top:1.3rem}
+.doc-box img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--orange)}
+.doc-box h5{font-weight:800;font-size:.88rem}
+.doc-box p{font-size:.73rem;color:var(--tm);margin-top:.1rem}
+
+/* CONTACT */
+.cbox{max-width:640px;margin:0 auto;text-align:center;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:3rem;box-shadow:var(--sh1)}
+.cbox h3{font-size:1.8rem;font-weight:800;margin-bottom:.4rem}
+.cbox p{font-size:.88rem;color:var(--td);margin-bottom:1.8rem}
+.clinks{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center}
+.cl{display:flex;align-items:center;gap:7px;padding:.65rem 1.3rem;border-radius:9px;background:var(--ol);border:1px solid var(--om);color:var(--od);text-decoration:none;font-weight:700;font-size:.85rem;transition:all .15s}
+.cl:hover{background:var(--orange);color:#fff}
+
+footer{background:#1c1917;padding:2.5rem 2rem;text-align:center}
+footer p{font-size:.73rem;color:rgba(255,255,255,.4);line-height:2}
+footer a{color:var(--orange);text-decoration:none;font-weight:600}
+.adl{display:inline-flex;align-items:center;gap:5px;margin-top:.8rem;padding:.38rem .9rem;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);text-decoration:none;font-size:.73rem;font-weight:600;transition:all .15s}
+.adl:hover{border-color:rgba(255,255,255,.35);color:#fff}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.rv.on{opacity:1;transform:none}
+@media(max-width:960px){.hero-in,.gg,.about-g{grid-template-columns:1fr}.gcards{display:none}.iag{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.iag{grid-template-columns:1fr 1fr}.nl a:not(.cta){display:none}}
 </style>
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="#">
-    <div class="logo-badge">GC</div>
-    <div class="logo-info"><b>GRUPO CENTED</b><span>Altavista · Aula Digital</span></div>
+  <a class="nb" href="#">
+    <div class="ni">🎓</div>
+    <div class="nt"><strong>GRUPO CENTED</strong><span>Departamento de Informática</span></div>
   </a>
-  <div class="nav-links">
+  <div class="nl">
     <a href="#grupos">Grupos</a>
     <a href="#herramientas">Herramientas</a>
     <a href="#nosotros">Nosotros</a>
@@ -142,147 +158,161 @@ footer .fa{color:var(--accent)}
   </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Plataforma Educativa Digital · 2026</div>
-    <h1 class="ht">AULA<br/><em>DIGITAL</em></h1>
-    <p class="hero-sub">Bienvenido al espacio digital del <strong style="color:var(--text)">Grupo CENTED Altavista</strong>. Selecciona tu grupo y accede a tus clases, prácticas y materiales.</p>
-    <div class="hero-btns">
-      <a href="#grupos" class="btn-p">Seleccionar mi grupo →</a>
-      <a href="#nosotros" class="btn-g">Conocer más</a>
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="hbadge">⭐ Plataforma Educativa v2.0</div>
+      <h1>Prácticas de <em>Grupo<br/>CENTED Altavista</em></h1>
+      <p class="sub">Plataforma interactiva para el aprendizaje técnico profesional. Accede a prácticas detalladas, videos tutoriales, recursos educativos y herramientas especializadas.</p>
+      <div class="hbtns">
+        <a href="#grupos" class="btn-p">Ver grupos →</a>
+        <a href="#herramientas" class="btn-s">🛠 Herramientas</a>
+        <a href="#ia" class="btn-s">🤖 IA</a>
+      </div>
+      <div class="hstats">
+        <div class="hsc"><div class="hsi">📖</div><div><span class="hsn" id="sn-p">—</span><span class="hsl">Prácticas</span></div></div>
+        <div class="hsc"><div class="hsi">🛠</div><div><span class="hsn">2</span><span class="hsl">Herramientas</span></div></div>
+        <div class="hsc"><div class="hsi">💡</div><div><span class="hsn" id="sn-t">—</span><span class="hsl">Temas de Teoría</span></div></div>
+      </div>
+    </div>
+    <div class="gcards">
+      <a href="grupo-matutino.html" class="gc active">
+        <div class="gc-top"><div class="gc-ico m">🌅</div><div><strong>Grupo Mañana</strong><em>Prácticas fundamentales</em></div></div>
+        <p>Prácticas básicas e intermedias. Perfecto para construir una base sólida.</p>
+        <span class="gc-link">Explorar prácticas →</span>
+      </a>
+      <a href="grupo-vespertino.html" class="gc">
+        <div class="gc-top"><div class="gc-ico v">🌇</div><div><strong>Grupo Tarde</strong><em>Prácticas avanzadas</em></div></div>
+        <p>Prácticas intermedias y avanzadas. Cambio de color, Composición y más.</p>
+        <span class="gc-link v">Explorar prácticas →</span>
+      </a>
+      <a href="grupo-sabatino.html" class="gc">
+        <div class="gc-top"><div class="gc-ico s">📚</div><div><strong>Grupo Sábado</strong><em>Fin de semana</em></div></div>
+        <p>Todas las materias técnicas en formato intensivo los días sábados.</p>
+        <span class="gc-link s">Explorar prácticas →</span>
+      </a>
     </div>
   </div>
-  <div class="scroll-cue"><span>Explorar</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
-</div>
+</section>
 
-<div class="sec" style="padding-top:3rem;padding-bottom:3rem">
-  <div class="stats-bar rev">
-    <div class="stat-c"><div class="stat-num">3</div><div class="stat-lbl">Grupos activos</div></div>
-    <div class="stat-c"><div class="stat-num">6</div><div class="stat-lbl">Materias técnicas</div></div>
-    <div class="stat-c"><div class="stat-num" id="stat-docs">—</div><div class="stat-lbl">Documentos subidos</div></div>
-    <div class="stat-c"><div class="stat-num">25</div><div class="stat-lbl">Años de experiencia</div></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="sec" id="grupos">
-  <div class="sec-header rev">
-    <div class="sec-tag">📅 Horarios</div>
-    <h2 class="sec-title">Selecciona tu <span style="color:var(--accent)">Grupo</span></h2>
-    <p class="sec-desc">Elige el grupo de tu horario para acceder a tus clases, prácticas y materiales.</p>
-  </div>
-  <div class="normas-wrap rev">
-    <div class="normas-box">
-      <span style="font-size:1.5rem;flex-shrink:0">⚠️</span>
-      <div><h4>Normas de Convivencia</h4><p>Lee y respeta las normas del aula digital antes de participar.</p></div>
-      <a href="#">Ver normas</a>
+<!-- GRUPOS -->
+<section class="sec" id="grupos">
+  <div class="wrap">
+    <div class="sec-header rv"><div class="stag">📅 Horarios</div><h2>Selecciona tu <span style="color:var(--orange)">Grupo</span></h2><p class="sub">Elige el grupo de tu horario de inscripción.</p></div>
+    <div class="gg rv">
+      <a href="grupo-matutino.html" class="gcard gm">
+        <div class="gcard-bar"></div>
+        <div class="gcard-img" style="background-image:url('https://static.wixstatic.com/media/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png/v1/fill/w_556,h_371,q_90,enc_avif,quality_auto/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png')"></div>
+        <div class="gcard-body"><h3>Grupo Matutino</h3><div class="gt">⏰ Lunes a Viernes · 7:00 AM – 12:00 PM</div><span class="gcard-cta">Ingresar →</span></div>
+      </a>
+      <a href="grupo-vespertino.html" class="gcard gv">
+        <div class="gcard-bar"></div>
+        <div class="gcard-img" style="background-image:url('https://static.wixstatic.com/media/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png/v1/fill/w_559,h_371,q_90,enc_avif,quality_auto/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png')"></div>
+        <div class="gcard-body"><h3>Grupo Vespertino</h3><div class="gt">⏰ Lunes a Viernes · 1:00 PM – 6:00 PM</div><span class="gcard-cta" style="background:#f5f3ff;border-color:#ddd6fe;color:#7c3aed">Ingresar →</span></div>
+      </a>
+      <a href="grupo-sabatino.html" class="gcard gs">
+        <div class="gcard-bar"></div>
+        <div class="gcard-img" style="background-image:url('https://static.wixstatic.com/media/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg/v1/fill/w_980,h_614,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg')"></div>
+        <div class="gcard-body"><h3>Grupo Sabatino</h3><div class="gt">⏰ Sábados · 8:00 AM – 5:00 PM</div><span class="gcard-cta" style="background:#ecfdf5;border-color:#a7f3d0;color:#047857">Ingresar →</span></div>
+      </a>
     </div>
   </div>
-  <div class="groups-grid">
-    <a href="grupo-matutino.html" class="gc gm rev">
-      <div class="g-bar"></div>
-      <div class="g-bg" style="background-image:url('https://static.wixstatic.com/media/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png/v1/fill/w_556,h_371,q_90,enc_avif,quality_auto/ee1221_15ca6974c9184c4ea262206d1acd46d2~mv2.png')"><div class="g-icon">🌅</div></div>
-      <div class="g-body"><h3>Grupo Matutino</h3><div class="gt">⏰ Lunes a Viernes · 7:00 AM – 12:00 PM</div><div class="g-btn">Ingresar al aula →</div></div>
-    </a>
-    <a href="grupo-vespertino.html" class="gc gv rev">
-      <div class="g-bar"></div>
-      <div class="g-bg" style="background-image:url('https://static.wixstatic.com/media/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png/v1/fill/w_559,h_371,q_90,enc_avif,quality_auto/ee1221_dc6125c596f945c79556c0a1ac61cfe4~mv2.png')"><div class="g-icon">🌇</div></div>
-      <div class="g-body"><h3>Grupo Vespertino</h3><div class="gt">⏰ Lunes a Viernes · 1:00 PM – 6:00 PM</div><div class="g-btn">Ingresar al aula →</div></div>
-    </a>
-    <a href="grupo-sabatino.html" class="gc gs rev">
-      <div class="g-bar"></div>
-      <div class="g-bg" style="background-image:url('https://static.wixstatic.com/media/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg/v1/fill/w_980,h_614,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_a6e1bb8d93704b859a65ba5d3dd3645a~mv2.jpg')"><div class="g-icon">📚</div></div>
-      <div class="g-body"><h3>Grupo Sabatino</h3><div class="gt">⏰ Sábados · 8:00 AM – 5:00 PM</div><div class="g-btn">Ingresar al aula →</div></div>
-    </a>
+</section>
+
+<!-- HERRAMIENTAS -->
+<section class="sec sec-alt" id="herramientas">
+  <div class="wrap">
+    <div class="sec-header rv"><div class="stag">🛠 Recursos</div><h2>Herramientas <span style="color:var(--orange)">Digitales</span></h2><p class="sub">Disponibles dentro de cada grupo con pasos de uso detallados.</p></div>
+    <div class="tg rv">
+      <a href="https://gemini.google.com/app" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png"/></div><h5>Gemini</h5><p>IA de Google</p></a>
+      <a href="https://copilot.microsoft.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png/v1/crop/x_228,y_19,w_1426,h_1882/fill/w_60,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png"/></div><h5>Copilot</h5><p>IA Microsoft</p></a>
+      <a href="https://www.canva.com/" target="_blank" class="tt"><div class="ti">🎨</div><h5>Canva</h5><p>Diseño gráfico</p></a>
+      <a href="https://www.photoroom.com/es/herramientas/eliminador-de-fondos" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png"/></div><h5>Photoroom</h5><p>Quitar fondos</p></a>
+      <a href="https://www.office.com/" target="_blank" class="tt"><div class="ti">📊</div><h5>Office Online</h5><p>Word · Excel · PPT</p></a>
+      <a href="https://skillsforall.com/" target="_blank" class="tt"><div class="ti">🌐</div><h5>Cisco Skills</h5><p>Redes</p></a>
+      <a href="https://app.diagrams.net/" target="_blank" class="tt"><div class="ti">📐</div><h5>Draw.io</h5><p>Diagramas ER</p></a>
+      <a href="https://www.db-fiddle.com/" target="_blank" class="tt"><div class="ti">🗄️</div><h5>DB Fiddle</h5><p>SQL Online</p></a>
+      <a href="https://fonts.google.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png"/></div><h5>Google Fonts</h5><p>Tipografías</p></a>
+      <a href="https://seeklogo.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png/v1/fill/w_180,h_70,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png"/></div><h5>Seek Logo</h5><p>Logos</p></a>
+      <a href="https://www.pexels.com/es-es/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png/v1/fill/w_140,h_40,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png"/></div><h5>Pexels</h5><p>Fotos gratis</p></a>
+      <a href="https://filebin.net/3dfedfo41lp5u6j5" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png"/></div><h5>FileBin</h5><p>Compartir</p></a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="divider"></div>
-
-<div class="sec" id="herramientas">
-  <div class="sec-header rev"><div class="sec-tag">🤖 IA & Web</div><h2 class="sec-title">Herramientas <span style="color:var(--accent2)">Digitales</span></h2><p class="sec-desc">Recursos y herramientas web recomendadas por el docente para potenciar tu aprendizaje.</p></div>
-  <div class="tools-grid rev">
-    <a href="https://gemini.google.com/app" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_b7c5178f54094acd95e2b75cdb6ffc2b~mv2.png"/></div><h5>Gemini</h5><p>IA de Google</p></a>
-    <a href="https://copilot.microsoft.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png/v1/crop/x_228,y_19,w_1426,h_1882/fill/w_60,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_ab3e1715cc48401fb1e4078d80c599e0~mv2.png"/></div><h5>Copilot</h5><p>IA de Microsoft</p></a>
-    <a href="https://www.photoroom.com/es/herramientas/eliminador-de-fondos" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_c620c7fda9d44076994615a5540e191e~mv2.png"/></div><h5>Photoroom</h5><p>Eliminar fondos</p></a>
-    <a href="https://dlbunny.com/es/youtube" target="_blank" class="tt"><div class="ti" style="font-size:2.2rem">⬇️</div><h5>DLBunny</h5><p>Descargar videos</p></a>
-    <a href="https://fonts.google.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_8e3f54098f254a6291ed24701cb4f6ed~mv2.png"/></div><h5>Google Fonts</h5><p>Tipografías gratis</p></a>
-    <a href="https://filebin.net/3dfedfo41lp5u6j5" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png/v1/fill/w_100,h_100,al_c,q_85,enc_avif,quality_auto/ee1221_cbba72de82364bb98577d0394bfe27b6~mv2.png"/></div><h5>FileBin</h5><p>Compartir archivos</p></a>
-    <a href="https://ar.pinterest.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_7876a14aa2d2463ca002b5ac87aea8b1~mv2.png/v1/fill/w_100,h_100,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_7876a14aa2d2463ca002b5ac87aea8b1~mv2.png"/></div><h5>Pinterest</h5><p>Inspiración visual</p></a>
-    <a href="https://seeklogo.com/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png/v1/fill/w_180,h_70,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a881fa24299a48ad876cff79e2bbb68b~mv2.png"/></div><h5>Seek Logo</h5><p>Banco de logos</p></a>
-    <a href="https://www.pexels.com/es-es/" target="_blank" class="tt"><div class="ti"><img src="https://static.wixstatic.com/media/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png/v1/fill/w_140,h_40,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_9386ee356eb945fda0f1a0ad843b00fd~mv2.png"/></div><h5>Pexels</h5><p>Fotos gratuitas</p></a>
+<!-- IA -->
+<section class="sec" id="ia">
+  <div class="wrap">
+    <div class="sec-header rv"><div class="stag">🤖 IA</div><h2>Asistentes de <span style="color:var(--orange)">Inteligencia Artificial</span></h2><p class="sub">Sin crear cuenta. Disponibles en cada página de grupo.</p></div>
+    <div class="iag rv">
+      <a href="https://gemini.google.com/app" target="_blank" class="iac ig"><div class="il">✨</div><h3>Google Gemini</h3><p>Responde preguntas, analiza imágenes y ayuda con todas las materias.</p><span class="io">Sin cuenta →</span></a>
+      <a href="https://copilot.microsoft.com/" target="_blank" class="iac ico"><div class="il">🪟</div><h3>Microsoft Copilot</h3><p>IA con Bing para búsquedas inteligentes y asistencia con Office.</p><span class="io">Sin cuenta →</span></a>
+      <a href="https://chatgpt.com/" target="_blank" class="iac igt"><div class="il">🧠</div><h3>ChatGPT</h3><p>Explica conceptos técnicos y resuelve ejercicios paso a paso.</p><span class="io">Sin cuenta →</span></a>
+      <a href="https://www.perplexity.ai/" target="_blank" class="iac ipp"><div class="il">🔍</div><h3>Perplexity AI</h3><p>Búsquedas con fuentes verificadas. Ideal para investigar y citar.</p><span class="io">Sin cuenta →</span></a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="divider"></div>
-
-<div class="sec">
-  <div class="sec-header rev"><div class="sec-tag">📱 Comunidad</div><h2 class="sec-title">Nuestras <span style="color:var(--gold)">Redes Sociales</span></h2></div>
-  <div class="social-row rev">
-    <a href="https://chat.whatsapp.com/LImpnjogjcUKiBJNeNu2FP" target="_blank" class="st wa"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png"/></div><h5>WhatsApp Matutino</h5><p>Grupo oficial turno mañana</p></a>
-    <a href="https://chat.whatsapp.com/HAdxuMHzKgaHz2fveoQn5d" target="_blank" class="st wa"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png"/></div><h5>WhatsApp Vespertino</h5><p>Grupo oficial turno tarde</p></a>
-    <a href="https://www.facebook.com/people/Grupo-Cented-Altavista/100064221211722/" target="_blank" class="st fb"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png/v1/fill/w_131,h_131,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png"/></div><h5>Facebook</h5><p>Grupo Cented Altavista</p></a>
-    <a href="https://music.youtube.com/playlist?list=PLyFNynFmNxw-IRwT0j6UKyPUOVVwqqbS8" target="_blank" class="st yt"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png/v1/fill/w_79,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png"/></div><h5>YouTube Music</h5><p>Playlist oficial del aula</p></a>
+<!-- SOCIAL -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-header rv"><div class="stag">📱 Comunidad</div><h2>Redes <span style="color:var(--orange)">Sociales</span></h2></div>
+    <div class="sg rv">
+      <a href="https://chat.whatsapp.com/LImpnjogjcUKiBJNeNu2FP" target="_blank" class="sc wa-s"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png"/></div><h5>WhatsApp Matutino</h5><p>Turno mañana</p></a>
+      <a href="https://chat.whatsapp.com/HAdxuMHzKgaHz2fveoQn5d" target="_blank" class="sc wa-s"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png/v1/fill/w_120,h_122,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_a49de63a901242fa9857ab89d9d76ee4~mv2.png"/></div><h5>WhatsApp Vespertino</h5><p>Turno tarde</p></a>
+      <a href="https://www.facebook.com/people/Grupo-Cented-Altavista/100064221211722/" target="_blank" class="sc fb-s"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png/v1/fill/w_131,h_131,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_97b1a2eac69e4f5490d05d98cdf47b0f~mv2.png"/></div><h5>Facebook</h5><p>Grupo Cented Altavista</p></a>
+      <a href="https://music.youtube.com/playlist?list=PLyFNynFmNxw-IRwT0j6UKyPUOVVwqqbS8" target="_blank" class="sc yt-s"><div class="si"><img src="https://static.wixstatic.com/media/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png/v1/fill/w_79,h_79,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_4abccbf9aacb4cb48862ecf4fe01bf17~mv2.png"/></div><h5>YouTube Music</h5><p>Playlist del aula</p></a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="divider"></div>
-
-<div class="sec" id="nosotros">
-  <div class="about-wrap">
-    <div class="about-img rev"><img src="https://static.wixstatic.com/media/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg/v1/fill/w_933,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg" alt="Grupo CENTED"/></div>
-    <div class="about-text rev">
-      <div class="sec-tag">🏫 Institución</div>
-      <h2>Acerca de <span style="color:var(--accent)">CENTED</span></h2>
-      <p>Bienvenido al <strong style="color:var(--text)">Grupo CENTED Altavista</strong>. Fundada en el año 2000, llevamos 25 años formando técnicos altamente capacitados en diversas disciplinas.</p>
-      <p>Nos comprometemos a ofrecerte una educación de calidad que te prepare para enfrentar los desafíos del mundo actual y real.</p>
-      <div class="lema">"Artificium Technicorum cum Excellentia et Innovatione"<br/>Forjando Técnicos con Excelencia e Innovación</div>
-      <div class="doc-box">
-        <img src="https://static.wixstatic.com/media/ee1221_51b0afc67f2c4a98aab5ad7f510de678~mv2.jpg/v1/fill/w_80,h_80,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4af5b805-d407-4f6c-a509-436b3c14ee5a.jpg" alt="Docente" onerror="this.style.display='none'"/>
-        <div><h5>Tec. Mauricio Manuel Alvarado Rivera</h5><p>Docente · Sistemas Informáticos</p></div>
+<!-- NOSOTROS -->
+<section class="sec" id="nosotros">
+  <div class="wrap">
+    <div class="about-g rv">
+      <div class="about-img"><img src="https://static.wixstatic.com/media/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg/v1/fill/w_933,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee1221_738a2b724dfb4a6e9368f84105cbafd2~mv2.jpeg" alt="CENTED"/></div>
+      <div>
+        <div class="stag">🏫 Institución</div>
+        <h2 style="margin-top:.5rem">Acerca de <span style="color:var(--orange)">CENTED</span></h2>
+        <p style="font-size:.93rem;color:var(--td);line-height:1.82;margin-top:.8rem">Bienvenido al <strong>Grupo CENTED Altavista</strong>. Fundados en el año 2000, llevamos 25 años formando técnicos altamente capacitados en sistemas informáticos y disciplinas digitales.</p>
+        <div class="lema">"Artificium Technicorum cum Excellentia et Innovatione"<br/><em>Forjando Técnicos con Excelencia e Innovación</em></div>
+        <div class="doc-box">
+          <img src="https://static.wixstatic.com/media/ee1221_51b0afc67f2c4a98aab5ad7f510de678~mv2.jpg/v1/fill/w_80,h_80,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4af5b805-d407-4f6c-a509-436b3c14ee5a.jpg" onerror="this.style.display='none'" alt="Docente"/>
+          <div><h5>Tec. Mauricio Manuel Alvarado Rivera</h5><p>Docente · Sistemas Informáticos</p></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="divider"></div>
-
-<div class="sec" id="contacto">
-  <div class="contact-box rev">
-    <div style="font-size:3rem;margin-bottom:1rem">📞</div>
-    <h3>Contacta a tu Docente</h3>
-    <p>¿Tienes dudas o necesitas orientación? Comunícate directamente.</p>
-    <div class="c-links">
-      <a href="mailto:mau.alv1101@gmail.com" class="c-link">✉️ mau.alv1101@gmail.com</a>
-      <a href="tel:+50376565020" class="c-link">📱 +503 7656-5020</a>
-      <a href="tel:+50376433416" class="c-link">🏫 +503 7643-3416</a>
+<!-- CONTACTO -->
+<section class="sec sec-alt" id="contacto">
+  <div class="wrap">
+    <div class="cbox rv">
+      <div style="font-size:2.8rem;margin-bottom:.8rem">📞</div>
+      <h3>Contacta al Docente</h3>
+      <p>¿Tienes dudas? Comunícate directamente.</p>
+      <div class="clinks">
+        <a href="mailto:mau.alv1101@gmail.com" class="cl">✉️ mau.alv1101@gmail.com</a>
+        <a href="tel:+50376565020" class="cl">📱 +503 7656-5020</a>
+        <a href="tel:+50376433416" class="cl">🏫 +503 7643-3416</a>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <footer>
-  <div class="f-logo">GRUPO <span class="fa">CENTED</span> ALTAVISTA</div>
-  <p>El editor se reserva uso, edición, distribución y accesibilidad.<br/><span class="fa">Derechos Reservados © 2027 Grupo CENTED</span> · Departamento de Sistemas Informáticos<br/>Última actualización: 18/02/26</p>
-  <a href="admin.html" class="admin-link">🔐 Panel Docente</a>
+  <p><span style="color:var(--orange);font-weight:700">GRUPO CENTED ALTAVISTA</span><br/>Derechos Reservados © 2027 · Departamento de Sistemas Informáticos</p>
+  <a href="admin.html" class="adl">🔐 Panel Docente</a>
 </footer>
 
 <script>
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})},{threshold:0.1});
-document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
-async function countDocs(){
-  if(GITHUB_CONFIG.user==='TU_USUARIO_GITHUB')return;
-  try{
-    let t=0;
-    for(const g of['matutino','vespertino','sabatino','todos']){
-      const r=await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.user}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.folder}/${g}`);
-      if(r.ok){const d=await r.json();if(Array.isArray(d))t+=d.length}
-    }
-    document.getElementById('stat-docs').textContent=t||'0';
-  }catch(e){}
-}
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+async function countDocs(){try{let t=0;for(const g of['matutino','vespertino','sabatino','todos']){const r=await fetch(`https://api.github.com/repos/${GH.user}/${GH.repo}/contents/${GH.folder}/${g}`);if(r.ok){const d=await r.json();if(Array.isArray(d))t+=d.length;}}document.getElementById('sn-p').textContent=t||'0';}catch(e){}}
 countDocs();
+// count clases
+(async()=>{try{let c=0;for(const g of['matutino','vespertino','sabatino']){const r=await fetch(`https://raw.githubusercontent.com/${GH.user}/${GH.repo}/${GH.branch}/clases/${g}/clases.json?t=`+Date.now());if(r.ok){const d=await r.json();c+=(d.clases||d).filter(x=>x.tipo!=='teoria').length;}}document.getElementById('sn-t').textContent=c||'0';}catch(e){}})();
 </script>
 </body>
 </html>
