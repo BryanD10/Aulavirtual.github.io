@@ -4,12 +4,13 @@
     {
       "numero": "01",
       "tipo": "practica",
-      "titulo": "CREA TIPOGRAFÃA CON FORMAS (EL EFECTO BANANA)",
-      "materia": "DISEÃO GRAFICO",
+      "titulo": "CREA TIPOGRAFÃÂA CON FORMAS (EL EFECTO BANANA)",
+      "materia": "DISEÃÂO GRAFICO",
       "nivel": "BASICO",
       "categoria": "PRACTICA 01",
       "videoUrl": "https://youtu.be/4XNC7XYEHBc",
-      "descripcion": "En esta prÃ¡ctica, integraremos texto de forma orgÃ¡nica en un objeto (una banana) para que parezca parte fÃ­sica del mismo, adaptÃ¡ndose a su volumen y curvatura.",
+      "descripcion": "En esta prÃÂ¡ctica, integraremos texto de forma orgÃÂ¡nica en un objeto (una banana) para que parezca parte fÃÂ­sica del mismo, adaptÃÂ¡ndose a su volumen y curvatura.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/1_Rjn5Iune4Fp3mWzt-3dtmb-QNkW8hXi?usp=drive_link",
       "visible": true,
       "grupos": [
         "matutino"
@@ -17,35 +18,35 @@
       "objetivos": [],
       "pasos": [
         {
-          "titulo": "CONFIGURACIÃN INICIAL",
-          "descripcion": " - Crear un documento nuevo (TamaÃ±o sugerido: Video vertical 1080 x 1920 px).\n\n - Colocar la imagen de la fruta u objeto."
+          "titulo": "CONFIGURACIÃÂN INICIAL",
+          "descripcion": " - Crear un documento nuevo (TamaÃÂ±o sugerido: Video vertical 1080 x 1920 px).\n\n - Colocar la imagen de la fruta u objeto."
         },
         {
           "titulo": "RECORTE CON EL PINCEL SELECTOR",
-          "descripcion": "- Selecciona la herramienta 'Pincel de SelecciÃ³n'.\n\n- Pasa el pincel por dentro del objeto para seleccionarlo.\n\n- Presiona 'Control + J' para crear una capa nueva solo con el recorte y borra la original. (recuerda siempre este comando ctrl + J)",
-          "tip": "Si seleccionas algo por error, mantÃ©n presionado 'Alt' mientras das clic para restar esa zona."
+          "descripcion": "- Selecciona la herramienta 'Pincel de SelecciÃÂ³n'.\n\n- Pasa el pincel por dentro del objeto para seleccionarlo.\n\n- Presiona 'Control + J' para crear una capa nueva solo con el recorte y borra la original. (recuerda siempre este comando ctrl + J)",
+          "tip": "Si seleccionas algo por error, mantÃÂ©n presionado 'Alt' mientras das clic para restar esa zona."
         },
         {
-          "titulo": "CREACIÃN DEL TEXTO",
-          "descripcion": "- Usa la 'Herramienta de Texto ArtÃ­stico' (PRESIONA LA TECLA T) y escribe la palabra (ej: BANANA).\n\n- Usa una fuente gruesa (ej: 'Anton') para que el efecto luzca mejor.\n",
+          "titulo": "CREACIÃÂN DEL TEXTO",
+          "descripcion": "- Usa la 'Herramienta de Texto ArtÃÂ­stico' (PRESIONA LA TECLA T) y escribe la palabra (ej: BANANA).\n\n- Usa una fuente gruesa (ej: 'Anton') para que el efecto luzca mejor.\n",
           "tip": "Ocupa la fuente dada por el docente "
         },
         {
-          "titulo": "DEFORMACIÃN DE MALLA (MESH WARP)",
-          "descripcion": "- Con el texto seleccionado, usa la herramienta 'DeformaciÃ³n de Malla'. (da un clic derecho en la herramienta mover)\n\n- Mueve los puntos de las esquinas para que las letras sigan la curva de la fruta.\n\n- AsegÃºrate de que los bordes del texto coincidan con los bordes del objeto."
+          "titulo": "DEFORMACIÃÂN DE MALLA (MESH WARP)",
+          "descripcion": "- Con el texto seleccionado, usa la herramienta 'DeformaciÃÂ³n de Malla'. (da un clic derecho en la herramienta mover)\n\n- Mueve los puntos de las esquinas para que las letras sigan la curva de la fruta.\n\n- AsegÃÂºrate de que los bordes del texto coincidan con los bordes del objeto."
         },
         {
-          "titulo": "MÃSCARAS E INTEGRACIÃN",
-          "descripcion": "- Haz 'Control + Clic' sobre la miniatura de la capa de texto para crear una selecciÃ³n.\n\n- Aplica una 'MÃ¡scara de Capa' a la imagen de la fruta. Esto harÃ¡ que la textura de la fruta rellene las letras.",
-          "tip": "si te pierdes en este paso mira detenidamente el video y pÃ­dele ayuda a tu docente "
+          "titulo": "MÃÂSCARAS E INTEGRACIÃÂN",
+          "descripcion": "- Haz 'Control + Clic' sobre la miniatura de la capa de texto para crear una selecciÃÂ³n.\n\n- Aplica una 'MÃÂ¡scara de Capa' a la imagen de la fruta. Esto harÃÂ¡ que la textura de la fruta rellene las letras.",
+          "tip": "si te pierdes en este paso mira detenidamente el video y pÃÂ­dele ayuda a tu docente "
         },
         {
           "titulo": "DETALLES FINALES",
-          "descripcion": "- Usa el Pincel con color Negro (para ocultar) o Blanco (para mostrar) en la mÃ¡scara para suavizar los bordes donde el texto se une con la fruta.\n\n- Agrega una elipse negra debajo con 'Desenfoque Gaussiano' para crear la sombra.",
-          "tip": "# Recuerda que el diseÃ±o Grafico el Negro es destructivo y el blanco es regenerativo"
+          "descripcion": "- Usa el Pincel con color Negro (para ocultar) o Blanco (para mostrar) en la mÃÂ¡scara para suavizar los bordes donde el texto se une con la fruta.\n\n- Agrega una elipse negra debajo con 'Desenfoque Gaussiano' para crear la sombra.",
+          "tip": "# Recuerda que el diseÃÂ±o Grafico el Negro es destructivo y el blanco es regenerativo"
         }
       ]
     }
   ],
-  "updated": "2026-02-27T17:41:28.583Z"
+  "updated": "2026-02-27T17:50:33.799Z"
 }
