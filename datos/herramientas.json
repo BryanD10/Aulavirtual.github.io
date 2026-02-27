@@ -1,9 +1,9 @@
 {
   "herramientas": [
     {
-      "icono": "ð¨",
+      "icono": "🔗",
       "nombre": "Canva",
-      "subtitulo": "DiseÃ±o GrÃ¡fico",
+      "subtitulo": "Diseño Grafico",
       "url": "https://www.canva.com/",
       "descripcion": "DiseÃ±o grÃ¡fico profesional en lÃ­nea. Afiches, presentaciones y mÃ¡s.",
       "pasos": [
@@ -101,5 +101,5 @@
       "pasos": []
     }
   ],
-  "updated": "2026-02-27T15:27:31.745Z"
+  "updated": "2026-02-27T18:38:57.772Z"
 }
