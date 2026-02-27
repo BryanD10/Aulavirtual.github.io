@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affinity Masterclass: Guía Interactiva de Diseño</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7; /* Warm Neutral Background */
+            color: #1c1917;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .font-serif-accent {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F5F4; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D6D3D1; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A8A29E; 
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+
+        .step-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Persona Badges */
+        .badge-photo {
+            background-color: #E0F2FE;
+            color: #0369A1;
+            border: 1px solid #BAE6FD;
+        }
+        .badge-designer {
+            background-color: #FFEDD5;
+            color: #C2410C;
+            border: 1px solid #FED7AA;
+        }
+
+        .active-item {
+            background-color: #1c1917;
+            color: white;
+            border-left: 4px solid #F59E0B;
+        }
+        .inactive-item:hover {
+            background-color: #F5F5F4;
+        }
+    </style>
+    <!-- Chosen Palette: "Warm Editorial" - Cream (#FDFBF7), Stone Black (#1C1917), Accents: Amber (#F59E0B), Sky Blue (#0EA5E9), Rose (#F43F5E) -->
+    <!-- Application Structure Plan:
+         1. Layout: Split view (Sidebar list of Challenges vs Main Content Area). Mobile responsive: Stacked.
+         2. Sidebar: List of 15 EDIs with filtering capability (Theme: Auto, Portrait, etc.).
+         3. Main Area:
+            - Header: Title, "Aesthetic DNA" (Chart), and Resources (Copyable search terms).
+            - Theory Section: The "Why".
+            - Step-by-Step Timeline: Differentiates cleanly between "Photo Persona" and "Designer Persona" tasks.
+         4. Dashboard Mode (Default): Shows general resources and rules before a specific challenge is selected.
+    -->
+    <!-- Visualization & Content Choices:
+         1. "Aesthetic DNA" (Radar Chart): Visualizes the balance of each design (e.g., Typography vs Photography vs Texture). Goal: Compare/Inform.
+         2. "Persona Breakdown" (Doughnut Chart): Shows the workload split between Photo and Designer personas. Goal: Inform/Prepare.
+         3. Step Timeline (HTML/CSS): Clear sequential flow.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Sidebar (Challenge Navigator) -->
+    <aside class="w-full md:w-80 flex-shrink-0 bg-white border-r border-stone-200 flex flex-col h-1/3 md:h-full z-20 shadow-lg md:shadow-none">
+        <div class="p-6 border-b border-stone-100 bg-stone-50">
+            <h1 class="text-2xl font-bold tracking-tight text-stone-900 font-display">Affinity <span class="text-amber-600">Masterclass</span></h1>
+            <p class="text-xs text-stone-500 mt-1">15 Retos de Diseño Editorial</p>
+        </div>
+        
+        <!-- Filter Controls -->
+        <div class="px-4 py-3 border-b border-stone-100 flex gap-2 overflow-x-auto no-scrollbar">
+            <button onclick="filterEDIs('all')" class="px-3 py-1 text-xs font-medium rounded-full bg-stone-800 text-white whitespace-nowrap hover:bg-stone-700 transition">Todos</button>
+            <button onclick="filterEDIs('Retrato')" class="px-3 py-1 text-xs font-medium rounded-full bg-stone-100 text-stone-600 whitespace-nowrap hover:bg-stone-200 transition">Retratos</button>
+            <button onclick="filterEDIs('Auto')" class="px-3 py-1 text-xs font-medium rounded-full bg-stone-100 text-stone-600 whitespace-nowrap hover:bg-stone-200 transition">Autos</button>
+            <button onclick="filterEDIs('Arquitectura')" class="px-3 py-1 text-xs font-medium rounded-full bg-stone-100 text-stone-600 whitespace-nowrap hover:bg-stone-200 transition">Arquitectura</button>
+        </div>
+
+        <!-- List -->
+        <div id="edi-list" class="flex-1 overflow-y-auto p-2 space-y-1">
+            <!-- Items populated by JS -->
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-2/3 md:h-full overflow-hidden bg-[#FDFBF7] relative">
+        
+        <!-- Welcome State (Hidden when active) -->
+        <div id="welcome-screen" class="absolute inset-0 z-10 bg-[#FDFBF7] p-8 md:p-12 overflow-y-auto flex flex-col items-center justify-center text-center">
+            <div class="max-w-2xl">
+                <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl">🎨</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-stone-900 mb-6 font-display">Bienvenido al Estudio</h2>
+                <p class="text-lg text-stone-600 mb-8 leading-relaxed">
+                    Esta guía interactiva te llevará a través de 15 retos de diseño para dominar la estética editorial.
+                    No copies, <span class="font-serif-accent italic text-stone-900">interpreta</span>.
+                </p>
+
+                <!-- General Resources Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full text-left">
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                        <h3 class="font-bold text-stone-900 mb-2">📜 Texturas</h3>
+                        <p class="text-sm text-stone-500 mb-3">El secreto del realismo.</p>
+                        <a href="https://texturelabs.org/" target="_blank" class="text-xs font-bold text-amber-600 hover:underline">Ir a TextureLabs →</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                        <h3 class="font-bold text-stone-900 mb-2">🅰️ Tipografía</h3>
+                        <p class="text-sm text-stone-500 mb-3">La voz de tu diseño.</p>
+                        <a href="https://fonts.google.com/" target="_blank" class="text-xs font-bold text-amber-600 hover:underline">Ir a Google Fonts →</a>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                        <h3 class="font-bold text-stone-900 mb-2">💡 Inspiración</h3>
+                        <p class="text-sm text-stone-500 mb-3">Pinterest + Gemini.</p>
+                        <span class="text-xs text-stone-400">Busca el "Mood"</span>
+                    </div>
+                </div>
+                
+                <p class="mt-12 text-sm text-stone-400">Selecciona un reto del menú para comenzar.</p>
+            </div>
+        </div>
+
+        <!-- Content Detail (Scrollable) -->
+        <div id="detail-view" class="flex-1 overflow-y-auto hidden">
+            <!-- Header -->
+            <header class="bg-white border-b border-stone-200 px-8 py-8 md:py-10 sticky top-0 z-20 shadow-sm">
+                <div class="max-w-5xl mx-auto">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-3 mb-2">
+                                <span id="detail-id" class="px-3 py-1 rounded-full bg-stone-900 text-white text-xs font-bold tracking-wider">EDI 01</span>
+                                <span id="detail-category" class="px-2 py-1 rounded-md bg-stone-100 text-stone-500 text-xs uppercase tracking-wide border border-stone-200">Categoría</span>
+                            </div>
+                            <h1 id="detail-title" class="text-3xl md:text-5xl font-bold text-stone-900 font-display mb-2">Título del Diseño</h1>
+                            <p class="text-stone-500 italic font-serif-accent text-lg">"Resumen del concepto estético principal."</p>
+                        </div>
+                        
+                        <!-- Mini Stats -->
+                        <div class="flex gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-stone-900 font-display" id="stat-steps">0</div>
+                                <div class="text-xs text-stone-400 uppercase tracking-wide">Pasos</div>
+                            </div>
+                            <div class="text-center pl-4 border-l border-stone-200">
+                                <div class="text-2xl font-bold text-amber-600 font-display" id="stat-complexity">Med</div>
+                                <div class="text-xs text-stone-400 uppercase tracking-wide">Dificultad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="max-w-5xl mx-auto px-6 py-8 md:px-8 space-y-12 pb-24">
+                
+                <!-- Section: Ingredients -->
+                <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left: Text Data -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+                            <h3 class="text-lg font-bold text-stone-900 mb-4 border-b border-stone-100 pb-2">📋 La Receta</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <span class="text-xs font-bold text-stone-400 uppercase block mb-1">Términos de Búsqueda (Copiar)</span>
+                                    <div class="flex gap-2">
+                                        <code id="detail-search" class="flex-1 bg-stone-50 border border-stone-200 rounded p-2 text-sm text-stone-700 font-mono select-all">...</code>
+                                        <button onclick="copySearch()" class="px-3 bg-stone-100 hover:bg-stone-200 rounded border border-stone-200 text-stone-600 transition">📋</button>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span class="text-xs font-bold text-stone-400 uppercase block mb-1">Fuentes (Google Fonts)</span>
+                                        <p id="detail-fonts" class="text-sm text-stone-800 font-medium">...</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-xs font-bold text-stone-400 uppercase block mb-1">Texturas (TextureLabs)</span>
+                                        <p id="detail-textures" class="text-sm text-stone-800 font-medium">...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100">
+                            <h3 class="text-lg font-bold text-amber-900 mb-2">🧠 Teoría Aplicada</h3>
+                            <p id="detail-theory" class="text-stone-700 leading-relaxed">...</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Aesthetic DNA Chart -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm h-full flex flex-col">
+                            <h3 class="text-sm font-bold text-stone-400 uppercase mb-4 text-center">ADN Estético</h3>
+                            <div class="chart-container flex-1">
+                                <canvas id="dnaChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-stone-400 mt-2">Balance de elementos visuales</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Steps -->
+                <section>
+                    <div class="flex items-center gap-4 mb-8">
+                        <h3 class="text-2xl font-bold text-stone-900 font-display">Guía Paso a Paso</h3>
+                        <div class="h-px bg-stone-200 flex-1"></div>
+                    </div>
+
+                    <div id="steps-container" class="space-y-6 relative before:absolute before:inset-0 before:ml-6 md:before:ml-8 before:-translate-x-px before:h-full before:w-0.5 before:bg-stone-200">
+                        <!-- Steps injected here -->
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- DATA SOURCE ---
+        const ediData = [
+            {
+                id: "EDI 1",
+                title: "Retro Pop Depth",
+                category: "Retrato",
+                complexity: "Baja",
+                search: "Retro girl portrait, baseball bat aesthetic, 90s fashion model",
+                fonts: "Bebas Neue, Oswald",
+                textures: "Halftone, Retro Paper",
+                theory: "Profundidad mediante capas: Sujeto (arriba) > Texto (medio) > Fondo (abajo). La textura unifica todo.",
+                dna: [20, 50, 30], // Photo, Text, Texture
+                steps: [
+                    { type: "photo", title: "Extracción del Sujeto", desc: "Usa el <b>Pincel de Selección Inteligente [W]</b>. Refina los bordes del cabello y extrae a una nueva capa." },
+                    { type: "designer", title: "Maquetación", desc: "Fondo sólido. Usa <b>Texto Artístico [T]</b> para el título gigante. Coloca el texto ENTRE el fondo y el sujeto." },
+                    { type: "photo", title: "Textura y Fusión", desc: "Añade textura Halftone arriba de todo. Modo: <b>Multiplicar</b>, Opacidad: 30-40%." }
+                ]
+            },
+            {
+                id: "EDI 2",
+                title: "Static 70s Minimal",
+                category: "Retrato",
+                complexity: "Media",
+                search: "Vintage fashion full body, minimalist nature walk retro",
+                fonts: "Anton (Título), Playfair Display (Detalles)",
+                textures: "Vintage Canvas, Subtle Grain",
+                theory: "Espacio Negativo y Jerarquía: Contraste extremo entre Sans-Serif gruesa y Serif fina.",
+                dna: [30, 40, 30],
+                steps: [
+                    { type: "photo", title: "Recorte Perfecto", desc: "Aísla al modelo. Los bordes deben ser muy limpios para este estilo elegante." },
+                    { type: "designer", title: "Jerarquía", desc: "Título gigante 'STATIC' detrás. Usa <b>Texto de Marco</b> para pequeñas notas editoriales en las esquinas (Playfair Display)." },
+                    { type: "photo", title: "Color Grading", desc: "Capa de Ajuste <b>HSL</b>: Desatura un -20%. Añade textura de papel en modo Multiplicar." }
+                ]
+            },
+            {
+                id: "EDI 3",
+                title: "Bold Horizon",
+                category: "Paisaje",
+                complexity: "Baja",
+                search: "Minimalist horizon line, clear sky beach wide shot",
+                fonts: "Impact, Bebas Neue",
+                textures: "Film Grain",
+                theory: "Anclaje Visual: El texto descansa físicamente sobre la línea del horizonte.",
+                dna: [60, 30, 10],
+                steps: [
+                    { type: "photo", title: "Limpieza", desc: "Usa <b>Inpainting Brush</b> para limpiar el cielo de distracciones." },
+                    { type: "designer", title: "Tipografía", desc: "Palabra gigante ocupando todo el ancho. Alinéala con el horizonte. Color complementario al cielo (Naranja/Azul)." },
+                    { type: "photo", title: "Integración", desc: "Baja opacidad del texto o usa modo <b>Superponer</b> para que las nubes se transparenten." }
+                ]
+            },
+            {
+                id: "EDI 4",
+                title: "Urban Minimalist Crop",
+                category: "Arquitectura",
+                complexity: "Media",
+                search: "Japanese storefront straight on, minimalist street photography",
+                fonts: "Space Mono, Courier Prime",
+                textures: "Dust and Scratches",
+                theory: "Sin Perspectiva: Geometría frontal pura y colores fríos/industriales.",
+                dna: [50, 20, 30],
+                steps: [
+                    { type: "photo", title: "Perspectiva", desc: "Usa <b>Filtro > Perspectiva</b> para enderezar todas las líneas verticales." },
+                    { type: "photo", title: "Revelado", desc: "<b>Equilibrio de Color</b>: Sombras hacia Azul/Cian. Curvas en 'S' para contraste." },
+                    { type: "designer", title: "Enmarcado", desc: "Rectángulo sin relleno con Trazo blanco grueso (marco de galería)." }
+                ]
+            },
+            {
+                id: "EDI 5",
+                title: "Japandi Auto Poster",
+                category: "Auto",
+                complexity: "Alta",
+                search: "Retro JDM car, Mazda RX7, white background isolated",
+                fonts: "Inter, Helvetica Neue",
+                textures: "Ninguna (Limpio)",
+                theory: "Punto Focal: El círculo rojo ancla la composición. Sombra de contacto es vital para el realismo.",
+                dna: [30, 30, 40], // 40 is 'Vector/Clean' here
+                steps: [
+                    { type: "designer", title: "Base Geométrica", desc: "Fondo crema. Círculo rojo perfecto (Shift + Elipse)." },
+                    { type: "photo", title: "Extracción y Sombra", desc: "Recorta el auto. Pinta MANUALMENTE una sombra suave negra debajo de las llantas (Pincel suave, flujo bajo)." },
+                    { type: "designer", title: "Alineación", desc: "Texto técnico alineado a la izquierda y derecha con guías." }
+                ]
+            },
+            {
+                id: "EDI 6",
+                title: "Geo-Portrait",
+                category: "Retrato",
+                complexity: "Media",
+                search: "Side profile portrait, high contrast lighting face",
+                fonts: "Noto Sans JP, Montserrat",
+                textures: "Halftone Dots",
+                theory: "Contraste Orgánico vs Vectorial: Blanco y negro dramático contra color plano puro.",
+                dna: [40, 20, 40],
+                steps: [
+                    { type: "photo", title: "Alto Contraste", desc: "Blanco y Negro. <b>Curvas</b> extremas (elimina grises medios)." },
+                    { type: "designer", title: "Vectores", desc: "Forma geométrica sólida (Círculo/Rectángulo) color vibrante DETRÁS del modelo." },
+                    { type: "designer", title: "Tipografía", desc: "Texto vertical a la derecha (Japonés o Sans Serif bold)." }
+                ]
+            },
+            {
+                id: "EDI 7",
+                title: "Swiss Silhouette",
+                category: "Retrato",
+                complexity: "Media",
+                search: "Fashion silhouette walking, minimal silhouette model",
+                fonts: "Helvetica Bold, Arial Black",
+                textures: "Ninguna",
+                theory: "Abstracción: El sujeto se convierte en un elemento gráfico negro plano.",
+                dna: [20, 30, 50],
+                steps: [
+                    { type: "photo", title: "Umbral", desc: "Ajuste <b>Umbral (Threshold)</b> al máximo hasta que el sujeto sea negro puro." },
+                    { type: "designer", title: "Composición Suiza", desc: "Formas primarias gigantes detrás. Fondo negro." },
+                    { type: "designer", title: "Corte", desc: "Usa números gigantes cortados por el borde del lienzo." }
+                ]
+            },
+            {
+                id: "EDI 8",
+                title: "Classy Auto Crop",
+                category: "Auto",
+                complexity: "Baja",
+                search: "BMW E30 detail, classic car headlight",
+                fonts: "Playfair Display, Inter",
+                textures: "Film Grain",
+                theory: "Intriga: Mostrar solo un detalle sugiere lujo y exclusividad.",
+                dna: [50, 40, 10],
+                steps: [
+                    { type: "photo", title: "Recorte", desc: "Usa herramienta <b>Recortar [C]</b>. Deja mucho espacio negativo." },
+                    { type: "designer", title: "Maquetación", desc: "Fondo verde oscuro/racing. Texto en columnas estrechas (estilo catálogo)." },
+                    { type: "photo", title: "Acabado", desc: "Añadir Ruido (Add Noise) al 5-10%." }
+                ]
+            },
+            {
+                id: "EDI 9",
+                title: "Retro Travel 'Venture'",
+                category: "Paisaje",
+                complexity: "Media",
+                search: "Vintage land cruiser landscape, retro 4x4 desert",
+                fonts: "Fjalla One, Bebas Neue",
+                textures: "Washed Paper, Light Leaks",
+                theory: "Look 'Faded': Levantar los negros en la curva para simular impresión vieja.",
+                dna: [60, 20, 20],
+                steps: [
+                    { type: "photo", title: "Curvas Faded", desc: "Sube el punto negro (esquina inf. izquierda) hacia arriba para hacer los negros grises." },
+                    { type: "designer", title: "Texto", desc: "Título en el cielo. Modo: <b>Luz Suave</b>." },
+                    { type: "photo", title: "Light Leaks", desc: "Textura de luz naranja en modo <b>Trama (Screen)</b>." }
+                ]
+            },
+            {
+                id: "EDI 10",
+                title: "Tech Minimalist",
+                category: "Objeto",
+                complexity: "Media",
+                search: "Retro computer isolated, 80s Macintosh",
+                fonts: "Space Grotesk, Roboto Mono",
+                textures: "Light Grain",
+                theory: "Contexto de Museo: Objeto aislado con especificaciones técnicas.",
+                dna: [30, 50, 20],
+                steps: [
+                    { type: "photo", title: "Recorte Pluma", desc: "Usa <b>Pluma [P]</b> para líneas rectas perfectas. Crea máscara." },
+                    { type: "photo", title: "Sombra", desc: "Pinta sombra de contacto debajo del objeto (opuesta a la luz)." },
+                    { type: "designer", title: "Data", desc: "Fondo beige. Texto monoespaciado técnico." }
+                ]
+            },
+            {
+                id: "EDI 11",
+                title: "Moody Film 'Eyes Talk'",
+                category: "Retrato",
+                complexity: "Alta",
+                search: "Cinematic portrait dark lighting, moody eye closeup",
+                fonts: "Cormorant Garamond",
+                textures: "Heavy Film Grain",
+                theory: "Teal & Orange: Sombras frías globales vs. Foco cálido en el marco.",
+                dna: [60, 10, 30],
+                steps: [
+                    { type: "photo", title: "Base Fría", desc: "Curvas: Oscurecer y subir canal Azul en sombras." },
+                    { type: "designer", title: "Marco", desc: "Rectángulo sin relleno, trazo blanco sobre un ojo." },
+                    { type: "photo", title: "Clipping Mask", desc: "Duplica foto, métela DENTRO del rectángulo. Aplica calidez/naranja SOLO a esa copia." }
+                ]
+            },
+            {
+                id: "EDI 12",
+                title: "Track Number / Swiss Grid",
+                category: "Paisaje",
+                complexity: "Baja",
+                search: "Minimalist model distant, lonely figure landscape",
+                fonts: "Montserrat Black",
+                textures: "Ninguna",
+                theory: "Escala Extrema: Humano minúsculo vs. Número sangrado gigante.",
+                dna: [20, 70, 10],
+                steps: [
+                    { type: "designer", title: "Sangrado", desc: "Número gigante. <b>Convertir a Curvas</b> para cortar por el borde." },
+                    { type: "photo", title: "Escala", desc: "Coloca la foto de la persona pequeña sobre el texto o fondo." }
+                ]
+            },
+            {
+                id: "EDI 14",
+                title: "Brutalist Clouds",
+                category: "Arquitectura",
+                complexity: "Alta",
+                search: "Brutalist architecture cloudy day low angle",
+                fonts: "Cinzel, Didot",
+                textures: "Cloud Overlays",
+                theory: "Blend If (Rango de Fusión): Ocultar texto basándose en la luminosidad de la capa inferior.",
+                dna: [50, 40, 10],
+                steps: [
+                    { type: "photo", title: "Textura", desc: "Claridad y Contraste alto para resaltar el concreto." },
+                    { type: "designer", title: "Texto", desc: "Título en el cielo. Opacidad 70%." },
+                    { type: "photo", title: "Blend If", desc: "Opciones de Fusión > Capa Subyacente. Mueve nodo derecho a la izquierda para que las nubes 'coman' el texto." }
+                ]
+            },
+            {
+                id: "EDI 15",
+                title: "Grunge Illustration",
+                category: "Retrato",
+                complexity: "Media",
+                search: "Ugly aesthetic portrait, funny face man screaming",
+                fonts: "Permanent Marker, Rock Salt",
+                textures: "Grid paper, Duct tape",
+                theory: "Anti-Diseño: Romper la perfección digital con caos analógico.",
+                dna: [30, 30, 40],
+                steps: [
+                    { type: "photo", title: "Posterizar", desc: "Filtro <b>Posterizar</b> (4-6 niveles) para look de dibujo." },
+                    { type: "designer", title: "Garabatos", desc: "Usa Pincel para dibujar líneas blancas caóticas sobre la foto." },
+                    { type: "photo", title: "Collage", desc: "Fondo cuadriculado sucio y cinta adhesiva." }
+                ]
+            },
+            {
+                id: "EDI 16",
+                title: "Y2K Pop 'Chuu'",
+                category: "Retrato",
+                complexity: "Alta",
+                search: "Y2K aesthetic portrait, retro nature smiling",
+                fonts: "Rubik Mono One",
+                textures: "Plastic Wrap, Dust",
+                theory: "Saturación y Contornos: Estética de los 2000s, excesiva y colorida.",
+                dna: [40, 30, 30],
+                steps: [
+                    { type: "photo", title: "Saturación", desc: "Vibrance y Saturation al máximo." },
+                    { type: "designer", title: "Outline", desc: "Texto con Relleno nulo y Trazo (Stroke) grueso de color neón (FX Panel)." },
+                    { type: "designer", title: "Scrapbook", desc: "Fotos extra en rectángulos blancos (Polaroids) usando Clipping Masks." },
+                    { type: "photo", title: "Textura", desc: "Polvo blanco en modo <b>Trama (Screen)</b>." }
+                ]
+            }
+        ];
+
+        let dnaChartInstance = null;
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderList(ediData);
+            
+            // Check for initial hash or load default? No, wait for user.
+        });
+
+        // --- RENDER LIST ---
+        function renderList(data) {
+            const container = document.getElementById('edi-list');
+            container.innerHTML = '';
+            
+            data.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'group p-3 rounded-lg cursor-pointer hover:bg-stone-100 transition border border-transparent hover:border-stone-200 inactive-item';
+                div.onclick = () => loadDetail(index);
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-[10px] font-bold text-stone-400 uppercase tracking-wider">${item.id}</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-500">${item.category}</span>
+                    </div>
+                    <h3 class="text-sm font-bold text-stone-800 group-hover:text-amber-700 transition font-display">${item.title}</h3>
+                `;
+                div.dataset.category = item.category; // For filtering
+                div.id = `list-item-${index}`;
+                container.appendChild(div);
+            });
+        }
+
+        // --- FILTER LOGIC ---
+        function filterEDIs(category) {
+            const items = document.getElementById('edi-list').children;
+            for (let item of items) {
+                if (category === 'all' || item.dataset.category.includes(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        }
+
+        // --- LOAD DETAIL VIEW ---
+        function loadDetail(index) {
+            const item = ediData[index];
+            const welcome = document.getElementById('welcome-screen');
+            const detail = document.getElementById('detail-view');
+            
+            // Toggle Visibility
+            welcome.classList.add('hidden');
+            detail.classList.remove('hidden');
+
+            // Update List Selection State
+            document.querySelectorAll('#edi-list > div').forEach(div => {
+                div.classList.remove('active-item');
+                div.classList.add('inactive-item');
+            });
+            const activeDiv = document.getElementById(`list-item-${index}`);
+            if(activeDiv) {
+                activeDiv.classList.add('active-item');
+                activeDiv.classList.remove('inactive-item');
+            }
+
+            // Populate Content
+            document.getElementById('detail-id').textContent = item.id;
+            document.getElementById('detail-category').textContent = item.category;
+            document.getElementById('detail-title').textContent = item.title;
+            document.getElementById('stat-steps').textContent = item.steps.length;
+            document.getElementById('stat-complexity').textContent = item.complexity;
+            
+            document.getElementById('detail-search').textContent = item.search;
+            document.getElementById('detail-fonts').textContent = item.fonts;
+            document.getElementById('detail-textures').textContent = item.textures;
+            document.getElementById('detail-theory').textContent = item.theory;
+
+            // Render Chart
+            renderChart(item.dna);
+
+            // Render Steps
+            const stepsContainer = document.getElementById('steps-container');
+            stepsContainer.innerHTML = '';
+            
+            item.steps.forEach((step, idx) => {
+                const isPhoto = step.type === 'photo';
+                const badgeClass = isPhoto ? 'badge-photo' : 'badge-designer';
+                const badgeText = isPhoto ? '📸 Photo' : '🖌️ Designer';
+                const sideClass = idx % 2 === 0 ? 'ml-12 md:ml-16' : 'ml-12 md:ml-16'; // Simplified timeline layout for stability
+
+                const stepDiv = document.createElement('div');
+                stepDiv.className = `relative pl-8 md:pl-12 py-2`;
+                stepDiv.innerHTML = `
+                    <div class="absolute left-0 top-6 w-12 h-px bg-stone-200"></div>
+                    <div class="absolute left-[-6px] top-[18px] w-3 h-3 rounded-full border-2 border-stone-300 bg-white z-10"></div>
+                    
+                    <div class="step-card bg-white p-5 rounded-xl border border-stone-200 shadow-sm hover:border-amber-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold px-2 py-1 rounded-md ${badgeClass} uppercase tracking-wide">${badgeText}</span>
+                            <span class="text-xs text-stone-300 font-bold">0${idx + 1}</span>
+                        </div>
+                        <h4 class="font-bold text-stone-900 text-lg mb-2 font-display">${step.title}</h4>
+                        <p class="text-sm text-stone-600 leading-relaxed">${step.desc}</p>
+                    </div>
+                `;
+                stepsContainer.appendChild(stepDiv);
+            });
+            
+            // Scroll detail view to top
+            detail.scrollTop = 0;
+        }
+
+        // --- CHART RENDERING ---
+        function renderChart(data) {
+            const ctx = document.getElementById('dnaChart').getContext('2d');
+            
+            if (dnaChartInstance) {
+                dnaChartInstance.destroy();
+            }
+
+            dnaChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Fotografía', 'Tipografía', 'Textura/FX'],
+                    datasets: [{
+                        label: 'Composición',
+                        data: data,
+                        fill: true,
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)', // Amber
+                        borderColor: 'rgb(245, 158, 11)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false },
+                            pointLabels: {
+                                font: {
+                                    size: 11,
+                                    family: 'Inter'
+                                },
+                                color: '#a8a29e'
+                            },
+                            grid: {
+                                color: '#e7e5e4'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    // Handle tooltip title callback
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                        return label.join(' ');
+                                    } else {
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- UTILS ---
+        function copySearch() {
+            const text = document.getElementById('detail-search').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('button[onclick="copySearch()"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✓';
+                setTimeout(() => btn.innerHTML = originalText, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
