@@ -46,7 +46,21 @@
           "tip": "# Recuerda que el diseño Gráfico el Negro es destructivo y el blanco es regenerativo"
         }
       ]
+    },
+    {
+      "numero": "06",
+      "tipo": "practica",
+      "titulo": "Serie EDI: Masterclass de Deconstrucción de Estilos y Composición Avanzada en Affinity",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "AVANZADO",
+      "categoria": "PRACTICA 06",
+      "visible": true,
+      "grupos": [
+        "vespertino"
+      ],
+      "objetivos": [],
+      "pasos": []
     }
   ],
-  "updated": "2026-02-27T18:14:17.321Z"
+  "updated": "2026-02-27T22:12:24.209Z"
 }
