@@ -1263,22 +1263,23 @@ const HERRAMIENTAS_DEFAULT=[
 
 
 async function repararEncodingHerramientas(){
-  if(!confirm('Esto vuelve a guardar el JSON de herramientas con encoding correcto para arreglar emojis e iconos rotos.\n¿Continuar?'))return;
+  if(!confirm('Esto reemplaza las herramientas de GitHub con los datos limpios (sin caracteres rotos).\n¿Continuar?'))return;
   toast('🔧 Reparando herramientas...','info');
   const c2=getConfig();
   try{
-    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/datos/herramientas.json?t=`+Date.now();
-    const r=await fetch(rawUrl);
-    if(!r.ok){toast('❌ No existe el archivo todavía','error');return;}
-    const text=await r.text();
-    let data;
-    try{data=JSON.parse(text);}catch(e){toast('❌ JSON inválido: '+e.message,'error');return;}
+    // Usar los datos actuales en memoria (ya cargados desde el DEFAULT o editados)
+    // Si tienen caracteres rotos, pedimos confirmación para resetear al DEFAULT
+    const usarDefault=confirm('¿Resetear al listado por defecto (emojis e iconos correctos)?\nCancela si prefieres conservar tus herramientas personalizadas.');
+    const dataFinal = usarDefault ? HERRAMIENTAS_DEFAULT : herramientasData;
+    const payload = {herramientas: dataFinal, updated: new Date().toISOString()};
+    // Obtener SHA actual
     const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
     let sha=null;
     if(metaR.ok){const meta=await metaR.json();sha=meta.sha;}
-    await ghPut('datos/herramientas.json',data,sha,'🔧 Reparar encoding UTF-8 herramientas');
-    await loadHerramientas();
-    toast('✅ Herramientas reparadas y guardadas','success');
+    await ghPut('datos/herramientas.json',payload,sha,'🔧 Reparar encoding UTF-8 herramientas');
+    if(usarDefault){herramientasData=[...HERRAMIENTAS_DEFAULT];renderHerramientasList();}
+    else await loadHerramientas();
+    toast('✅ Herramientas reparadas en GitHub','success');
   }catch(e){toast('❌ Error: '+e.message,'error');}
 }
 async function loadHerramientas(){
@@ -1305,25 +1306,46 @@ function renderHerramientasList(){
   const wrap=document.getElementById('herramientas-list');
   if(!wrap)return;
   if(!herramientasData.length){wrap.innerHTML=`<div class="empty-state"><div class="es-icon">🛠</div><h4>Sin herramientas</h4><p>Agrega la primera.</p></div>`;return;}
-  wrap.innerHTML=herramientasData.map((h,i)=>`
+  wrap.innerHTML=herramientasData.map((h,i)=>{const h2=fixEncObj(h);return`
     <div class="tool-item">
-      <div class="tool-ico-disp">${h.icono||'🔗'}</div>
+      <div class="tool-ico-disp">${h2.icono||'🔗'}</div>
       <div class="tool-info">
-        <div class="tool-name">${h.nombre||'Sin nombre'}</div>
-        <div class="tool-url">${h.url||''}</div>
-        <div class="tool-desc-disp">${h.subtitulo||''} ${h.pasos&&h.pasos.length?'· '+h.pasos.length+' pasos':''}</div>
+        <div class="tool-name">${h2.nombre||'Sin nombre'}</div>
+        <div class="tool-url">${h2.url||''}</div>
+        <div class="tool-desc-disp">${h2.subtitulo||''} ${h2.pasos&&h.pasos.length?'· '+h.pasos.length+' pasos':''}</div>
       </div>
       <div class="action-btns">
-        <a class="btn-sm btn-view" href="${h.url||'#'}" target="_blank">🔗 Abrir</a>
+        <a class="btn-sm btn-view" href="${h2.url||'#'}" target="_blank">🔗 Abrir</a>
         <button class="btn-sm btn-edit" onclick="openHerramientaModal(${i})">✏️ Editar</button>
         <button class="btn-sm btn-delete" onclick="eliminarHerramienta(${i})">🗑</button>
       </div>
     </div>`).join('');
 }
 
+
+// Intenta reparar string con encoding corrupto (latin1 leído como utf8)
+function fixEncStr(s){
+  if(!s||typeof s!=='string')return s;
+  try{
+    // Detectar si tiene secuencias típicas de corrupción UTF-8
+    if(!/Ã|â€|Â|ð/.test(s))return s;
+    // Re-codificar: tratar como latin-1 y decodificar como UTF-8
+    const bytes=new Uint8Array(s.length);
+    for(let i=0;i<s.length;i++)bytes[i]=s.charCodeAt(i)&0xff;
+    return new TextDecoder('utf-8').decode(bytes);
+  }catch(e){return s;}
+}
+function fixEncObj(obj){
+  if(!obj)return obj;
+  const o={...obj};
+  ['icono','nombre','subtitulo','descripcion'].forEach(k=>{if(o[k])o[k]=fixEncStr(o[k]);});
+  if(Array.isArray(o.pasos))o.pasos=o.pasos.map(p=>fixEncStr(p));
+  return o;
+}
 function openHerramientaModal(idx){
   editHerrIdx=idx;
-  const h=idx!==null?herramientasData[idx]:{};
+  const hRaw=idx!==null?herramientasData[idx]:{};
+  const h=fixEncObj(hRaw);
   document.getElementById('herr-modal-title').innerHTML=(idx!==null?'✏️ Editar Herramienta':'➕ Nueva Herramienta')+' <button class="modal-close" onclick="closeHerramientaModal()">✕</button>';
   document.getElementById('hm-icono').value=h.icono||'';
   document.getElementById('hm-nombre').value=h.nombre||'';
