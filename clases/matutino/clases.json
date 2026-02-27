@@ -4,57 +4,57 @@
     {
       "numero": "01",
       "tipo": "practica",
-      "titulo": "Crea TipografÃ­a con Formas",
-      "materia": "DiseÃ±o Grafico",
+      "titulo": "Crea Tipografia con Formas",
+      "materia": "DiseÃÂ±o Grafico",
       "nivel": "Basico",
       "categoria": "Practica 1",
       "videoUrl": "https://youtu.be/4XNC7XYEHBc",
-      "descripcion": "Esta prÃ¡ctica de diseÃ±o grÃ¡fico en Affinity consiste en integrar texto de forma orgÃ¡nica en un objeto (en este caso, una banana) utilizando herramientas de deformaciÃ³n de malla y mÃ¡scaras de capa. \n\nEl objetivo es que la tipografÃ­a parezca ser parte fÃ­sica del objeto, adaptÃ¡ndose a su curvatura y volumen.",
+      "descripcion": "Esta practica de diseñada graficamente en Affinity consiste en integrar texto de forma orgÃÂ¡nica en un objeto (en este caso, una banana) utilizando herramientas de deformaciÃÂ³n de malla y mÃÂ¡scaras de capa. \n\nEl objetivo es que la tipografÃÂ­a parezca ser parte fÃÂ­sica del objeto, adaptÃÂ¡ndose a su curvatura y volumen.",
       "herramientaUrl": "https://youtu.be/4XNC7XYEHBc",
       "objetivos": [
         "Familiarizarte con el programa "
       ],
       "pasos": [
         {
-          "titulo": "ConfiguraciÃ³n y PreparaciÃ³n",
-          "descripcion": "Crea un nuevo documento. El video sugiere un tamaÃ±o de video vertical (1080 x 1920 px).\n\nPega la imagen de la fruta u objeto que vayas a utilizar.",
+          "titulo": "Configuracion y PreparaciÃÂ³n",
+          "descripcion": "Crea un nuevo documento. El video sugiere un tamaÃÂ±o de video vertical (1080 x 1920 px).\n\nPega la imagen de la fruta u objeto que vayas a utilizar.",
           "ejemplo": "",
           "tip": "# Ya te subi los archivos necesarios en el aula DESCARGALOS"
         },
         {
-          "titulo": "SelecciÃ³n y Recorte del Objeto",
-          "descripcion": "Selecciona la herramienta Pincel de SelecciÃ³n.\n\nPasa el pincel por dentro de la banana para seleccionarla.",
-          "tip": "Si se selecciona algo de mÃ¡s, mantÃ©n presionada la tecla Alt mientras das clic para restar esa parte de la selecciÃ³n."
+          "titulo": "SelecciÃÂ³n y Recorte del Objeto",
+          "descripcion": "Selecciona la herramienta Pincel de SelecciÃÂ³n.\n\nPasa el pincel por dentro de la banana para seleccionarla.",
+          "tip": "Si se selecciona algo de mÃÂ¡s, mantÃÂ©n presionada la tecla Alt mientras das clic para restar esa parte de la selecciÃÂ³n."
         },
         {
           "titulo": "Duplica la capa ",
           "descripcion": "Presiona Control + J para crear una nueva capa solo con el recorte y elimina la imagen original de fondo.",
-          "tip": "#Recuerda este comandÃ³ siempre "
+          "tip": "#Recuerda este comandÃÂ³ siempre "
         },
         {
-          "titulo": "CreaciÃ³n del Texto",
-          "descripcion": "Usa la Herramienta de Texto ArtÃ­stico y escribe la palabra (ejemplo: \"BANANA\"). (Presiona la tecla T)\n\nSe recomienda una fuente gruesa como \"Anton\" para que el efecto se note mejor. (Selecciona la fuente dada por el docente)\n\nEscala el texto para que cubra el ancho de la banana."
+          "titulo": "CreaciÃÂ³n del Texto",
+          "descripcion": "Usa la Herramienta de Texto ArtÃÂ­stico y escribe la palabra (ejemplo: \"BANANA\"). (Presiona la tecla T)\n\nSe recomienda una fuente gruesa como \"Anton\" para que el efecto se note mejor. (Selecciona la fuente dada por el docente)\n\nEscala el texto para que cubra el ancho de la banana."
         },
         {
-          "titulo": "DeformaciÃ³n de Malla (Mesh Warp)",
-          "descripcion": "Con el texto seleccionado, busca la herramienta FormaciÃ³n de Malla (dentro del grupo de la herramienta mover).\n\nAparecerÃ¡n puntos en las esquinas y lÃ­neas. Arrastra los puntos para que las letras sigan la curva de la banana.\n\nAsegÃºrate de que los extremos de la primera y Ãºltima letra coincidan exactamente con el borde de la banana para que la transiciÃ³n sea fluida.",
-          "tip": "# Para seleccionar la herramienta Mesh Warp da un clic derecho el la herramienta mover , en el menÃº desplegado selecciona DeformaciÃ³n de Malla"
+          "titulo": "DeformaciÃÂ³n de Malla (Mesh Warp)",
+          "descripcion": "Con el texto seleccionado, busca la herramienta FormaciÃÂ³n de Malla (dentro del grupo de la herramienta mover).\n\nAparecerÃÂ¡n puntos en las esquinas y lÃÂ­neas. Arrastra los puntos para que las letras sigan la curva de la banana.\n\nAsegÃÂºrate de que los extremos de la primera y ÃÂºltima letra coincidan exactamente con el borde de la banana para que la transiciÃÂ³n sea fluida.",
+          "tip": "# Para seleccionar la herramienta Mesh Warp da un clic derecho el la herramienta mover , en el menÃÂº desplegado selecciona DeformaciÃÂ³n de Malla"
         },
         {
-          "titulo": "El Efecto de IntegraciÃ³n (MÃ¡scaras)",
-          "descripcion": "Duplica la capa de la banana (Control + J).\n\nHaz Control + Clic sobre la miniatura de la capa de texto para crear una selecciÃ³n con la forma de las letras.\n\nCon esa selecciÃ³n activa, aÃ±ade una MÃ¡scara de Capa a las capas de la banana. Esto harÃ¡ que la textura de la fruta \"rellene\" el texto."
+          "titulo": "El Efecto de IntegraciÃÂ³n (MÃÂ¡scaras)",
+          "descripcion": "Duplica la capa de la banana (Control + J).\n\nHaz Control + Clic sobre la miniatura de la capa de texto para crear una selecciÃÂ³n con la forma de las letras.\n\nCon esa selecciÃÂ³n activa, aÃÂ±ade una MÃÂ¡scara de Capa a las capas de la banana. Esto harÃÂ¡ que la textura de la fruta \"rellene\" el texto."
         },
         {
           "titulo": "Detalle con el Pincel",
-          "descripcion": "Selecciona la Herramienta Pincel y asegÃºrate de estar en la mÃ¡scara de capa.\n\nUsa el color Negro para ocultar partes y el Blanco para mostrar.\n\nPinta suavemente en las uniones para que parezca que la cÃ¡scara se funde con el texto.",
+          "descripcion": "Selecciona la Herramienta Pincel y asegÃÂºrate de estar en la mÃÂ¡scara de capa.\n\nUsa el color Negro para ocultar partes y el Blanco para mostrar.\n\nPinta suavemente en las uniones para que parezca que la cÃÂ¡scara se funde con el texto.",
           "tip": "# Recuerda : negro (destructivo) / blanco (regenerativo)  "
         },
         {
           "titulo": "La Sombra",
-          "descripcion": "Crea una elipse negra debajo de la banana.\n\nVe a la pestaÃ±a de filtros (Ã­cono de reloj de arena) y selecciona Desenfoque Gaussiano.\n\nSube el radio hasta que parezca una sombra suave y baja la Opacidad de la capa para que no sea un negro muy intenso. "
+          "descripcion": "Crea una elipse negra debajo de la banana.\n\nVe a la pestaÃÂ±a de filtros (ÃÂ­cono de reloj de arena) y selecciona Desenfoque Gaussiano.\n\nSube el radio hasta que parezca una sombra suave y baja la Opacidad de la capa para que no sea un negro muy intenso. "
         }
       ]
     }
   ],
-  "updated": "2026-02-27T14:43:20.066Z"
+  "updated": "2026-02-27T15:50:19.212Z"
 }
