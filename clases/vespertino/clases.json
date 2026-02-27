@@ -1,19 +1,5 @@
 {
   "grupo": "vespertino",
-  "clases": [
-    {
-      "numero": "05",
-      "tipo": "practica",
-      "titulo": "Ejem",
-      "videoUrl": "https://youtu.be/VHHMjFvRu4w?si=xRLxNK7ulnQyY-xt",
-      "objetivos": [],
-      "pasos": [
-        {
-          "titulo": "Uno",
-          "descripcion": "Null"
-        }
-      ]
-    }
-  ],
-  "updated": "2026-02-27T04:29:26.121Z"
+  "clases": [],
+  "updated": "2026-02-27T04:40:09.905Z"
 }
