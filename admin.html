@@ -62,12 +62,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .logout-btn:hover{background:rgba(252,129,129,0.15)}
 
 /* ══ MAIN ══ */
-.topbar{position:sticky;top:0;z-index:90;margin-left:240px;background:rgba(6,13,24,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0.7rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.topbar-left{display:flex;align-items:center;gap:0.75rem}
-.topbar-title{font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text)}
-.btn-regresar{display:inline-flex;align-items:center;gap:7px;padding:0.5rem 1.1rem;border-radius:9px;border:1px solid rgba(104,211,145,0.5);background:rgba(104,211,145,0.12);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;text-decoration:none;transition:all 0.2s;white-space:nowrap}
-.btn-regresar:hover{background:rgba(104,211,145,0.25);transform:translateX(-2px)}
-.main{margin-left:240px;min-height:100vh;padding:2rem 2.5rem 4rem}
+.main{margin-left:240px;min-height:100vh;padding:2.5rem 2.5rem 4rem}
 .page-header{margin-bottom:2rem}
 .page-header h1{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700}
 .page-header p{color:var(--text-dim);margin-top:0.3rem;font-size:0.88rem}
@@ -356,19 +351,13 @@ select option{background:#0c1a2e}
 <div id="app">
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem">
-        <div class="s-badge">GC</div>
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:0.35rem 0.75rem;border-radius:8px;border:2px solid #68d391;background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.75rem;font-weight:800;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='rgba(104,211,145,0.3)'" onmouseout="this.style.background='rgba(104,211,145,0.15)'">← Aula</a>
-      </div>
+      <div class="s-badge">GC</div>
       <h2>CENTED Admin</h2>
       <span>Panel Docente</span>
     </div>
     <div class="sidebar-repo">
       <div class="repo-label">Repositorio</div>
       <div class="repo-name" id="sidebar-repo-name">BryanD10/Aulavirtual.github.io</div>
-    </div>
-    <div style="padding:0 0.6rem 0.4rem">
-      <a href="index.html" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:0.65rem 1rem;border-radius:10px;border:1px solid rgba(104,211,145,0.4);background:rgba(104,211,145,0.12);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.84rem;font-weight:800;text-decoration:none;transition:all 0.2s" onmouseover="this.style.background='rgba(104,211,145,0.22)'" onmouseout="this.style.background='rgba(104,211,145,0.12)'">← Regresar al Aula</a>
     </div>
     <div class="nav-section">Principal</div>
     <div class="nav-item active" onclick="showPanel('dashboard',this)"><span class="ni">📊</span> Dashboard</div>
@@ -383,18 +372,11 @@ select option{background:#0c1a2e}
     <div class="nav-item" onclick="showPanel('ia',this)"><span class="ni">🤖</span> Asistentes IA</div>
     <div class="nav-section">Ajustes</div>
     <div class="nav-item" onclick="showPanel('settings',this)"><span class="ni">⚙️</span> Configuración</div>
+    <div class="nav-item" onclick="window.open('index.html','_blank')"><span class="ni">🌐</span> Ver Aula</div>
     <div class="sidebar-footer">
       <button class="logout-btn" onclick="doLogout()">🚪 Cerrar sesión</button>
     </div>
   </aside>
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="topbar-left">
-      <span class="topbar-title" id="topbar-panel-name">📊 Dashboard</span>
-    </div>
-    <a href="index.html" class="btn-regresar">🏫 ← Regresar al Aula</a>
-  </div>
 
   <main class="main">
 
@@ -410,30 +392,6 @@ select option{background:#0c1a2e}
         <div class="stat-card orange"><div class="sc-label">Vespertino</div><div class="sc-val" id="stat-ves">—</div></div>
         <div class="stat-card red"><div class="sc-label">Sabatino</div><div class="sc-val" id="stat-sab">—</div></div>
       </div>
-      <!-- Accesos rápidos -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem">
-        <div onclick="showPanel('clases',document.querySelector('.nav-item:nth-child(7)'))" style="background:var(--surface);border:1px solid rgba(104,211,145,0.25);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-          <div style="font-size:1.8rem;margin-bottom:0.5rem">📝</div>
-          <div style="font-weight:800;font-size:0.9rem">Gestión de Clases</div>
-          <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.2rem">Crear y editar prácticas</div>
-        </div>
-        <div onclick="showPanel('herramientas',document.querySelector('.nav-item:nth-child(8)'))" style="background:var(--surface);border:1px solid rgba(246,173,85,0.25);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-          <div style="font-size:1.8rem;margin-bottom:0.5rem">🛠</div>
-          <div style="font-weight:800;font-size:0.9rem">Herramientas Web</div>
-          <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.2rem">Gestionar recursos del aula</div>
-        </div>
-        <div onclick="showPanel('upload',document.querySelector('.nav-item:nth-child(2)'))" style="background:var(--surface);border:1px solid rgba(99,179,237,0.25);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-          <div style="font-size:1.8rem;margin-bottom:0.5rem">⬆️</div>
-          <div style="font-weight:800;font-size:0.9rem">Subir Documento</div>
-          <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.2rem">PDF, DOCX, PPTX y más</div>
-        </div>
-        <div onclick="showPanel('settings',document.querySelectorAll('.nav-item')[10])" style="background:var(--surface);border:1px solid rgba(183,148,244,0.25);border-radius:14px;padding:1.2rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
-          <div style="font-size:1.8rem;margin-bottom:0.5rem">🔐</div>
-          <div style="font-weight:800;font-size:0.9rem">Cambiar Contraseña</div>
-          <div style="font-size:0.72rem;color:var(--text-dim);margin-top:0.2rem">Configuración del panel</div>
-        </div>
-      </div>
-
       <div class="card">
         <h3>🕐 Archivos recientes</h3>
         <div id="recent-files"><div class="empty-state"><div class="es-icon">📭</div><h4>Sin archivos</h4><p>Sube el primer documento desde "Subir Documento".</p></div></div>
@@ -756,12 +714,11 @@ select option{background:#0c1a2e}
           <div class="form-group"><label>Carpeta archivos</label><input type="text" id="cfg-folder" value="archivos"/></div>
           <button class="btn-save" onclick="saveConfig()">💾 Guardar</button>
         </div>
-        <div class="settings-card" style="border-color:rgba(246,173,85,0.3)">
-          <h3>🔐 Cambiar contraseña del Panel</h3>
-          <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1.2rem;line-height:1.6">Actualiza la contraseña con la que ingresas al Panel Docente. Se guarda en tu navegador.</p>
-          <div class="form-group" style="margin-bottom:1rem"><label>Nueva contraseña</label><input type="password" id="cfg-newpass" placeholder="Escribe la nueva contraseña"/></div>
-          <div class="form-group"><label>Confirmar nueva contraseña</label><input type="password" id="cfg-newpass2" placeholder="Repite la contraseña"/></div>
-          <button class="btn-save" style="background:linear-gradient(135deg,var(--accent3),#e88a2a);margin-top:1rem" onclick="changePassword()">🔑 Actualizar contraseña</button>
+        <div class="settings-card">
+          <h3>🔐 Cambiar contraseña</h3>
+          <div class="form-group" style="margin-bottom:1rem"><label>Nueva contraseña</label><input type="password" id="cfg-newpass" placeholder="Nueva contraseña"/></div>
+          <div class="form-group"><label>Confirmar</label><input type="password" id="cfg-newpass2" placeholder="Repetir"/></div>
+          <button class="btn-save" onclick="changePassword()">🔑 Actualizar</button>
           <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)">
             <h3 style="font-size:1rem;margin-bottom:0.7rem">🌐 URL del Aula</h3>
             <div id="public-url" style="font-size:0.82rem;color:var(--accent);word-break:break-all;background:rgba(99,179,237,0.07);padding:0.6rem 0.8rem;border-radius:8px;border:1px solid rgba(99,179,237,0.15)">https://bryand10.github.io/Aulavirtual.github.io/</div>
@@ -930,7 +887,7 @@ async function ghReq(method,path,body){
   return res;
 }
 async function ghGet(path){const c=getConfig();try{const r=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+path);if(r.ok){const d=await r.json();const json=JSON.parse(atob(d.content.replace(/\n/g,'')));return{data:json,sha:d.sha};}return null;}catch(e){return null;}}
-async function ghPut(path,data,sha,msg){const c=getConfig();const b64=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));const body={message:msg||'📚 Actualizar '+path,content:b64,branch:c.branch};if(sha)body.sha=sha;const r=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!r.ok){const e=await r.json();throw new Error(e.message);}return r;}
+async function ghPut(path,data,sha,msg){const c=getConfig();const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);const b64=btoa(String.fromCharCode(..._by));const body={message:msg||'📚 Actualizar '+path,content:b64,branch:c.branch};if(sha)body.sha=sha;const r=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!r.ok){const e=await r.json();throw new Error(e.message);}return r;}
 
 // ══════════════════════════════════════════
 //  PANELS
@@ -993,7 +950,7 @@ async function uploadFiles(){
 // Video
 function previewVideo(){const url=document.getElementById('vid-url').value.trim();const preview=document.getElementById('vid-preview');const msg=document.getElementById('vid-preview-msg');const iframe=document.getElementById('vid-iframe');const embed=getEmbedUrl(url);if(embed){iframe.src=embed;preview.style.display='block';msg.style.display='none';}else{preview.style.display='none';msg.style.display='block';msg.textContent=url?'URL no reconocida.':'Ingresa una URL de YouTube para ver la vista previa.';}}
 function getEmbedUrl(url){if(!url)return null;const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);if(yt)return'https://www.youtube.com/embed/'+yt[1];const ys=url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);if(ys)return'https://www.youtube.com/embed/'+ys[1];const gd=url.match(/drive\.google\.com\/file\/d\/([^/]+)/);if(gd)return'https://drive.google.com/file/d/'+gd[1]+'/preview';return null;}
-async function saveVideoLink(){const c=getConfig();const token=GH_TOKEN||localStorage.getItem('cented_token');if(!token)return toast('⚠️ Sin token','error');const url=document.getElementById('vid-url').value.trim();const title=document.getElementById('vid-title').value.trim();const group=document.getElementById('vid-group').value;const cat=document.getElementById('vid-category').value;const desc=document.getElementById('vid-desc').value.trim();if(!url||!title)return toast('⚠️ Completa el título y la URL','error');const embed=getEmbedUrl(url);const data={title,url,embed,group,category:cat,description:desc,type:'video',date:new Date().toISOString()};const ts=Date.now();const fileName=`video_${cat}_${title.replace(/[^a-zA-Z0-9]/g,'_').slice(0,30)}_${ts}.json`;const path=`${c.folder}/${group}/${fileName}`;const b64=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));try{const res=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,{message:'🎬 Video: '+title+' ['+group+']',content:b64,branch:c.branch});if(!res.ok){const err=await res.json();throw new Error(err.message);}toast('✅ Video guardado: '+title,'success');document.getElementById('vid-url').value='';document.getElementById('vid-title').value='';document.getElementById('vid-desc').value='';document.getElementById('vid-preview').style.display='none';loadFiles();}catch(e){toast('❌ Error: '+e.message,'error');}}
+async function saveVideoLink(){const c=getConfig();const token=GH_TOKEN||localStorage.getItem('cented_token');if(!token)return toast('⚠️ Sin token','error');const url=document.getElementById('vid-url').value.trim();const title=document.getElementById('vid-title').value.trim();const group=document.getElementById('vid-group').value;const cat=document.getElementById('vid-category').value;const desc=document.getElementById('vid-desc').value.trim();if(!url||!title)return toast('⚠️ Completa el título y la URL','error');const embed=getEmbedUrl(url);const data={title,url,embed,group,category:cat,description:desc,type:'video',date:new Date().toISOString()};const ts=Date.now();const fileName=`video_${cat}_${title.replace(/[^a-zA-Z0-9]/g,'_').slice(0,30)}_${ts}.json`;const path=`${c.folder}/${group}/${fileName}`;const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);const b64=btoa(String.fromCharCode(..._by));try{const res=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,{message:'🎬 Video: '+title+' ['+group+']',content:b64,branch:c.branch});if(!res.ok){const err=await res.json();throw new Error(err.message);}toast('✅ Video guardado: '+title,'success');document.getElementById('vid-url').value='';document.getElementById('vid-title').value='';document.getElementById('vid-desc').value='';document.getElementById('vid-preview').style.display='none';loadFiles();}catch(e){toast('❌ Error: '+e.message,'error');}}
 
 // Delete
 function confirmDelete(group,name,sha){document.getElementById('confirm-msg').textContent=`¿Eliminar "${name.replace(/_/g,' ')}" del grupo ${group}?`;document.getElementById('confirm-modal').classList.add('open');document.getElementById('confirm-ok').onclick=()=>deleteFile(group,name,sha);}
