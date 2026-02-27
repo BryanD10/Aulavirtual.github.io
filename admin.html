@@ -353,7 +353,7 @@ select option{background:#0c1a2e}
     <div class="sidebar-logo">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem">
         <div class="s-badge">GC</div>
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:0.38rem 0.85rem;border-radius:8px;border:2px solid #68d391;background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:800;text-decoration:none;transition:all 0.2s;white-space:nowrap" onmouseover="this.style.background='rgba(104,211,145,0.3)'" onmouseout="this.style.background='rgba(104,211,145,0.15)'">← Aula</a>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:5px;padding:0.38rem 0.85rem;border-radius:8px;border:2px solid #68d391;background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:800;text-decoration:none;white-space:nowrap" onmouseover="this.style.background='rgba(104,211,145,0.3)'" onmouseout="this.style.background='rgba(104,211,145,0.15)'">← Aula</a>
       </div>
       <h2>CENTED Admin</h2>
       <span>Panel Docente</span>
@@ -563,7 +563,6 @@ select option{background:#0c1a2e}
         </select>
         <button class="btn-upload sm green" onclick="openClaseModal(null)">➕ Nueva clase</button>
         <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadClasesFromGH()">🔄 Recargar</button>
-        <button class="btn-sm btn-edit" style="padding:0.55rem 1rem;border-radius:9px" onclick="repararEncoding()" title="Vuelve a guardar el JSON con encoding correcto para arreglar caracteres rotos">🔧 Reparar tildes</button>
         <span id="clases-count" style="font-size:0.82rem;color:var(--text-dim);margin-left:auto"></span>
       </div>
 
@@ -600,7 +599,6 @@ select option{background:#0c1a2e}
         </select>
         <button class="btn-upload sm" style="background:linear-gradient(135deg,var(--accent3),#e88a2a)" onclick="openHerramientaModal(null)">➕ Nueva herramienta</button>
         <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadHerramientas()">🔄 Recargar</button>
-        <button class="btn-sm btn-edit" style="padding:0.55rem 1rem;border-radius:9px" onclick="repararEncodingHerramientas()" title="Arregla emojis e iconos rotos">🔧 Reparar iconos</button>
         <button class="btn-upload sm green" onclick="saveHerramientasToGH()" style="margin-left:auto">💾 Guardar en GitHub</button>
       </div>
 
@@ -785,26 +783,25 @@ select option{background:#0c1a2e}
     <div class="form-row one">
       <div class="form-group"><label>Link de herramienta / tarea (opcional)</label><input type="url" id="cm-herramienta" placeholder="https://www.canva.com/"/></div>
     </div>
-    <!-- VISIBILIDAD Y GRUPOS -->
     <div style="background:rgba(99,179,237,0.06);border:1px solid rgba(99,179,237,0.18);border-radius:12px;padding:1.2rem;margin:0.5rem 0 1rem">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div style="display:flex;gap:2rem;flex-wrap:wrap">
         <div>
-          <div style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem">Visibilidad para alumnos</div>
+          <div style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem">Visibilidad</div>
           <div style="display:flex;gap:0.5rem">
-            <button type="button" id="vis-on" onclick="setVisible(true)" style="padding:0.4rem 1rem;border-radius:8px;border:1px solid rgba(104,211,145,0.4);background:rgba(104,211,145,0.15);color:#68d391;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer">✅ Visible</button>
-            <button type="button" id="vis-off" onclick="setVisible(false)" style="padding:0.4rem 1rem;border-radius:8px;border:1px solid rgba(252,129,129,0.3);background:rgba(252,129,129,0.08);color:var(--danger);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer">🔒 Oculta</button>
+            <button type="button" id="vis-on" onclick="setVisible(true)" style="padding:0.4rem 1rem;border-radius:8px;border:2px solid #68d391;background:rgba(104,211,145,0.2);color:#68d391;font-size:0.82rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif">✅ Visible</button>
+            <button type="button" id="vis-off" onclick="setVisible(false)" style="padding:0.4rem 1rem;border-radius:8px;border:1px solid rgba(252,129,129,0.3);background:rgba(252,129,129,0.06);color:var(--danger);font-size:0.82rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif">🔒 Oculta</button>
           </div>
           <input type="hidden" id="cm-visible" value="true"/>
-          <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.4rem">Si está oculta los alumnos ven el título pero no pueden abrirla.</p>
+          <p style="font-size:0.7rem;color:var(--text-dim);margin-top:0.35rem">Oculta: alumnos ven el título pero no pueden abrirla.</p>
         </div>
         <div>
-          <div style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem">Grupos que pueden verla</div>
-          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-matutino" value="matutino" style="accent-color:var(--accent)"> 🌅 Matutino</label>
-            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-vespertino" value="vespertino" style="accent-color:var(--accent3)"> 🌇 Vespertino</label>
-            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-sabatino" value="sabatino" style="accent-color:var(--purple)"> 📚 Sabatino</label>
+          <div style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem">Grupos que la ven</div>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-matutino" style="accent-color:var(--accent)"> 🌅 Matutino</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-vespertino" style="accent-color:var(--accent3)"> 🌇 Vespertino</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:700;cursor:pointer"><input type="checkbox" id="grp-sabatino" style="accent-color:var(--purple)"> 📚 Sabatino</label>
           </div>
-          <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.4rem">Si no marcas ninguno, la clase aparece en todos los grupos.</p>
+          <p style="font-size:0.7rem;color:var(--text-dim);margin-top:0.35rem">Sin marcar = aparece en todos.</p>
         </div>
       </div>
     </div>
@@ -915,7 +912,7 @@ async function ghReq(method,path,body){
   return res;
 }
 async function ghGet(path){const c=getConfig();try{const r=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+path);if(r.ok){const d=await r.json();const raw=d.content.replace(/\n/g,'');const bytes=Uint8Array.from(atob(raw),ch=>ch.charCodeAt(0));const json=JSON.parse(new TextDecoder('utf-8').decode(bytes));return{data:json,sha:d.sha};}return null;}catch(e){return null;}}
-async function ghPut(path,data,sha,msg){const c=getConfig();const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);let b64="";for(let i=0;i<_by.length;i++)b64+=String.fromCharCode(_by[i]);b64=btoa(b64);const body={message:msg||'📚 Actualizar '+path,content:b64,branch:c.branch};if(sha)body.sha=sha;const r=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!r.ok){const e=await r.json();throw new Error(e.message);}return r;}
+async function ghPut(path,data,sha,msg){const c=getConfig();const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);let b64='';for(let i=0;i<_by.length;i++)b64+=String.fromCharCode(_by[i]);b64=btoa(b64);const body={message:msg||'📚 Actualizar '+path,content:b64,branch:c.branch};if(sha)body.sha=sha;const r=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!r.ok){const e=await r.json();throw new Error(e.message);}return r;}
 
 // ══════════════════════════════════════════
 //  PANELS
@@ -978,7 +975,7 @@ async function uploadFiles(){
 // Video
 function previewVideo(){const url=document.getElementById('vid-url').value.trim();const preview=document.getElementById('vid-preview');const msg=document.getElementById('vid-preview-msg');const iframe=document.getElementById('vid-iframe');const embed=getEmbedUrl(url);if(embed){iframe.src=embed;preview.style.display='block';msg.style.display='none';}else{preview.style.display='none';msg.style.display='block';msg.textContent=url?'URL no reconocida.':'Ingresa una URL de YouTube para ver la vista previa.';}}
 function getEmbedUrl(url){if(!url)return null;const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);if(yt)return'https://www.youtube.com/embed/'+yt[1];const ys=url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);if(ys)return'https://www.youtube.com/embed/'+ys[1];const gd=url.match(/drive\.google\.com\/file\/d\/([^/]+)/);if(gd)return'https://drive.google.com/file/d/'+gd[1]+'/preview';return null;}
-async function saveVideoLink(){const c=getConfig();const token=GH_TOKEN||localStorage.getItem('cented_token');if(!token)return toast('⚠️ Sin token','error');const url=document.getElementById('vid-url').value.trim();const title=document.getElementById('vid-title').value.trim();const group=document.getElementById('vid-group').value;const cat=document.getElementById('vid-category').value;const desc=document.getElementById('vid-desc').value.trim();if(!url||!title)return toast('⚠️ Completa el título y la URL','error');const embed=getEmbedUrl(url);const data={title,url,embed,group,category:cat,description:desc,type:'video',date:new Date().toISOString()};const ts=Date.now();const fileName=`video_${cat}_${title.replace(/[^a-zA-Z0-9]/g,'_').slice(0,30)}_${ts}.json`;const path=`${c.folder}/${group}/${fileName}`;const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);let b64="";for(let i=0;i<_by.length;i++)b64+=String.fromCharCode(_by[i]);b64=btoa(b64);try{const res=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,{message:'🎬 Video: '+title+' ['+group+']',content:b64,branch:c.branch});if(!res.ok){const err=await res.json();throw new Error(err.message);}toast('✅ Video guardado: '+title,'success');document.getElementById('vid-url').value='';document.getElementById('vid-title').value='';document.getElementById('vid-desc').value='';document.getElementById('vid-preview').style.display='none';loadFiles();}catch(e){toast('❌ Error: '+e.message,'error');}}
+async function saveVideoLink(){const c=getConfig();const token=GH_TOKEN||localStorage.getItem('cented_token');if(!token)return toast('⚠️ Sin token','error');const url=document.getElementById('vid-url').value.trim();const title=document.getElementById('vid-title').value.trim();const group=document.getElementById('vid-group').value;const cat=document.getElementById('vid-category').value;const desc=document.getElementById('vid-desc').value.trim();if(!url||!title)return toast('⚠️ Completa el título y la URL','error');const embed=getEmbedUrl(url);const data={title,url,embed,group,category:cat,description:desc,type:'video',date:new Date().toISOString()};const ts=Date.now();const fileName=`video_${cat}_${title.replace(/[^a-zA-Z0-9]/g,'_').slice(0,30)}_${ts}.json`;const path=`${c.folder}/${group}/${fileName}`;const _js=JSON.stringify(data,null,2);const _by=new TextEncoder().encode(_js);let b64='';for(let i=0;i<_by.length;i++)b64+=String.fromCharCode(_by[i]);b64=btoa(b64);try{const res=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,{message:'🎬 Video: '+title+' ['+group+']',content:b64,branch:c.branch});if(!res.ok){const err=await res.json();throw new Error(err.message);}toast('✅ Video guardado: '+title,'success');document.getElementById('vid-url').value='';document.getElementById('vid-title').value='';document.getElementById('vid-desc').value='';document.getElementById('vid-preview').style.display='none';loadFiles();}catch(e){toast('❌ Error: '+e.message,'error');}}
 
 // Delete
 function confirmDelete(group,name,sha){document.getElementById('confirm-msg').textContent=`¿Eliminar "${name.replace(/_/g,' ')}" del grupo ${group}?`;document.getElementById('confirm-modal').classList.add('open');document.getElementById('confirm-ok').onclick=()=>deleteFile(group,name,sha);}
@@ -998,33 +995,28 @@ let editObjetivos=[];
 let editPasos=[];
 
 
-// ── Reparar encoding de JSON corrupto en GitHub ──
-async function repararEncoding(){
-  if(!confirm('Esto vuelve a guardar el JSON de clases en GitHub con encoding correcto.\n¿Continuar?'))return;
-  toast('🔧 Reparando encoding...','info');
-  // Leer con raw fetch (no atob) para obtener el texto tal cual
-  const c2=getConfig();
-  const path=`clases/${clasesGroup}/clases.json`;
+function fixEncStr(s){
+  if(!s||typeof s!=='string')return s;
   try{
-    // Usar raw.githubusercontent para obtener el texto directamente sin base64
-    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/${path}?t=`+Date.now();
-    const r=await fetch(rawUrl);
-    if(!r.ok){toast('❌ No existe el archivo aún','error');return;}
-    const text=await r.text();
-    // Intentar parsear - si hay caracteres corruptos, mostrar advertencia
-    let data;
-    try{data=JSON.parse(text);}
-    catch(e){toast('❌ JSON inválido: '+e.message,'error');return;}
-    // Reescribir con encoding correcto
-    // Primero obtener SHA
-    const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/${path}`);
-    let sha=null;
-    if(metaR.ok){const meta=await metaR.json();sha=meta.sha;}
-    await ghPut(path,data,sha,'🔧 Reparar encoding UTF-8');
-    // Recargar
-    await loadClasesFromGH();
-    toast('✅ Encoding reparado y guardado','success');
-  }catch(e){toast('❌ Error: '+e.message,'error');}
+    if(!/Ã|Â|â/.test(s))return s;
+    const b=new Uint8Array(s.length);
+    for(let i=0;i<s.length;i++)b[i]=s.charCodeAt(i)&0xff;
+    return new TextDecoder('utf-8').decode(b);
+  }catch(e){return s;}
+}
+function fixEncObj(obj){
+  if(!obj||typeof obj!=='object')return obj||{};
+  const o=Object.assign({},obj);
+  ['icono','nombre','subtitulo','descripcion'].forEach(k=>{if(o[k])o[k]=fixEncStr(o[k]);});
+  if(Array.isArray(o.pasos))o.pasos=o.pasos.map(p=>fixEncStr(p));
+  if(Array.isArray(o.objetivos))o.objetivos=o.objetivos.map(x=>fixEncStr(x));
+  if(Array.isArray(o.pasos))o.pasos=o.pasos.map(p=>{
+    if(typeof p==='string')return fixEncStr(p);
+    if(p&&typeof p==='object'){const q=Object.assign({},p);['titulo','descripcion','tip','ejemplo'].forEach(k=>{if(q[k])q[k]=fixEncStr(q[k]);});return q;}
+    return p;
+  });
+  ['titulo','materia','nivel','categoria','descripcion'].forEach(k=>{if(o[k])o[k]=fixEncStr(o[k]);});
+  return o;
 }
 function initClasesPanel(){loadClasesFromGH();}
 function selectClasesGroup(g,btn){clasesGroup=g;document.querySelectorAll('#clases-group-tabs .inner-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');loadClasesFromGH();}
@@ -1039,27 +1031,24 @@ async function loadClasesFromGH(){
   // Try path: clases/[grupo]/clases.json
   const c=getConfig();
   const path=`clases/${clasesGroup}/clases.json`;
-  // Leer por raw para evitar corrupcion UTF-8 con atob
-  let clasesSha=null;
   const c2=getConfig();
-  let allRaw=[];
+  let allRaw=[];let clasesSha=null;
   try{
     const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/${path}?t=`+Date.now();
     const rr=await fetch(rawUrl);
     if(rr.ok){
-      const txt=await rr.text();
-      const dd=JSON.parse(txt);
+      const dd=JSON.parse(await rr.text());
       allRaw=dd.clases||dd||[];
-      const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/${path}`);
-      if(metaR.ok){const meta=await metaR.json();clasesSha=meta.sha;}
+      const mr=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/${path}`);
+      if(mr.ok){const m=await mr.json();clasesSha=m.sha;}
     }
   }catch(e){}
-  const result = allRaw.length ? {data:{clases:allRaw}, sha:clasesSha} : null;
+  const result=allRaw.length?{data:{clases:allRaw},sha:clasesSha}:null;
 
   if(result){
     const all=result.data.clases||result.data||[];
     clasesFileSha=result.sha;
-    const filtrarGrupo = cl => !cl.grupos || cl.grupos.length===0 || cl.grupos.includes(clasesGroup);
+    const filtrarGrupo=cl=>!cl.grupos||cl.grupos.length===0||cl.grupos.includes(clasesGroup);
     if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria').filter(filtrarGrupo);
     else clasesData=all.filter(cl=>cl.tipo==='teoria').filter(filtrarGrupo);
     // Store full array for save
@@ -1088,7 +1077,7 @@ function renderClasesList(){
         <div class="ci-title">${cl.titulo||'Sin título'}</div>
         <div class="ci-meta">${[cl.materia,cl.nivel].filter(Boolean).join(' · ')}</div>
         <div class="ci-badges">
-          ${cl.visible===false?'<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.3)">🔒 Oculta</span>':'<span class="ci-badge vis-badge" style="background:rgba(104,211,145,0.1);color:#68d391;border-color:rgba(104,211,145,0.3)">✅ Visible</span>'}
+          ${cl.visible===false?`<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.3)">🔒 Oculta</span>`:`<span class="ci-badge vis-badge" style="background:rgba(104,211,145,0.1);color:#68d391;border-color:rgba(104,211,145,0.3)">✅ Visible</span>`}
           ${cl.categoria?`<span class="ci-badge">${cl.categoria}</span>`:''}
           ${cl.grupos&&cl.grupos.length&&cl.grupos.length<3?`<span class="ci-badge" style="background:rgba(99,179,237,0.1);color:var(--accent);border-color:rgba(99,179,237,0.3)">${cl.grupos.join(' · ')}</span>`:''}
           ${cl.pasos&&cl.pasos.length?`<span class="ci-badge" style="background:rgba(104,211,145,0.1);color:var(--accent2);border-color:rgba(104,211,145,0.2)">${cl.pasos.length} pasos</span>`:''}
@@ -1117,10 +1106,10 @@ function openClaseModal(idx){
   document.getElementById('cm-descripcion').value=cl.descripcion||'';
   document.getElementById('cm-herramienta').value=cl.herramientaUrl||'';
   setVisible(cl.visible!==false);
-  const grps=cl.grupos||[];
+  const _grps=cl.grupos||[];
   ['matutino','vespertino','sabatino'].forEach(g=>{
     const cb=document.getElementById('grp-'+g);
-    if(cb) cb.checked = grps.length===0 || grps.includes(g);
+    if(cb)cb.checked=_grps.length===0||_grps.includes(g);
   });
   editObjetivos=[...(cl.objetivos||[''])];
   editPasos=[...(cl.pasos||[{titulo:'',descripcion:''}])];
@@ -1131,11 +1120,12 @@ function openClaseModal(idx){
 }
 
 function setVisible(v){
-  document.getElementById('cm-visible').value = v ? 'true' : 'false';
-  document.getElementById('vis-on').style.background  = v ? 'rgba(104,211,145,0.3)' : 'rgba(104,211,145,0.08)';
-  document.getElementById('vis-on').style.borderColor = v ? '#68d391' : 'rgba(104,211,145,0.2)';
-  document.getElementById('vis-off').style.background  = !v ? 'rgba(252,129,129,0.25)' : 'rgba(252,129,129,0.06)';
-  document.getElementById('vis-off').style.borderColor = !v ? 'var(--danger)' : 'rgba(252,129,129,0.2)';
+  document.getElementById('cm-visible').value=v?'true':'false';
+  const on=document.getElementById('vis-on'),off=document.getElementById('vis-off');
+  on.style.background=v?'rgba(104,211,145,0.3)':'rgba(104,211,145,0.06)';
+  on.style.borderWidth=v?'2px':'1px';
+  off.style.background=!v?'rgba(252,129,129,0.2)':'rgba(252,129,129,0.06)';
+  off.style.borderColor=!v?'var(--danger)':'rgba(252,129,129,0.3)';
 }
 function closeClaseModal(){document.getElementById('clase-modal').classList.remove('open');}
 
@@ -1181,10 +1171,9 @@ async function guardarClase(){
     videoUrl: document.getElementById('cm-video').value.trim(),
     descripcion:document.getElementById('cm-descripcion').value.trim(),
     herramientaUrl:document.getElementById('cm-herramienta').value.trim(),
-    visible: document.getElementById('cm-visible').value !== 'false',
-    grupos: ['matutino','vespertino','sabatino'].filter(g=>{
-      const cb=document.getElementById('grp-'+g);
-      return cb && cb.checked;
+    visible:document.getElementById('cm-visible').value!=='false',
+    grupos:['matutino','vespertino','sabatino'].filter(g=>{
+      const cb=document.getElementById('grp-'+g);return cb&&cb.checked;
     }),
     objetivos:editObjetivos.filter(o=>o.trim()),
     pasos:    editPasos.filter(p=>p.titulo||p.descripcion),
@@ -1262,39 +1251,30 @@ const HERRAMIENTAS_DEFAULT=[
 ];
 
 
-async function repararEncodingHerramientas(){
-  if(!confirm('Esto reemplaza las herramientas de GitHub con los datos limpios (sin caracteres rotos).\n¿Continuar?'))return;
-  toast('🔧 Reparando herramientas...','info');
+async function repararHerramientas(){
+  if(!confirm('¿Resetear herramientas al listado por defecto con iconos y tildes correctas?\nSe sobreescribirá lo que hay en GitHub.'))return;
+  toast('🔧 Reparando...','info');
   const c2=getConfig();
   try{
-    // Usar los datos actuales en memoria (ya cargados desde el DEFAULT o editados)
-    // Si tienen caracteres rotos, pedimos confirmación para resetear al DEFAULT
-    const usarDefault=confirm('¿Resetear al listado por defecto (emojis e iconos correctos)?\nCancela si prefieres conservar tus herramientas personalizadas.');
-    const dataFinal = usarDefault ? HERRAMIENTAS_DEFAULT : herramientasData;
-    const payload = {herramientas: dataFinal, updated: new Date().toISOString()};
-    // Obtener SHA actual
-    const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
-    let sha=null;
-    if(metaR.ok){const meta=await metaR.json();sha=meta.sha;}
-    await ghPut('datos/herramientas.json',payload,sha,'🔧 Reparar encoding UTF-8 herramientas');
-    if(usarDefault){herramientasData=[...HERRAMIENTAS_DEFAULT];renderHerramientasList();}
-    else await loadHerramientas();
-    toast('✅ Herramientas reparadas en GitHub','success');
-  }catch(e){toast('❌ Error: '+e.message,'error');}
+    const payload={herramientas:HERRAMIENTAS_DEFAULT,updated:new Date().toISOString()};
+    const mr=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
+    let sha=null;if(mr.ok){const m=await mr.json();sha=m.sha;}
+    await ghPut('datos/herramientas.json',payload,sha,'🔧 Reparar encoding herramientas');
+    herramientasData=[...HERRAMIENTAS_DEFAULT];
+    renderHerramientasList();
+    toast('✅ Herramientas reparadas','success');
+  }catch(e){toast('❌ '+e.message,'error');}
 }
 async function loadHerramientas(){
   const c2=getConfig();
-  // Leer por raw (texto plano, sin base64/atob) para evitar corrupcion de UTF-8
   try{
     const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/datos/herramientas.json?t=`+Date.now();
     const r=await fetch(rawUrl);
     if(r.ok){
-      const text=await r.text();
-      const d=JSON.parse(text);
+      const d=JSON.parse(await r.text());
       herramientasData=d.herramientas||d||[];
-      // Obtener SHA por separado para poder guardar
-      const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
-      if(metaR.ok){const meta=await metaR.json();herramientasFileSha=meta.sha;}
+      const mr=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
+      if(mr.ok){const m=await mr.json();herramientasFileSha=m.sha;}
       renderHerramientasList();return;
     }
   }catch(e){}
@@ -1306,46 +1286,25 @@ function renderHerramientasList(){
   const wrap=document.getElementById('herramientas-list');
   if(!wrap)return;
   if(!herramientasData.length){wrap.innerHTML=`<div class="empty-state"><div class="es-icon">🛠</div><h4>Sin herramientas</h4><p>Agrega la primera.</p></div>`;return;}
-  wrap.innerHTML=herramientasData.map((h,i)=>{const h2=fixEncObj(h);return`
+  wrap.innerHTML=herramientasData.map((hRaw,i)=>{const h=fixEncObj(hRaw);return`
     <div class="tool-item">
-      <div class="tool-ico-disp">${h2.icono||'🔗'}</div>
+      <div class="tool-ico-disp">${h.icono||'🔗'}</div>
       <div class="tool-info">
-        <div class="tool-name">${h2.nombre||'Sin nombre'}</div>
-        <div class="tool-url">${h2.url||''}</div>
-        <div class="tool-desc-disp">${h2.subtitulo||''} ${h2.pasos&&h.pasos.length?'· '+h.pasos.length+' pasos':''}</div>
+        <div class="tool-name">${h.nombre||'Sin nombre'}</div>
+        <div class="tool-url">${h.url||''}</div>
+        <div class="tool-desc-disp">${h.subtitulo||''} ${h.pasos&&h.pasos.length?'· '+h.pasos.length+' pasos':''}</div>
       </div>
       <div class="action-btns">
-        <a class="btn-sm btn-view" href="${h2.url||'#'}" target="_blank">🔗 Abrir</a>
+        <a class="btn-sm btn-view" href="${h.url||'#'}" target="_blank">🔗 Abrir</a>
         <button class="btn-sm btn-edit" onclick="openHerramientaModal(${i})">✏️ Editar</button>
         <button class="btn-sm btn-delete" onclick="eliminarHerramienta(${i})">🗑</button>
       </div>
-    </div>`).join('');
+    </div>`;}).join('');
 }
 
-
-// Intenta reparar string con encoding corrupto (latin1 leído como utf8)
-function fixEncStr(s){
-  if(!s||typeof s!=='string')return s;
-  try{
-    // Detectar si tiene secuencias típicas de corrupción UTF-8
-    if(!/Ã|â€|Â|ð/.test(s))return s;
-    // Re-codificar: tratar como latin-1 y decodificar como UTF-8
-    const bytes=new Uint8Array(s.length);
-    for(let i=0;i<s.length;i++)bytes[i]=s.charCodeAt(i)&0xff;
-    return new TextDecoder('utf-8').decode(bytes);
-  }catch(e){return s;}
-}
-function fixEncObj(obj){
-  if(!obj)return obj;
-  const o={...obj};
-  ['icono','nombre','subtitulo','descripcion'].forEach(k=>{if(o[k])o[k]=fixEncStr(o[k]);});
-  if(Array.isArray(o.pasos))o.pasos=o.pasos.map(p=>fixEncStr(p));
-  return o;
-}
 function openHerramientaModal(idx){
   editHerrIdx=idx;
-  const hRaw=idx!==null?herramientasData[idx]:{};
-  const h=fixEncObj(hRaw);
+  const h=fixEncObj(idx!==null?herramientasData[idx]:{});
   document.getElementById('herr-modal-title').innerHTML=(idx!==null?'✏️ Editar Herramienta':'➕ Nueva Herramienta')+' <button class="modal-close" onclick="closeHerramientaModal()">✕</button>';
   document.getElementById('hm-icono').value=h.icono||'';
   document.getElementById('hm-nombre').value=h.nombre||'';
