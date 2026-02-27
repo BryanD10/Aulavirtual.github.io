@@ -1,0 +1,57 @@
+{
+  "herramientas": [
+    {
+      "icono": "🎨",
+      "nombre": "Canva",
+      "subtitulo": "Diseño Gráfico",
+      "url": "https://www.canva.com/",
+      "descripcion": "Diseño gráfico profesional en línea. Afiches, presentaciones y más.",
+      "pasos": [
+        "Registrarse gratis en canva.com",
+        "Elegir formato (afiche, presentación…)",
+        "Personalizar con el panel lateral",
+        "Descargar en JPG, PNG o PDF"
+      ]
+    },
+    {
+      "icono": "✂️",
+      "nombre": "Photoroom",
+      "subtitulo": "Eliminar fondos",
+      "url": "https://www.photoroom.com/es/herramientas/eliminador-de-fondos",
+      "descripcion": "Elimina fondos con IA automáticamente. Sin instalación.",
+      "pasos": [
+        "Entrar a photoroom.com",
+        "Subir la imagen",
+        "El fondo se elimina solo",
+        "Descargar PNG transparente"
+      ]
+    },
+    {
+      "icono": "🖼️",
+      "nombre": "Photopea",
+      "subtitulo": "Editor de fotos",
+      "url": "https://www.photopea.com/",
+      "descripcion": "Editor de imágenes avanzado, similar a Photoshop, en el navegador.",
+      "pasos": [
+        "Ir a photopea.com",
+        "Abrir o crear nuevo documento",
+        "Usar las herramientas del panel izquierdo",
+        "Guardar/exportar tu trabajo"
+      ]
+    },
+    {
+      "icono": "📊",
+      "nombre": "Office Online",
+      "subtitulo": "Word · Excel · PPT",
+      "url": "https://www.office.com/",
+      "descripcion": "Suite ofimática completa en el navegador.",
+      "pasos": [
+        "Ingresar a office.com",
+        "Elegir la app (Word/Excel/PPT)",
+        "Crear o subir archivo",
+        "Compartir enlace al docente"
+      ]
+    }
+  ],
+  "updated": "2026-02-27T15:06:21.025Z"
+}
