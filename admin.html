@@ -600,6 +600,7 @@ select option{background:#0c1a2e}
         </select>
         <button class="btn-upload sm" style="background:linear-gradient(135deg,var(--accent3),#e88a2a)" onclick="openHerramientaModal(null)">➕ Nueva herramienta</button>
         <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadHerramientas()">🔄 Recargar</button>
+        <button class="btn-sm btn-edit" style="padding:0.55rem 1rem;border-radius:9px" onclick="repararEncodingHerramientas()" title="Arregla emojis e iconos rotos">🔧 Reparar iconos</button>
         <button class="btn-upload sm green" onclick="saveHerramientasToGH()" style="margin-left:auto">💾 Guardar en GitHub</button>
       </div>
 
@@ -1038,7 +1039,22 @@ async function loadClasesFromGH(){
   // Try path: clases/[grupo]/clases.json
   const c=getConfig();
   const path=`clases/${clasesGroup}/clases.json`;
-  const result=await ghGet(path);
+  // Leer por raw para evitar corrupcion UTF-8 con atob
+  let clasesSha=null;
+  const c2=getConfig();
+  let allRaw=[];
+  try{
+    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/${path}?t=`+Date.now();
+    const rr=await fetch(rawUrl);
+    if(rr.ok){
+      const txt=await rr.text();
+      const dd=JSON.parse(txt);
+      allRaw=dd.clases||dd||[];
+      const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/${path}`);
+      if(metaR.ok){const meta=await metaR.json();clasesSha=meta.sha;}
+    }
+  }catch(e){}
+  const result = allRaw.length ? {data:{clases:allRaw}, sha:clasesSha} : null;
 
   if(result){
     const all=result.data.clases||result.data||[];
@@ -1245,10 +1261,43 @@ const HERRAMIENTAS_DEFAULT=[
   {icono:'📊',nombre:'Office Online',subtitulo:'Word · Excel · PPT',url:'https://www.office.com/',descripcion:'Suite ofimática completa en el navegador.',pasos:['Ingresar a office.com','Elegir la app (Word/Excel/PPT)','Crear o subir archivo','Compartir enlace al docente']},
 ];
 
+
+async function repararEncodingHerramientas(){
+  if(!confirm('Esto vuelve a guardar el JSON de herramientas con encoding correcto para arreglar emojis e iconos rotos.\n¿Continuar?'))return;
+  toast('🔧 Reparando herramientas...','info');
+  const c2=getConfig();
+  try{
+    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/datos/herramientas.json?t=`+Date.now();
+    const r=await fetch(rawUrl);
+    if(!r.ok){toast('❌ No existe el archivo todavía','error');return;}
+    const text=await r.text();
+    let data;
+    try{data=JSON.parse(text);}catch(e){toast('❌ JSON inválido: '+e.message,'error');return;}
+    const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
+    let sha=null;
+    if(metaR.ok){const meta=await metaR.json();sha=meta.sha;}
+    await ghPut('datos/herramientas.json',data,sha,'🔧 Reparar encoding UTF-8 herramientas');
+    await loadHerramientas();
+    toast('✅ Herramientas reparadas y guardadas','success');
+  }catch(e){toast('❌ Error: '+e.message,'error');}
+}
 async function loadHerramientas(){
-  const result=await ghGet('datos/herramientas.json');
-  if(result){herramientasData=result.data.herramientas||result.data||[];herramientasFileSha=result.sha;}
-  else{herramientasData=[...HERRAMIENTAS_DEFAULT];herramientasFileSha=null;}
+  const c2=getConfig();
+  // Leer por raw (texto plano, sin base64/atob) para evitar corrupcion de UTF-8
+  try{
+    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/datos/herramientas.json?t=`+Date.now();
+    const r=await fetch(rawUrl);
+    if(r.ok){
+      const text=await r.text();
+      const d=JSON.parse(text);
+      herramientasData=d.herramientas||d||[];
+      // Obtener SHA por separado para poder guardar
+      const metaR=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
+      if(metaR.ok){const meta=await metaR.json();herramientasFileSha=meta.sha;}
+      renderHerramientasList();return;
+    }
+  }catch(e){}
+  herramientasData=[...HERRAMIENTAS_DEFAULT];herramientasFileSha=null;
   renderHerramientasList();
 }
 
