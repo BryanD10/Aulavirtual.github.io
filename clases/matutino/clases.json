@@ -5,7 +5,7 @@
       "numero": "01",
       "tipo": "practica",
       "titulo": "VALIENDO EN LOS PARCIALES",
-      "materia": "DISEÃO GRAFICO",
+      "materia": "DISEÃÂO GRAFICO",
       "nivel": "AVANZADO",
       "categoria": "Practica1",
       "videoUrl": "https://youtu.be/4nWXujGi90Y?si=_KVZNkpD2-ff_qyn",
@@ -16,13 +16,23 @@
       "numero": "02",
       "tipo": "teoria",
       "titulo": "El cipitio",
-      "materia": "Diseño Grafico",
+      "materia": "DiseÃ±o Grafico",
       "nivel": "Basico",
       "categoria": "Practica 2",
       "videoUrl": "https://youtu.be/fSmfXq1T1Yc?si=YbwKKyoOlAyLVYk6",
       "objetivos": [],
       "pasos": []
+    },
+    {
+      "numero": "04",
+      "tipo": "practica",
+      "titulo": "Q valor",
+      "materia": "Diseño gráfico",
+      "nivel": "Intermedio",
+      "categoria": "Práctica 3",
+      "objetivos": [],
+      "pasos": []
     }
   ],
-  "updated": "2026-02-27T04:02:56.209Z"
+  "updated": "2026-02-27T04:21:07.342Z"
 }
