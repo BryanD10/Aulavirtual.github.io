@@ -5,23 +5,13 @@
       "numero": "02",
       "tipo": "teoria",
       "titulo": "El cipitio",
-      "materia": "DiseÃÂ±o Grafico",
+      "materia": "DiseÃÂÃÂ±o Grafico",
       "nivel": "Basico",
       "categoria": "Practica 2",
       "videoUrl": "https://youtu.be/fSmfXq1T1Yc?si=YbwKKyoOlAyLVYk6",
       "objetivos": [],
       "pasos": []
-    },
-    {
-      "numero": "04",
-      "tipo": "practica",
-      "titulo": "Q valor",
-      "materia": "DiseÃ±o grÃ¡fico",
-      "nivel": "Intermedio",
-      "categoria": "PrÃ¡ctica 3",
-      "objetivos": [],
-      "pasos": []
     }
   ],
-  "updated": "2026-02-27T04:39:46.676Z"
+  "updated": "2026-02-27T14:22:40.381Z"
 }
