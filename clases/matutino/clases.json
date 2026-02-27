@@ -2,21 +2,10 @@
   "grupo": "matutino",
   "clases": [
     {
-      "numero": "01",
-      "tipo": "practica",
-      "titulo": "VALIENDO EN LOS PARCIALES",
-      "materia": "DISEÃÂO GRAFICO",
-      "nivel": "AVANZADO",
-      "categoria": "Practica1",
-      "videoUrl": "https://youtu.be/4nWXujGi90Y?si=_KVZNkpD2-ff_qyn",
-      "objetivos": [],
-      "pasos": []
-    },
-    {
       "numero": "02",
       "tipo": "teoria",
       "titulo": "El cipitio",
-      "materia": "DiseÃ±o Grafico",
+      "materia": "DiseÃÂ±o Grafico",
       "nivel": "Basico",
       "categoria": "Practica 2",
       "videoUrl": "https://youtu.be/fSmfXq1T1Yc?si=YbwKKyoOlAyLVYk6",
@@ -27,12 +16,12 @@
       "numero": "04",
       "tipo": "practica",
       "titulo": "Q valor",
-      "materia": "Diseño gráfico",
+      "materia": "DiseÃ±o grÃ¡fico",
       "nivel": "Intermedio",
-      "categoria": "Práctica 3",
+      "categoria": "PrÃ¡ctica 3",
       "objetivos": [],
       "pasos": []
     }
   ],
-  "updated": "2026-02-27T04:21:07.342Z"
+  "updated": "2026-02-27T04:39:46.676Z"
 }
