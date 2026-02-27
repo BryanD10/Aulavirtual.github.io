@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Panel Docente | AULA DIGITAL CENTED</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#060d18;--surface:#0c1a2e;--surface2:#112240;
+  --border:rgba(99,179,237,0.15);--accent:#63b3ed;--accent2:#68d391;
+  --accent3:#f6ad55;--danger:#fc8181;--purple:#b794f4;
+  --text:#e2e8f0;--text-dim:#718096;--text-muted:#4a5568;--radius:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle at 1px 1px,rgba(99,179,237,0.04) 1px,transparent 0);
+  background-size:32px 32px}
+
+/* ══ LOGIN ══ */
+#login-screen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.login-box{width:100%;max-width:440px;padding:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 0 60px rgba(99,179,237,0.07)}
+.login-logo{text-align:center;margin-bottom:2rem}
+.login-logo .badge{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:16px;margin-bottom:1rem;background:linear-gradient(135deg,var(--accent),var(--accent2));font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:var(--bg);box-shadow:0 0 30px rgba(99,179,237,0.3)}
+.login-logo h1{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700}
+.login-logo p{color:var(--text-dim);font-size:0.82rem;margin-top:0.3rem}
+.field{margin-bottom:1.2rem}
+.field label{display:block;font-size:0.78rem;font-weight:800;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.45rem}
+.field input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.75rem 1rem;border-radius:9px;font-family:'Nunito',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,179,237,0.12)}
+.field .hint{font-size:0.72rem;color:var(--text-muted);margin-top:0.4rem;line-height:1.5}
+.field .hint a{color:var(--accent);text-decoration:none}
+.token-steps{background:rgba(99,179,237,0.06);border:1px solid rgba(99,179,237,0.15);border-radius:10px;padding:1rem;margin-top:0.5rem}
+.token-steps p{font-size:0.75rem;color:var(--text-dim);line-height:1.7}
+.token-steps b{color:var(--accent)}
+.token-steps a{color:var(--accent2);text-decoration:none;font-weight:700}
+.btn-login{width:100%;padding:0.85rem;border:none;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:800;cursor:pointer;transition:all 0.25s;margin-top:0.5rem;box-shadow:0 0 20px rgba(99,179,237,0.25)}
+.btn-login:hover{transform:translateY(-1px);box-shadow:0 0 35px rgba(99,179,237,0.4)}
+.login-error{background:rgba(252,129,129,0.1);border:1px solid rgba(252,129,129,0.3);color:var(--danger);border-radius:8px;padding:0.7rem 1rem;font-size:0.82rem;margin-top:1rem;display:none}
+
+/* ══ APP ══ */
+#app{display:none;position:relative;z-index:1}
+
+/* ══ SIDEBAR ══ */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:240px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100}
+.sidebar-logo{padding:1.6rem 1.4rem 1.1rem;border-bottom:1px solid var(--border)}
+.sidebar-logo .s-badge{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-family:'Rajdhani',sans-serif;font-size:0.95rem;font-weight:700;color:var(--bg);box-shadow:0 0 16px rgba(99,179,237,0.3);margin-bottom:0.7rem}
+.sidebar-logo h2{font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;line-height:1.2}
+.sidebar-logo span{font-size:0.65rem;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase}
+.sidebar-repo{margin:0.8rem;padding:0.65rem 0.9rem;background:rgba(99,179,237,0.07);border:1px solid rgba(99,179,237,0.2);border-radius:9px}
+.sidebar-repo .repo-label{font-size:0.65rem;font-weight:800;letter-spacing:0.1em;color:var(--text-dim);text-transform:uppercase;margin-bottom:0.3rem}
+.sidebar-repo .repo-name{font-size:0.8rem;font-weight:700;color:var(--accent);word-break:break-all}
+.nav-section{padding:0.5rem 1rem;font-size:0.63rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted)}
+.nav-item{display:flex;align-items:center;gap:10px;padding:0.6rem 1.1rem;margin:0.1rem 0.5rem;border-radius:9px;cursor:pointer;font-size:0.83rem;font-weight:700;color:var(--text-dim);transition:all 0.18s;border:1px solid transparent}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text)}
+.nav-item.active{background:rgba(99,179,237,0.1);color:var(--accent);border-color:rgba(99,179,237,0.2)}
+.nav-item .ni{width:20px;text-align:center;font-size:1rem}
+.sidebar-footer{margin-top:auto;padding:1rem;border-top:1px solid var(--border)}
+.logout-btn{display:flex;align-items:center;gap:8px;width:100%;padding:0.6rem 1rem;border-radius:8px;border:1px solid rgba(252,129,129,0.2);background:rgba(252,129,129,0.07);color:var(--danger);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.logout-btn:hover{background:rgba(252,129,129,0.15)}
+
+/* ══ MAIN ══ */
+.main{margin-left:240px;min-height:100vh;padding:2.5rem 2.5rem 4rem}
+.page-header{margin-bottom:2rem}
+.page-header h1{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700}
+.page-header p{color:var(--text-dim);margin-top:0.3rem;font-size:0.88rem}
+.panel{display:none}
+.panel.active{display:block}
+
+/* STATS */
+.stats-overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem}
+.stat-card .sc-label{font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim)}
+.stat-card .sc-val{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;margin-top:0.3rem}
+.stat-card .sc-sub{font-size:0.73rem;color:var(--text-muted);margin-top:0.15rem}
+.stat-card.blue .sc-val{color:var(--accent)}
+.stat-card.green .sc-val{color:var(--accent2)}
+.stat-card.orange .sc-val{color:var(--accent3)}
+.stat-card.red .sc-val{color:var(--danger)}
+
+/* INNER TABS */
+.inner-tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:2rem;border-bottom:1px solid var(--border)}
+.inner-tab{padding:0.65rem 1.2rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--text-dim);font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;cursor:pointer;transition:all 0.2s;margin-bottom:-1px}
+.inner-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.inner-tab:hover{color:var(--text)}
+.inner-panel{display:none}
+.inner-panel.active{display:block}
+
+/* UPLOAD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.5rem}
+.card h3{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row.one{grid-template-columns:1fr}
+.form-row.three{grid-template-columns:1fr 1fr 1fr}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group label{font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim)}
+.form-group select,.form-group input[type="text"],.form-group input[type="url"],.form-group input[type="email"],.form-group input[type="tel"],.form-group textarea{background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.7rem 0.9rem;border-radius:9px;font-family:'Nunito',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+.form-group select:focus,.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,179,237,0.1)}
+.form-group textarea{resize:vertical;min-height:80px}
+select option{background:#0c1a2e}
+
+/* DROP ZONE */
+.drop-zone{border:2px dashed var(--border);border-radius:12px;padding:2.5rem;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;background:rgba(99,179,237,0.02)}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--accent);background:rgba(99,179,237,0.06)}
+.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-icon{font-size:2.5rem;margin-bottom:0.8rem}
+.drop-zone h4{font-weight:800;font-size:0.95rem;margin-bottom:0.4rem}
+.drop-zone p{font-size:0.78rem;color:var(--text-dim)}
+.file-types{display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem}
+.ftt{padding:0.2rem 0.6rem;border-radius:50px;font-size:0.65rem;font-weight:800;background:rgba(99,179,237,0.1);color:var(--accent);border:1px solid rgba(99,179,237,0.2)}
+#selected-files{margin-top:1rem}
+.sel-file{display:flex;align-items:center;gap:10px;padding:0.75rem 1rem;background:rgba(104,211,145,0.07);border:1px solid rgba(104,211,145,0.2);border-radius:9px;margin-bottom:0.5rem}
+.sel-file .sf-icon{font-size:1.2rem;flex-shrink:0}
+.sel-file .sf-info{flex:1}
+.sel-file .sf-name{font-size:0.85rem;font-weight:700}
+.sel-file .sf-size{font-size:0.72rem;color:var(--text-dim)}
+.sel-file .sf-remove{background:none;border:none;color:var(--danger);cursor:pointer;font-size:1rem;padding:0.2rem}
+.progress-bar-wrap{background:rgba(99,179,237,0.1);border-radius:50px;height:8px;overflow:hidden;margin-top:0.8rem;display:none}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:50px;width:0%;transition:width 0.4s ease}
+
+/* BTNS */
+.btn-upload{display:inline-flex;align-items:center;gap:8px;padding:0.85rem 2rem;border:none;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.92rem;font-weight:800;cursor:pointer;transition:all 0.25s;box-shadow:0 0 20px rgba(99,179,237,0.25);margin-top:1.2rem}
+.btn-upload:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(99,179,237,0.4)}
+.btn-upload:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.btn-upload.orange{background:linear-gradient(135deg,var(--accent3),#e88a2a)}
+.btn-upload.green{background:linear-gradient(135deg,var(--accent2),#38a169)}
+.btn-upload.sm{padding:0.55rem 1.2rem;font-size:0.82rem;margin-top:0}
+.btn-save{padding:0.65rem 1.4rem;border:none;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;cursor:pointer;transition:all 0.2s;margin-top:1rem}
+.btn-save:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(99,179,237,0.3)}
+
+/* FILES TABLE */
+.files-toolbar{display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.search-box{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:0.65rem 1rem;border-radius:9px;font-family:'Nunito',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s}
+.search-box:focus{border-color:var(--accent)}
+.filter-select{background:var(--surface);border:1px solid var(--border);color:var(--text);padding:0.65rem 1rem;border-radius:9px;font-family:'Nunito',sans-serif;font-size:0.85rem;outline:none;cursor:pointer}
+.files-table{width:100%;border-collapse:collapse}
+.files-table th{text-align:left;padding:0.7rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.files-table td{padding:0.85rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;vertical-align:middle}
+.files-table tr:hover td{background:rgba(255,255,255,0.02)}
+.file-name-cell{display:flex;align-items:center;gap:10px}
+.file-ext{width:36px;height:36px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.ext-pdf{background:rgba(252,129,129,0.12)}.ext-doc{background:rgba(99,179,237,0.12)}.ext-ppt{background:rgba(246,173,85,0.12)}.ext-zip{background:rgba(183,148,244,0.12)}.ext-vid{background:rgba(252,129,129,0.2)}.ext-img{background:rgba(104,211,145,0.12)}.ext-other{background:rgba(113,128,150,0.12)}
+.fn-title{font-weight:700;font-size:0.88rem}
+.fn-desc{font-size:0.72rem;color:var(--text-dim);margin-top:0.1rem}
+.group-pill{display:inline-block;padding:0.22rem 0.7rem;border-radius:50px;font-size:0.68rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase}
+.pill-m{background:rgba(99,179,237,0.12);color:var(--accent);border:1px solid rgba(99,179,237,0.2)}
+.pill-v{background:rgba(246,173,85,0.12);color:var(--accent3);border:1px solid rgba(246,173,85,0.2)}
+.pill-s{background:rgba(183,148,244,0.12);color:var(--purple);border:1px solid rgba(183,148,244,0.2)}
+.pill-all{background:rgba(104,211,145,0.12);color:var(--accent2);border:1px solid rgba(104,211,145,0.2)}
+.action-btns{display:flex;gap:0.4rem}
+.btn-sm{padding:0.35rem 0.75rem;border-radius:7px;font-size:0.75rem;font-weight:700;cursor:pointer;border:1px solid;transition:all 0.18s;font-family:'Nunito',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.btn-copy{background:rgba(99,179,237,0.1);border-color:rgba(99,179,237,0.25);color:var(--accent)}
+.btn-copy:hover{background:rgba(99,179,237,0.2)}
+.btn-delete{background:rgba(252,129,129,0.1);border-color:rgba(252,129,129,0.2);color:var(--danger)}
+.btn-delete:hover{background:rgba(252,129,129,0.2)}
+.btn-view{background:rgba(104,211,145,0.1);border-color:rgba(104,211,145,0.2);color:var(--accent2)}
+.btn-view:hover{background:rgba(104,211,145,0.2)}
+.btn-edit{background:rgba(246,173,85,0.1);border-color:rgba(246,173,85,0.2);color:var(--accent3)}
+.btn-edit:hover{background:rgba(246,173,85,0.2)}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--text-dim)}
+.empty-state .es-icon{font-size:3rem;margin-bottom:1rem;opacity:0.5}
+.empty-state h4{font-weight:700;margin-bottom:0.4rem}
+
+/* ══ CLASES PANEL ══ */
+.clase-item{display:flex;align-items:center;gap:12px;padding:0.9rem 1.2rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-bottom:0.6rem;transition:all 0.2s;cursor:default}
+.clase-item:hover{border-color:rgba(99,179,237,0.35);background:rgba(99,179,237,0.04)}
+.ci-num{width:36px;height:36px;border-radius:50%;background:rgba(99,179,237,0.15);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.88rem;flex-shrink:0;font-family:'Rajdhani',sans-serif}
+.ci-info{flex:1;min-width:0}
+.ci-title{font-weight:700;font-size:0.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-meta{font-size:0.72rem;color:var(--text-dim);margin-top:0.15rem}
+.ci-badges{display:flex;gap:0.35rem;flex-wrap:wrap;margin-top:0.3rem}
+.ci-badge{padding:0.15rem 0.5rem;border-radius:50px;font-size:0.62rem;font-weight:800;background:rgba(246,173,85,0.1);color:var(--accent3);border:1px solid rgba(246,173,85,0.2)}
+
+/* ══ CLASE MODAL ══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:600;display:none;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:2rem;width:100%;max-width:780px;margin:auto;box-shadow:0 40px 100px rgba(0,0,0,0.5)}
+.modal-box h3{font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between}
+.modal-close{background:none;border:none;color:var(--text-dim);font-size:1.3rem;cursor:pointer;padding:0.2rem}
+.modal-close:hover{color:var(--text)}
+.modal-footer{display:flex;gap:0.75rem;justify-content:flex-end;border-top:1px solid var(--border);padding-top:1.2rem;margin-top:1.5rem}
+.btn-cancel{padding:0.6rem 1.4rem;border-radius:9px;border:1px solid var(--border);background:none;color:var(--text-dim);font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.btn-cancel:hover{border-color:var(--text-dim);color:var(--text)}
+.modal-confirm{padding:0.6rem 1.2rem;border-radius:8px;border:none;background:var(--danger);color:white;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;cursor:pointer}
+
+/* Paso y Objetivo rows en modal */
+.step-block{background:rgba(99,179,237,0.05);border:1px solid rgba(99,179,237,0.15);border-radius:10px;padding:1rem;margin-bottom:0.6rem}
+.step-block-header{display:flex;align-items:center;gap:8px;margin-bottom:0.6rem}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;flex-shrink:0}
+.step-block input,.step-block textarea{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.55rem 0.8rem;border-radius:8px;font-family:'Nunito',sans-serif;font-size:0.84rem;outline:none;transition:border-color 0.2s;margin-bottom:0.4rem}
+.step-block textarea{resize:vertical;min-height:60px}
+.step-block input:focus,.step-block textarea:focus{border-color:var(--accent)}
+.extra-fields{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:0.2rem}
+.obj-row{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.4rem}
+.obj-row input{flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.5rem 0.8rem;border-radius:8px;font-family:'Nunito',sans-serif;font-size:0.84rem;outline:none}
+.obj-row input:focus{border-color:var(--accent)}
+.btn-remove-row{background:rgba(252,129,129,0.1);border:1px solid rgba(252,129,129,0.2);color:var(--danger);border-radius:7px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0}
+.btn-add-row{padding:0.4rem 0.9rem;border-radius:7px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;border:none}
+.btn-add-blue{background:rgba(99,179,237,0.1);color:var(--accent);border:1px solid rgba(99,179,237,0.25)}
+.btn-add-green{background:rgba(104,211,145,0.1);color:var(--accent2);border:1px solid rgba(104,211,145,0.25)}
+
+/* ══ HERRAMIENTAS PANEL ══ */
+.tool-item{display:flex;align-items:center;gap:12px;padding:0.9rem 1.2rem;background:var(--surface2);border:1px solid var(--border);border-radius:10px;margin-bottom:0.6rem;transition:all 0.2s}
+.tool-item:hover{border-color:rgba(246,173,85,0.4)}
+.tool-ico-disp{font-size:1.6rem;width:44px;text-align:center;flex-shrink:0}
+.tool-info{flex:1;min-width:0}
+.tool-name{font-weight:700;font-size:0.9rem}
+.tool-url{font-size:0.72rem;color:var(--text-dim);margin-top:0.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tool-desc-disp{font-size:0.75rem;color:var(--text-muted);margin-top:0.1rem}
+
+/* ══ HERRAMIENTA MODAL ══ */
+.pasos-editor{display:flex;flex-direction:column;gap:0.4rem}
+.paso-herr-row{display:flex;gap:0.5rem;align-items:center}
+.paso-herr-row input{flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:0.5rem 0.8rem;border-radius:8px;font-family:'Nunito',sans-serif;font-size:0.84rem;outline:none}
+
+/* ══ RUEDA CROMÁTICA ══ */
+.color-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.wheel-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center}
+.wheel-wrap h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.2rem}
+#colorWheel{border-radius:50%;cursor:crosshair;touch-action:none}
+.wheel-controls{margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem}
+.wheel-controls label{font-size:0.73rem;font-weight:800;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem;display:block}
+.wheel-controls input[type="range"]{width:100%;accent-color:var(--accent)}
+.selected-color-box{width:100%;height:60px;border-radius:10px;border:1px solid var(--border);margin-top:0.5rem;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;transition:all 0.2s;cursor:pointer}
+.palettes-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.palettes-wrap h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.2rem}
+.harmony-btns{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.h-btn{padding:0.4rem 0.85rem;border-radius:7px;border:1px solid var(--border);background:none;color:var(--text-dim);font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.h-btn.active,.h-btn:hover{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent)}
+.palette-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.swatch{width:52px;height:52px;border-radius:10px;cursor:pointer;border:2px solid transparent;transition:all 0.2s;position:relative;flex-shrink:0}
+.swatch:hover{transform:scale(1.1);border-color:rgba(255,255,255,0.4)}
+.swatch-val{font-size:0.58rem;font-weight:800;text-align:center;margin-top:0.3rem;color:var(--text-dim);word-break:break-all;width:52px}
+.swatch-group{display:flex;flex-direction:column;align-items:center}
+.color-info-box{background:rgba(99,179,237,0.06);border:1px solid rgba(99,179,237,0.15);border-radius:10px;padding:1rem;margin-top:1rem}
+.color-info-box h4{font-weight:800;font-size:0.85rem;margin-bottom:0.6rem;color:var(--accent)}
+.cib-row{display:flex;gap:0.5rem;margin-bottom:0.4rem}
+.cib-tag{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:0.3rem 0.7rem;font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.2s;flex:1;text-align:center}
+.cib-tag:hover{border-color:var(--accent);color:var(--accent)}
+.saved-palette{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-top:1rem}
+.saved-palette h4{font-weight:800;font-size:0.85rem;margin-bottom:0.8rem}
+.saved-swatches{display:flex;gap:0.4rem;flex-wrap:wrap}
+.btn-save-pal{display:inline-flex;align-items:center;gap:6px;margin-top:1rem;padding:0.55rem 1.1rem;border:none;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:800;cursor:pointer}
+
+/* IA */
+.ia-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.ia-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;text-decoration:none;color:var(--text);transition:all 0.25s;display:block;position:relative;overflow:hidden}
+.ia-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.25s;background:var(--ia-glow)}
+.ia-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+.ia-card:hover::before{opacity:1}
+.ia-card .ia-logo{font-size:3rem;margin-bottom:1rem;position:relative;z-index:1}
+.ia-card h3{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:0.5rem;position:relative;z-index:1}
+.ia-card p{font-size:0.82rem;color:var(--text-dim);line-height:1.65;position:relative;z-index:1}
+.ia-card .ia-badge{display:inline-block;margin-top:1rem;padding:0.3rem 0.8rem;border-radius:50px;font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:1}
+.ia-card.gemini{--ia-glow:linear-gradient(135deg,rgba(66,133,244,0.08),rgba(52,168,83,0.08))}
+.ia-card.gemini .ia-badge{background:rgba(66,133,244,0.15);color:#4285f4;border:1px solid rgba(66,133,244,0.3)}
+.ia-card.copilot{--ia-glow:linear-gradient(135deg,rgba(0,120,212,0.08),rgba(80,200,255,0.08))}
+.ia-card.copilot .ia-badge{background:rgba(0,120,212,0.15);color:#0078d4;border:1px solid rgba(0,120,212,0.3)}
+.ia-card.chatgpt{--ia-glow:linear-gradient(135deg,rgba(16,163,127,0.08),rgba(0,0,0,0))}
+.ia-card.chatgpt .ia-badge{background:rgba(16,163,127,0.15);color:#10a37f;border:1px solid rgba(16,163,127,0.3)}
+.ia-card.perplexity{--ia-glow:linear-gradient(135deg,rgba(99,179,237,0.08),rgba(0,0,0,0))}
+.ia-card.perplexity .ia-badge{background:rgba(99,179,237,0.15);color:var(--accent);border:1px solid rgba(99,179,237,0.3)}
+.ia-embed{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-top:1.5rem}
+.ia-embed h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:8px}
+.ia-frame{width:100%;height:600px;border:none;border-radius:10px;background:#000}
+.ia-tabs{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.ia-tab-btn{padding:0.45rem 1rem;border-radius:8px;border:1px solid var(--border);background:none;color:var(--text-dim);font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.ia-tab-btn.active{background:rgba(99,179,237,0.12);border-color:var(--accent);color:var(--accent)}
+
+/* SETTINGS */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem}
+.settings-card h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:8px}
+.guide-step{background:rgba(99,179,237,0.06);border:1px solid rgba(99,179,237,0.15);border-radius:10px;padding:1.2rem;margin-bottom:0.75rem}
+.guide-step .gs-num{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:var(--accent);margin-bottom:0.4rem}
+.guide-step h5{font-weight:800;font-size:0.9rem;margin-bottom:0.5rem}
+.guide-step p{font-size:0.8rem;color:var(--text-dim);line-height:1.65}
+.guide-step code{background:rgba(99,179,237,0.15);color:var(--accent);padding:0.1rem 0.4rem;border-radius:4px;font-family:monospace;font-size:0.82rem}
+
+/* VIDEO PREVIEW */
+.video-preview{margin-top:1rem;border-radius:10px;overflow:hidden;display:none}
+.video-preview iframe{width:100%;height:220px;border:none}
+
+/* MODAL CONFIRM */
+.confirm-modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:700;display:none;align-items:center;justify-content:center}
+.confirm-modal.open{display:flex}
+.confirm-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;max-width:420px;width:90%}
+.confirm-box h3{font-family:'Rajdhani',sans-serif;font-size:1.4rem;margin-bottom:0.7rem}
+.confirm-box p{font-size:0.85rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem}
+.confirm-btns{display:flex;gap:0.75rem;justify-content:flex-end}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;flex-direction:column;gap:0.6rem}
+.toast{padding:0.9rem 1.4rem;border-radius:10px;font-size:0.85rem;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,0.3);animation:slideIn 0.3s ease;min-width:280px;max-width:380px;display:flex;align-items:center;gap:10px}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
+.toast.success{background:#1a3a2a;border:1px solid rgba(104,211,145,0.3);color:var(--accent2)}
+.toast.error{background:#3a1a1a;border:1px solid rgba(252,129,129,0.3);color:var(--danger)}
+.toast.info{background:#1a2a3a;border:1px solid rgba(99,179,237,0.3);color:var(--accent)}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(6,13,24,0.3);border-top-color:var(--bg);border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .main{margin-left:0;padding:1.5rem}
+  .form-row,.form-row.three{grid-template-columns:1fr}
+  .settings-grid,.ia-grid,.color-layout{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="badge">GC</div>
+      <h1>Panel Docente</h1>
+      <p>AULA DIGITAL · GRUPO CENTED ALTAVISTA</p>
+    </div>
+    <div class="field">
+      <label>Usuario</label>
+      <input type="text" id="login-user" placeholder="Wicho-alv503" autocomplete="username"/>
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"/>
+    </div>
+    <div class="field">
+      <label>GitHub Token</label>
+      <input type="password" id="login-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"/>
+      <div class="token-steps">
+        <p>
+          <b>¿Cómo obtener tu token?</b><br/>
+          1. Ve a <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens/new</a><br/>
+          2. Note: <b>Panel CENTED</b> · Expiration: <b>No expiration</b><br/>
+          3. Marca ✅ <b>repo</b> (primer checkbox)<br/>
+          4. Clic en <b>Generate token</b> y copia <b>ghp_...</b><br/>
+          5. Pégalo aquí. Se guarda en tu navegador.
+        </p>
+      </div>
+    </div>
+    <button class="btn-login" onclick="doLogin()">Ingresar al panel →</button>
+    <div class="login-error" id="login-error">Usuario o contraseña incorrectos.</div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="s-badge">GC</div>
+      <h2>CENTED Admin</h2>
+      <span>Panel Docente</span>
+    </div>
+    <div class="sidebar-repo">
+      <div class="repo-label">Repositorio</div>
+      <div class="repo-name" id="sidebar-repo-name">BryanD10/Aulavirtual.github.io</div>
+    </div>
+    <div class="nav-section">Principal</div>
+    <div class="nav-item active" onclick="showPanel('dashboard',this)"><span class="ni">📊</span> Dashboard</div>
+    <div class="nav-item" onclick="showPanel('upload',this)"><span class="ni">⬆️</span> Subir Documento</div>
+    <div class="nav-item" onclick="showPanel('video',this)"><span class="ni">🎬</span> Agregar Video</div>
+    <div class="nav-item" onclick="showPanel('files',this)"><span class="ni">📂</span> Mis Archivos</div>
+    <div class="nav-section">Contenido Aula</div>
+    <div class="nav-item" onclick="showPanel('clases',this)"><span class="ni">📝</span> Gestión de Clases</div>
+    <div class="nav-item" onclick="showPanel('herramientas',this)"><span class="ni">🛠</span> Herramientas Web</div>
+    <div class="nav-section">Recursos</div>
+    <div class="nav-item" onclick="showPanel('color',this)"><span class="ni">🎨</span> Rueda Cromática</div>
+    <div class="nav-item" onclick="showPanel('ia',this)"><span class="ni">🤖</span> Asistentes IA</div>
+    <div class="nav-section">Ajustes</div>
+    <div class="nav-item" onclick="showPanel('settings',this)"><span class="ni">⚙️</span> Configuración</div>
+    <div class="nav-item" onclick="window.open('index.html','_blank')"><span class="ni">🌐</span> Ver Aula</div>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">🚪 Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- ══════════════════════ DASHBOARD ══════════════════════ -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="page-header">
+        <h1>📊 Dashboard</h1>
+        <p>Bienvenido, <strong>Wicho</strong> · BryanD10/Aulavirtual.github.io</p>
+      </div>
+      <div class="stats-overview">
+        <div class="stat-card blue"><div class="sc-label">Archivos totales</div><div class="sc-val" id="stat-total">—</div><div class="sc-sub">docs y videos</div></div>
+        <div class="stat-card green"><div class="sc-label">Matutino</div><div class="sc-val" id="stat-mat">—</div></div>
+        <div class="stat-card orange"><div class="sc-label">Vespertino</div><div class="sc-val" id="stat-ves">—</div></div>
+        <div class="stat-card red"><div class="sc-label">Sabatino</div><div class="sc-val" id="stat-sab">—</div></div>
+      </div>
+      <div class="card">
+        <h3>🕐 Archivos recientes</h3>
+        <div id="recent-files"><div class="empty-state"><div class="es-icon">📭</div><h4>Sin archivos</h4><p>Sube el primer documento desde "Subir Documento".</p></div></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ SUBIR ARCHIVO ══════════════════════ -->
+    <div class="panel" id="panel-upload">
+      <div class="page-header">
+        <h1>⬆️ Subir Documento</h1>
+        <p>El archivo se sube directo a GitHub y queda disponible para los alumnos al instante.</p>
+      </div>
+      <div class="card">
+        <h3>📋 Información del documento</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Grupo destino</label>
+            <select id="up-group">
+              <option value="matutino">🌅 Grupo Matutino</option>
+              <option value="vespertino">🌇 Grupo Vespertino</option>
+              <option value="sabatino">📚 Grupo Sabatino</option>
+              <option value="todos">🌐 Todos los grupos</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Categoría / Materia</label>
+            <select id="up-category">
+              <option value="informatica">💻 Informática</option>
+              <option value="ofimatica">📊 Ofimática</option>
+              <option value="diseno">🎨 Diseño Gráfico</option>
+              <option value="redes">🌐 Redes y Datos</option>
+              <option value="bases-datos">🗄️ Bases de Datos</option>
+              <option value="mantenimiento">🔧 Mantenimiento</option>
+              <option value="general">📌 General</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Título del documento</label>
+            <input type="text" id="up-title" placeholder="Ej: Guía de Diseño — Unidad 2"/>
+          </div>
+          <div class="form-group">
+            <label>Unidad / Semana</label>
+            <input type="text" id="up-unit" placeholder="Ej: Unidad 1"/>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📁 Seleccionar archivo</h3>
+        <div class="drop-zone" id="drop-zone">
+          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip,.rar,.png,.jpg,.jpeg,.txt,.mp4,.mov,.avi" onchange="handleFiles(this.files)"/>
+          <div class="drop-icon">📂</div>
+          <h4>Arrastra aquí o haz clic para seleccionar</h4>
+          <p>Máximo 25 MB por archivo</p>
+          <div class="file-types"><span class="ftt">PDF</span><span class="ftt">DOCX</span><span class="ftt">PPTX</span><span class="ftt">XLSX</span><span class="ftt">ZIP</span><span class="ftt">JPG/PNG</span><span class="ftt">MP4</span></div>
+        </div>
+        <div id="selected-files"></div>
+        <div class="progress-bar-wrap" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+        <button class="btn-upload" id="btn-upload" onclick="uploadFiles()"><span id="upload-btn-text">⬆️ Subir a GitHub</span></button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ AGREGAR VIDEO ══════════════════════ -->
+    <div class="panel" id="panel-video">
+      <div class="page-header">
+        <h1>🎬 Agregar Video</h1>
+        <p>Agrega links de YouTube u otros videos para los alumnos.</p>
+      </div>
+      <div class="card">
+        <h3>📋 Datos del video</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Grupo destino</label>
+            <select id="vid-group">
+              <option value="matutino">🌅 Matutino</option>
+              <option value="vespertino">🌇 Vespertino</option>
+              <option value="sabatino">📚 Sabatino</option>
+              <option value="todos">🌐 Todos</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Categoría</label>
+            <select id="vid-category">
+              <option value="informatica">💻 Informática</option>
+              <option value="ofimatica">📊 Ofimática</option>
+              <option value="diseno">🎨 Diseño</option>
+              <option value="redes">🌐 Redes</option>
+              <option value="bases-datos">🗄️ Bases de Datos</option>
+              <option value="general">📌 General</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row one">
+          <div class="form-group">
+            <label>Título del video</label>
+            <input type="text" id="vid-title" placeholder="Ej: Tutorial Photoshop — Capas y Máscaras"/>
+          </div>
+        </div>
+        <div class="form-row one">
+          <div class="form-group">
+            <label>URL del video (YouTube, Drive, etc.)</label>
+            <input type="url" id="vid-url" placeholder="https://www.youtube.com/watch?v=..." oninput="previewVideo()"/>
+          </div>
+        </div>
+        <div class="form-row one">
+          <div class="form-group">
+            <label>Descripción</label>
+            <textarea id="vid-desc" placeholder="¿Qué aprenderán con este video?"></textarea>
+          </div>
+        </div>
+        <div style="background:rgba(246,173,85,0.06);border:1px solid rgba(246,173,85,0.2);border-radius:12px;padding:1.5rem;margin-top:1rem">
+          <h4 style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;margin-bottom:1rem;color:var(--accent3);display:flex;align-items:center;gap:8px">👁 Vista previa</h4>
+          <div class="video-preview" id="vid-preview"><iframe id="vid-iframe" allowfullscreen></iframe></div>
+          <p id="vid-preview-msg" style="font-size:0.82rem;color:var(--text-dim)">Ingresa una URL de YouTube para ver la vista previa.</p>
+        </div>
+        <button class="btn-upload orange" onclick="saveVideoLink()">🎬 Guardar link de video</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ MIS ARCHIVOS ══════════════════════ -->
+    <div class="panel" id="panel-files">
+      <div class="page-header">
+        <h1>📂 Archivos y Videos</h1>
+        <p>Gestiona todos los materiales del repositorio.</p>
+      </div>
+      <div class="files-toolbar">
+        <input class="search-box" type="text" placeholder="🔍 Buscar..." id="search-input" oninput="filterFiles()"/>
+        <select class="filter-select" id="filter-group" onchange="filterFiles()">
+          <option value="">Todos los grupos</option>
+          <option value="matutino">🌅 Matutino</option>
+          <option value="vespertino">🌇 Vespertino</option>
+          <option value="sabatino">📚 Sabatino</option>
+          <option value="todos">🌐 Todos</option>
+        </select>
+        <select class="filter-select" id="filter-type" onchange="filterFiles()">
+          <option value="">Todos los tipos</option>
+          <option value="doc">Documentos</option>
+          <option value="video">Videos</option>
+          <option value="img">Imágenes</option>
+        </select>
+        <button class="btn-sm btn-copy" onclick="loadFiles()" style="border-radius:9px;padding:0.55rem 1rem">🔄 Actualizar</button>
+      </div>
+      <div id="files-table-wrap"><div class="empty-state"><div class="es-icon">📭</div><h4>Cargando...</h4></div></div>
+    </div>
+
+    <!-- ══════════════════════ GESTIÓN DE CLASES ══════════════════════ -->
+    <div class="panel" id="panel-clases">
+      <div class="page-header">
+        <h1>📝 Gestión de Clases</h1>
+        <p>Crea, edita y organiza las prácticas y teoría de cada grupo. Se guardan en GitHub como <code style="background:rgba(99,179,237,0.1);color:var(--accent);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.82rem">clases/[grupo]/clases.json</code></p>
+      </div>
+
+      <!-- Grupo selector -->
+      <div class="inner-tabs" id="clases-group-tabs">
+        <button class="inner-tab active" onclick="selectClasesGroup('matutino',this)">🌅 Matutino</button>
+        <button class="inner-tab" onclick="selectClasesGroup('vespertino',this)">🌇 Vespertino</button>
+        <button class="inner-tab" onclick="selectClasesGroup('sabatino',this)">📚 Sabatino</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <select class="filter-select" id="cl-tipo" onchange="loadClasesFromGH()">
+          <option value="practica">📖 Prácticas</option>
+          <option value="teoria">📚 Teoría</option>
+        </select>
+        <button class="btn-upload sm green" onclick="openClaseModal(null)">➕ Nueva clase</button>
+        <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadClasesFromGH()">🔄 Recargar</button>
+        <span id="clases-count" style="font-size:0.82rem;color:var(--text-dim);margin-left:auto"></span>
+      </div>
+
+      <!-- Lista clases -->
+      <div class="card" style="padding:1.2rem">
+        <div id="clases-list"><div class="empty-state"><div class="es-icon">🔄</div><h4>Selecciona un grupo para cargar las clases</h4></div></div>
+      </div>
+
+      <!-- Ayuda formato JSON -->
+      <div style="background:rgba(99,179,237,0.04);border:1px solid rgba(99,179,237,0.12);border-radius:12px;padding:1.2rem;margin-top:1rem">
+        <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7">
+          💡 <strong style="color:var(--accent)">Ruta en GitHub:</strong> <code style="background:rgba(99,179,237,0.1);color:var(--accent);padding:0.1rem 0.5rem;border-radius:4px">clases/matutino/clases.json</code> · 
+          <code style="background:rgba(246,173,85,0.1);color:var(--accent3);padding:0.1rem 0.5rem;border-radius:4px">clases/vespertino/clases.json</code> · 
+          <code style="background:rgba(183,148,244,0.1);color:var(--purple);padding:0.1rem 0.5rem;border-radius:4px">clases/sabatino/clases.json</code><br/>
+          Los grupos leen <strong style="color:var(--accent)">clases/[grupo]/clases.json</strong> automáticamente al cargar la página.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ HERRAMIENTAS WEB ══════════════════════ -->
+    <div class="panel" id="panel-herramientas">
+      <div class="page-header">
+        <h1>🛠 Herramientas Web</h1>
+        <p>Agrega, edita y organiza las herramientas externas que aparecen en la sección de cada grupo.</p>
+      </div>
+
+      <!-- Toolbar -->
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap">
+        <select class="filter-select" id="herr-grupo">
+          <option value="matutino">🌅 Matutino</option>
+          <option value="vespertino">🌇 Vespertino</option>
+          <option value="sabatino">📚 Sabatino</option>
+          <option value="todos">🌐 Todos</option>
+        </select>
+        <button class="btn-upload sm" style="background:linear-gradient(135deg,var(--accent3),#e88a2a)" onclick="openHerramientaModal(null)">➕ Nueva herramienta</button>
+        <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadHerramientas()">🔄 Recargar</button>
+        <button class="btn-upload sm green" onclick="saveHerramientasToGH()" style="margin-left:auto">💾 Guardar en GitHub</button>
+      </div>
+
+      <div class="card" style="padding:1.2rem">
+        <div id="herramientas-list"><div class="empty-state"><div class="es-icon">🛠</div><h4>Cargando herramientas...</h4></div></div>
+      </div>
+
+      <div style="background:rgba(246,173,85,0.04);border:1px solid rgba(246,173,85,0.15);border-radius:12px;padding:1.2rem;margin-top:1rem">
+        <p style="font-size:0.78rem;color:var(--text-dim);line-height:1.7">
+          💡 <strong style="color:var(--accent3)">Ruta en GitHub:</strong> <code style="background:rgba(246,173,85,0.1);color:var(--accent3);padding:0.1rem 0.5rem;border-radius:4px">datos/herramientas.json</code> — Los grupos cargan este archivo para mostrar las herramientas.<br/>
+          Después de guardar, la lista se actualizará automáticamente en el aula.
+        </p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ RUEDA CROMÁTICA ══════════════════════ -->
+    <div class="panel" id="panel-color" style="padding-bottom:3rem">
+      <div class="page-header">
+        <h1>🎨 Rueda Cromática</h1>
+        <p>Selecciona colores y genera paletas armónicas para tus diseños y materiales.</p>
+      </div>
+      <div class="color-layout">
+        <div>
+          <div class="wheel-wrap">
+            <h3>🎡 Selector de color</h3>
+            <canvas id="colorWheel" width="260" height="260"></canvas>
+            <div class="wheel-controls">
+              <div><label>Brillo</label><input type="range" id="brightness" min="0" max="100" value="100" oninput="drawWheel()"/></div>
+              <div><label>Saturación</label><input type="range" id="saturation" min="0" max="100" value="100" oninput="drawWheel()"/></div>
+            </div>
+            <div id="selected-color-box" class="selected-color-box" style="background:#ff0000;color:#fff" onclick="copyHex()">#FF0000 — Clic para copiar</div>
+            <div class="color-info-box" id="color-info-box">
+              <h4>Valores del color</h4>
+              <div class="cib-row">
+                <div class="cib-tag" id="hex-val" onclick="copyText(this.textContent)">#FF0000</div>
+                <div class="cib-tag" id="rgb-val" onclick="copyText(this.textContent)">rgb(255,0,0)</div>
+              </div>
+              <div class="cib-row">
+                <div class="cib-tag" id="hsl-val" onclick="copyText(this.textContent)">hsl(0,100%,50%)</div>
+                <div class="cib-tag" id="cmyk-val" onclick="copyText(this.textContent)">C:0 M:100 Y:100 K:0</div>
+              </div>
+              <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem">Clic en cualquier valor para copiarlo</p>
+            </div>
+          </div>
+          <div class="saved-palette" style="margin-top:1rem">
+            <h4>💾 Paleta guardada</h4>
+            <div class="saved-swatches" id="saved-swatches"><p style="font-size:0.78rem;color:var(--text-dim)">Agrega colores con el botón de abajo</p></div>
+            <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap">
+              <button class="btn-save-pal" onclick="addToSaved()">➕ Agregar color</button>
+              <button class="btn-save-pal" style="background:linear-gradient(135deg,var(--danger),#e53e3e)" onclick="clearSaved()">🗑 Limpiar</button>
+              <button class="btn-save-pal" style="background:linear-gradient(135deg,var(--accent3),#e88a2a)" onclick="exportPalette()">📋 Exportar CSS</button>
+            </div>
+          </div>
+        </div>
+        <div class="palettes-wrap">
+          <h3>🎭 Paletas armónicas</h3>
+          <div class="harmony-btns">
+            <button class="h-btn active" onclick="setHarmony('complementario',this)">Complementario</button>
+            <button class="h-btn" onclick="setHarmony('analogos',this)">Análogos</button>
+            <button class="h-btn" onclick="setHarmony('triadico',this)">Triádico</button>
+            <button class="h-btn" onclick="setHarmony('tetradico',this)">Tetrádico</button>
+            <button class="h-btn" onclick="setHarmony('split',this)">Split-comp</button>
+            <button class="h-btn" onclick="setHarmony('monocromatico',this)">Monocromático</button>
+          </div>
+          <div id="harmony-palette" class="palette-row"></div>
+          <div style="margin-top:1.5rem">
+            <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1rem">🌈 Gradientes sugeridos</h3>
+            <div id="gradient-preview" style="display:grid;gap:0.75rem"></div>
+          </div>
+          <div style="margin-top:1.5rem">
+            <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1rem">📐 Contraste de texto</h3>
+            <div id="contrast-box" style="border-radius:10px;padding:1rem;text-align:center;font-weight:800;font-size:1.1rem;transition:all 0.2s">Texto oscuro sobre tu color</div>
+            <div id="contrast-box2" style="border-radius:10px;padding:1rem;text-align:center;font-weight:800;font-size:1.1rem;margin-top:0.5rem;transition:all 0.2s">Texto claro sobre tu color</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ ASISTENTES IA ══════════════════════ -->
+    <div class="panel" id="panel-ia">
+      <div class="page-header">
+        <h1>🤖 Asistentes de IA</h1>
+        <p>Accede directamente a los asistentes de inteligencia artificial sin necesidad de iniciar sesión.</p>
+      </div>
+      <div class="ia-grid">
+        <a href="https://gemini.google.com/app" target="_blank" class="ia-card gemini"><div class="ia-logo">✨</div><h3>Google Gemini</h3><p>El asistente de IA de Google. Excelente para responder preguntas, crear contenido y analizar imágenes.</p><span class="ia-badge">Abrir sin cuenta →</span></a>
+        <a href="https://copilot.microsoft.com/" target="_blank" class="ia-card copilot"><div class="ia-logo">🪟</div><h3>Microsoft Copilot</h3><p>IA de Microsoft integrada con Bing. Búsquedas inteligentes, imágenes con DALL-E y asistencia en Office.</p><span class="ia-badge">Abrir sin cuenta →</span></a>
+        <a href="https://chatgpt.com/" target="_blank" class="ia-card chatgpt"><div class="ia-logo">🧠</div><h3>ChatGPT</h3><p>Modelo GPT de OpenAI. Ideal para redactar textos, explicar conceptos técnicos y programar.</p><span class="ia-badge">Abrir sin cuenta →</span></a>
+        <a href="https://www.perplexity.ai/" target="_blank" class="ia-card perplexity"><div class="ia-logo">🔍</div><h3>Perplexity AI</h3><p>Motor de búsqueda con IA. Responde con fuentes verificadas en tiempo real para investigación.</p><span class="ia-badge">Abrir sin cuenta →</span></a>
+      </div>
+      <div class="ia-embed">
+        <h3>⚡ Acceso rápido integrado</h3>
+        <div class="ia-tabs">
+          <button class="ia-tab-btn active" onclick="loadIA('https://gemini.google.com/app',this)">✨ Gemini</button>
+          <button class="ia-tab-btn" onclick="loadIA('https://copilot.microsoft.com/',this)">🪟 Copilot</button>
+          <button class="ia-tab-btn" onclick="loadIA('https://chatgpt.com/',this)">🧠 ChatGPT</button>
+          <button class="ia-tab-btn" onclick="loadIA('https://www.perplexity.ai/',this)">🔍 Perplexity</button>
+        </div>
+        <iframe id="ia-frame" class="ia-frame" src="https://gemini.google.com/app" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"></iframe>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.7rem">⚠️ Si el asistente no carga aquí, usa el botón de arriba para acceder directamente.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ CONFIGURACIÓN ══════════════════════ -->
+    <div class="panel" id="panel-settings">
+      <div class="page-header">
+        <h1>⚙️ Configuración</h1>
+        <p>Ajusta el repositorio, credenciales y opciones del panel.</p>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3>🐙 GitHub Repository</h3>
+          <div class="form-group" style="margin-bottom:1rem"><label>Usuario</label><input type="text" id="cfg-user" value="BryanD10"/></div>
+          <div class="form-group" style="margin-bottom:1rem"><label>Repositorio</label><input type="text" id="cfg-repo" value="Aulavirtual.github.io"/></div>
+          <div class="form-group" style="margin-bottom:1rem"><label>Rama</label><input type="text" id="cfg-branch" value="main"/></div>
+          <div class="form-group"><label>Carpeta archivos</label><input type="text" id="cfg-folder" value="archivos"/></div>
+          <button class="btn-save" onclick="saveConfig()">💾 Guardar</button>
+        </div>
+        <div class="settings-card">
+          <h3>🔐 Cambiar contraseña</h3>
+          <div class="form-group" style="margin-bottom:1rem"><label>Nueva contraseña</label><input type="password" id="cfg-newpass" placeholder="Nueva contraseña"/></div>
+          <div class="form-group"><label>Confirmar</label><input type="password" id="cfg-newpass2" placeholder="Repetir"/></div>
+          <button class="btn-save" onclick="changePassword()">🔑 Actualizar</button>
+          <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)">
+            <h3 style="font-size:1rem;margin-bottom:0.7rem">🌐 URL del Aula</h3>
+            <div id="public-url" style="font-size:0.82rem;color:var(--accent);word-break:break-all;background:rgba(99,179,237,0.07);padding:0.6rem 0.8rem;border-radius:8px;border:1px solid rgba(99,179,237,0.15)">https://bryand10.github.io/Aulavirtual.github.io/</div>
+            <button class="btn-sm btn-copy" style="margin-top:0.6rem" onclick="navigator.clipboard.writeText(document.getElementById('public-url').textContent).then(()=>toast('📋 URL copiada','info'))">📋 Copiar</button>
+          </div>
+        </div>
+        <div class="settings-card" style="grid-column:1/-1">
+          <h3>🔑 Guía: Crear GitHub Token</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+            <div class="guide-step"><div class="gs-num">01</div><h5>Inicia sesión en GitHub</h5><p>Ve a <a href="https://github.com/login" target="_blank" style="color:var(--accent2)">github.com/login</a> con tu cuenta <code>BryanD10</code>.</p></div>
+            <div class="guide-step"><div class="gs-num">02</div><h5>Ir a configuración</h5><p>Foto de perfil → <code>Settings</code> → al final → <code>Developer settings</code>.</p></div>
+            <div class="guide-step"><div class="gs-num">03</div><h5>Personal Access Tokens</h5><p>Clic en <code>Tokens (classic)</code> → <code>Generate new token (classic)</code>.</p></div>
+            <div class="guide-step"><div class="gs-num">04</div><h5>Configurar el token</h5><p>Note: <code>Panel CENTED</code> · Expiration: <code>No expiration</code> · Marca ✅ <code>repo</code>.</p></div>
+            <div class="guide-step"><div class="gs-num">05</div><h5>Copiar el token</h5><p>Clic en <code>Generate token</code>. Copia el <code>ghp_...</code>. ⚠️ Solo se muestra una vez.</p></div>
+            <div class="guide-step"><div class="gs-num">06</div><h5>Pegarlo en el login</h5><p>Al ingresar, pega el token en <code>GitHub Token</code>. Se guarda en tu navegador.</p></div>
+          </div>
+          <div style="margin-top:1rem;padding:1rem;background:rgba(252,129,129,0.08);border:1px solid rgba(252,129,129,0.2);border-radius:10px">
+            <p style="font-size:0.82rem;color:var(--danger)">⚠️ <strong>Importante:</strong> Tu token es como una contraseña de GitHub. No lo compartas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ══ CLASE MODAL ══ -->
+<div class="modal-overlay" id="clase-modal">
+  <div class="modal-box">
+    <h3 id="clase-modal-title">➕ Nueva Clase <button class="modal-close" onclick="closeClaseModal()">✕</button></h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Número / ID</label>
+        <input type="text" id="cm-numero" placeholder="01"/>
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <select id="cm-tipo">
+          <option value="practica">📖 Práctica</option>
+          <option value="teoria">📚 Teoría</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row one">
+      <div class="form-group"><label>Título *</label><input type="text" id="cm-titulo" placeholder="Ej: Introducción a Photoshop — Interfaz y herramientas básicas"/></div>
+    </div>
+    <div class="form-row three">
+      <div class="form-group"><label>Materia</label><input type="text" id="cm-materia" placeholder="Diseño Gráfico"/></div>
+      <div class="form-group"><label>Nivel</label><input type="text" id="cm-nivel" placeholder="Básico · Intermedio · Avanzado"/></div>
+      <div class="form-group"><label>Categoría (badge)</label><input type="text" id="cm-categoria" placeholder="Práctica 1"/></div>
+    </div>
+    <div class="form-row one">
+      <div class="form-group"><label>Video URL (YouTube / Google Drive)</label><input type="url" id="cm-video" placeholder="https://www.youtube.com/watch?v=..." oninput="previewClaseVideo()"/></div>
+    </div>
+    <div id="cm-video-preview" style="display:none;border-radius:10px;overflow:hidden;margin-bottom:0.8rem"><iframe id="cm-video-iframe" style="width:100%;height:200px;border:none" allowfullscreen></iframe></div>
+    <div class="form-row one">
+      <div class="form-group"><label>Descripción</label><textarea id="cm-descripcion" rows="2" placeholder="Breve descripción de la clase..."></textarea></div>
+    </div>
+    <div class="form-row one">
+      <div class="form-group"><label>Link de herramienta / tarea (opcional)</label><input type="url" id="cm-herramienta" placeholder="https://www.canva.com/"/></div>
+    </div>
+
+    <!-- Objetivos -->
+    <div style="margin:1.2rem 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem">
+        <label style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim)">🎯 Objetivos de aprendizaje</label>
+        <button class="btn-add-row btn-add-blue" onclick="addObjetivo()">+ Agregar objetivo</button>
+      </div>
+      <div id="objetivos-list"></div>
+    </div>
+
+    <!-- Pasos -->
+    <div style="margin:1.2rem 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem">
+        <label style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim)">📋 Pasos de la práctica</label>
+        <button class="btn-add-row btn-add-green" onclick="addPaso()">+ Agregar paso</button>
+      </div>
+      <div id="pasos-list"></div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeClaseModal()">Cancelar</button>
+      <button class="btn-upload" style="margin:0" onclick="guardarClase()">💾 Guardar clase</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HERRAMIENTA MODAL ══ -->
+<div class="modal-overlay" id="herramienta-modal">
+  <div class="modal-box" style="max-width:560px">
+    <h3 id="herr-modal-title">➕ Nueva Herramienta <button class="modal-close" onclick="closeHerramientaModal()">✕</button></h3>
+    <div class="form-row">
+      <div class="form-group"><label>Emoji / Icono</label><input type="text" id="hm-icono" placeholder="🎨"/></div>
+      <div class="form-group"><label>Nombre *</label><input type="text" id="hm-nombre" placeholder="Canva"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Subtítulo</label><input type="text" id="hm-subtitulo" placeholder="Diseño Gráfico"/></div>
+      <div class="form-group"><label>URL *</label><input type="url" id="hm-url" placeholder="https://www.canva.com/"/></div>
+    </div>
+    <div class="form-row one">
+      <div class="form-group"><label>Descripción</label><textarea id="hm-desc" rows="2" placeholder="Diseño gráfico profesional en línea. Afiches, presentaciones y más."></textarea></div>
+    </div>
+    <div style="margin:1rem 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem">
+        <label style="font-size:0.73rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-dim)">📋 Pasos de uso</label>
+        <button class="btn-add-row btn-add-blue" onclick="addPasoHerr()">+ Agregar paso</button>
+      </div>
+      <div id="herr-pasos-list" class="pasos-editor"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeHerramientaModal()">Cancelar</button>
+      <button class="btn-upload orange" style="margin:0" onclick="guardarHerramienta()">💾 Guardar herramienta</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="confirm-modal" id="confirm-modal">
+  <div class="confirm-box">
+    <h3>⚠️ Confirmar eliminación</h3>
+    <p id="confirm-msg">¿Eliminar este elemento?</p>
+    <div class="confirm-btns">
+      <button class="btn-cancel" onclick="closeConfirm()">Cancelar</button>
+      <button class="modal-confirm" id="confirm-ok">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toasts"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  AUTH
+// ══════════════════════════════════════════
+const ADMIN_USER = 'Wicho-alv503';
+let ADMIN_PASS = localStorage.getItem('cented_pass') || 'Wicho-alv503';
+let GH_TOKEN   = localStorage.getItem('cented_token') || '';
+
+const DEFAULT_GH = {user:'BryanD10',repo:'Aulavirtual.github.io',branch:'main',folder:'archivos'};
+
+function doLogin() {
+  const u=document.getElementById('login-user').value.trim();
+  const p=document.getElementById('login-pass').value;
+  const t=document.getElementById('login-token').value.trim();
+  if(u!==ADMIN_USER||p!==ADMIN_PASS){document.getElementById('login-error').style.display='block';return;}
+  if(t){GH_TOKEN=t;localStorage.setItem('cented_token',t);}
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  initApp();
+}
+['login-pass','login-token'].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();}));
+function doLogout(){GH_TOKEN='';document.getElementById('login-screen').style.display='flex';document.getElementById('app').style.display='none';document.getElementById('login-pass').value='';}
+function initApp(){GH_TOKEN=GH_TOKEN||localStorage.getItem('cented_token')||'';loadConfigUI();loadFiles();loadHerramientas();}
+
+// ══════════════════════════════════════════
+//  CONFIG & GH
+// ══════════════════════════════════════════
+function getConfig(){return{user:localStorage.getItem('cented_gh_user')||DEFAULT_GH.user,repo:localStorage.getItem('cented_gh_repo')||DEFAULT_GH.repo,branch:localStorage.getItem('cented_gh_branch')||DEFAULT_GH.branch,folder:localStorage.getItem('cented_gh_folder')||DEFAULT_GH.folder};}
+function loadConfigUI(){const c=getConfig();document.getElementById('cfg-user').value=c.user;document.getElementById('cfg-repo').value=c.repo;document.getElementById('cfg-branch').value=c.branch;document.getElementById('cfg-folder').value=c.folder;document.getElementById('sidebar-repo-name').textContent=c.user+'/'+c.repo;}
+function saveConfig(){localStorage.setItem('cented_gh_user',document.getElementById('cfg-user').value.trim());localStorage.setItem('cented_gh_repo',document.getElementById('cfg-repo').value.trim());localStorage.setItem('cented_gh_branch',document.getElementById('cfg-branch').value.trim()||'main');localStorage.setItem('cented_gh_folder',document.getElementById('cfg-folder').value.trim()||'archivos');loadConfigUI();toast('✅ Configuración guardada','success');loadFiles();}
+function changePassword(){const p1=document.getElementById('cfg-newpass').value,p2=document.getElementById('cfg-newpass2').value;if(!p1)return toast('⚠️ Ingresa una contraseña','error');if(p1!==p2)return toast('⚠️ Las contraseñas no coinciden','error');ADMIN_PASS=p1;localStorage.setItem('cented_pass',p1);document.getElementById('cfg-newpass').value='';document.getElementById('cfg-newpass2').value='';toast('🔑 Contraseña actualizada','success');}
+
+async function ghReq(method,path,body){
+  const token=GH_TOKEN||localStorage.getItem('cented_token');
+  const res=await fetch('https://api.github.com'+path,{method,headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:body?JSON.stringify(body):undefined});
+  return res;
+}
+async function ghGet(path){const c=getConfig();try{const r=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+path);if(r.ok){const d=await r.json();const json=JSON.parse(atob(d.content.replace(/\n/g,'')));return{data:json,sha:d.sha};}return null;}catch(e){return null;}}
+async function ghPut(path,data,sha,msg){const c=getConfig();const b64=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));const body={message:msg||'📚 Actualizar '+path,content:b64,branch:c.branch};if(sha)body.sha=sha;const r=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!r.ok){const e=await r.json();throw new Error(e.message);}return r;}
+
+// ══════════════════════════════════════════
+//  PANELS
+// ══════════════════════════════════════════
+function showPanel(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+  if(id==='files'||id==='dashboard')loadFiles();
+  if(id==='color')initColorWheel();
+  if(id==='clases')initClasesPanel();
+  if(id==='herramientas')renderHerramientasList();
+}
+
+// ══════════════════════════════════════════
+//  ARCHIVOS GH
+// ══════════════════════════════════════════
+let allFiles=[];
+async function loadFiles(){
+  const c=getConfig();let files=[];
+  for(const g of['matutino','vespertino','sabatino','todos']){
+    try{const r=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+c.folder+'/'+g);if(r.ok){const d=await r.json();if(Array.isArray(d))d.forEach(f=>{f._group=g;files.push(f);});}}catch(e){}
+  }
+  allFiles=files;renderFilesTable(files);updateStats(files);renderRecent(files);
+}
+function renderFilesTable(files){
+  const wrap=document.getElementById('files-table-wrap');
+  if(!files.length){wrap.innerHTML=`<div class="empty-state"><div class="es-icon">📭</div><h4>Sin archivos aún</h4><p>Usa "Subir Documento" o "Agregar Video".</p></div>`;return;}
+  const rows=files.map(f=>{const ext=f.name.split('.').pop().toLowerCase();const isVid=f.name.startsWith('video_');const icon=isVid?'🎬':extIcon(ext);const cls=isVid?'ext-vid':extClass(ext);const gpill=groupPill(f._group);const title=f.name.replace(/\.[^.]+$/,'').replace(/_/g,' ');const dl=isVid?'#':f.download_url;
+    return`<tr><td><div class="file-name-cell"><div class="file-ext ${cls}">${icon}</div><div><div class="fn-title">${title}</div><div class="fn-desc">${f.name}</div></div></div></td><td>${gpill}</td><td>${isVid?'—':(f.size/1024).toFixed(1)+' KB'}</td><td><div class="action-btns"><a class="btn-sm btn-view" href="${dl}" target="_blank">👁 Ver</a><button class="btn-sm btn-copy" onclick="copyLink('${f.download_url||''}')">📋 Link</button><button class="btn-sm btn-delete" onclick="confirmDelete('${f._group}','${f.name}','${f.sha}')">🗑</button></div></td></tr>`;}).join('');
+  wrap.innerHTML=`<table class="files-table"><thead><tr><th>Archivo</th><th>Grupo</th><th>Tamaño</th><th>Acciones</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function filterFiles(){const q=document.getElementById('search-input').value.toLowerCase();const g=document.getElementById('filter-group').value;const t=document.getElementById('filter-type').value;const ext=f=>f.name.split('.').pop().toLowerCase();const isVid=f=>f.name.startsWith('video_')||['mp4','mov','avi'].includes(ext(f));const isImg=f=>['png','jpg','jpeg','gif','webp'].includes(ext(f));renderFilesTable(allFiles.filter(f=>{const mQ=!q||f.name.toLowerCase().includes(q);const mG=!g||f._group===g;const mT=!t||(t==='video'&&isVid(f))||(t==='img'&&isImg(f))||(t==='doc'&&!isVid(f)&&!isImg(f));return mQ&&mG&&mT;}));}
+function updateStats(files){document.getElementById('stat-total').textContent=files.length;document.getElementById('stat-mat').textContent=files.filter(f=>f._group==='matutino').length;document.getElementById('stat-ves').textContent=files.filter(f=>f._group==='vespertino').length;document.getElementById('stat-sab').textContent=files.filter(f=>f._group==='sabatino').length;}
+function renderRecent(files){const wrap=document.getElementById('recent-files');const recent=[...files].reverse().slice(0,6);if(!recent.length){wrap.innerHTML=`<div class="empty-state"><div class="es-icon">📭</div><h4>Sin archivos</h4></div>`;return;}wrap.innerHTML=recent.map(f=>{const ext=f.name.split('.').pop().toLowerCase();return`<div style="display:flex;align-items:center;gap:10px;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.04)"><div class="file-ext ${extClass(ext)}" style="width:32px;height:32px;border-radius:7px;font-size:1rem">${extIcon(ext)}</div><div style="flex:1"><div style="font-size:0.85rem;font-weight:700">${f.name.replace(/_/g,' ').replace(/\.[^.]+$/,'')}</div><div style="font-size:0.7rem;color:var(--text-dim)">${groupPill(f._group)}</div></div><a style="font-size:0.75rem;color:var(--accent);text-decoration:none" href="${f.download_url||'#'}" target="_blank">Ver →</a></div>`;}).join('');}
+
+// Upload
+let selectedFiles=[];
+function handleFiles(fl){selectedFiles=Array.from(fl);const w=document.getElementById('selected-files');w.innerHTML=selectedFiles.map((f,i)=>`<div class="sel-file"><div class="sf-icon">${extIcon(f.name.split('.').pop().toLowerCase())}</div><div class="sf-info"><div class="sf-name">${f.name}</div><div class="sf-size">${(f.size/1024).toFixed(1)} KB</div></div><button class="sf-remove" onclick="removeFile(${i})">✕</button></div>`).join('');}
+function removeFile(i){selectedFiles.splice(i,1);handleFiles(selectedFiles);}
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('dragover');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('dragover');handleFiles(e.dataTransfer.files);});
+async function uploadFiles(){
+  if(!selectedFiles.length)return toast('⚠️ Selecciona al menos un archivo','error');
+  const c=getConfig();const token=GH_TOKEN||localStorage.getItem('cented_token');
+  if(!token)return toast('⚠️ Sin token. Cierra sesión y vuelve a ingresar con tu token','error');
+  const group=document.getElementById('up-group').value;const category=document.getElementById('up-category').value;const unit=document.getElementById('up-unit').value.trim();
+  const btn=document.getElementById('btn-upload');const txt=document.getElementById('upload-btn-text');
+  btn.disabled=true;txt.innerHTML='<span class="spinner"></span> Subiendo...';
+  const pw=document.getElementById('progress-wrap');const pb=document.getElementById('progress-bar');pw.style.display='block';let done=0;
+  for(const file of selectedFiles){
+    try{const prefix=unit?unit.replace(/\s+/g,'_')+'_':'';const safeName=`${category}_${prefix}${file.name.replace(/[^a-zA-Z0-9.\-_áéíóúÑñüÜ]/g,'_')}`;const path=`${c.folder}/${group}/${safeName}`;const b64=await fileToBase64(file);let sha;try{const cr=await ghReq('GET','/repos/'+c.user+'/'+c.repo+'/contents/'+path);if(cr.ok){const d=await cr.json();sha=d.sha;}}catch(e){}const body={message:'📚 Subir: '+file.name+' ['+group+']',content:b64,branch:c.branch};if(sha)body.sha=sha;const res=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,body);if(!res.ok){const err=await res.json();throw new Error(err.message);}done++;pb.style.width=`${(done/selectedFiles.length)*100}%`;toast('✅ Subido: '+file.name,'success');}catch(e){toast('❌ Error: '+e.message,'error');}
+  }
+  btn.disabled=false;txt.textContent='⬆️ Subir a GitHub';setTimeout(()=>{pw.style.display='none';pb.style.width='0%';},2000);selectedFiles=[];document.getElementById('selected-files').innerHTML='';document.getElementById('file-input').value='';loadFiles();
+}
+
+// Video
+function previewVideo(){const url=document.getElementById('vid-url').value.trim();const preview=document.getElementById('vid-preview');const msg=document.getElementById('vid-preview-msg');const iframe=document.getElementById('vid-iframe');const embed=getEmbedUrl(url);if(embed){iframe.src=embed;preview.style.display='block';msg.style.display='none';}else{preview.style.display='none';msg.style.display='block';msg.textContent=url?'URL no reconocida.':'Ingresa una URL de YouTube para ver la vista previa.';}}
+function getEmbedUrl(url){if(!url)return null;const yt=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);if(yt)return'https://www.youtube.com/embed/'+yt[1];const ys=url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/);if(ys)return'https://www.youtube.com/embed/'+ys[1];const gd=url.match(/drive\.google\.com\/file\/d\/([^/]+)/);if(gd)return'https://drive.google.com/file/d/'+gd[1]+'/preview';return null;}
+async function saveVideoLink(){const c=getConfig();const token=GH_TOKEN||localStorage.getItem('cented_token');if(!token)return toast('⚠️ Sin token','error');const url=document.getElementById('vid-url').value.trim();const title=document.getElementById('vid-title').value.trim();const group=document.getElementById('vid-group').value;const cat=document.getElementById('vid-category').value;const desc=document.getElementById('vid-desc').value.trim();if(!url||!title)return toast('⚠️ Completa el título y la URL','error');const embed=getEmbedUrl(url);const data={title,url,embed,group,category:cat,description:desc,type:'video',date:new Date().toISOString()};const ts=Date.now();const fileName=`video_${cat}_${title.replace(/[^a-zA-Z0-9]/g,'_').slice(0,30)}_${ts}.json`;const path=`${c.folder}/${group}/${fileName}`;const b64=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));try{const res=await ghReq('PUT','/repos/'+c.user+'/'+c.repo+'/contents/'+path,{message:'🎬 Video: '+title+' ['+group+']',content:b64,branch:c.branch});if(!res.ok){const err=await res.json();throw new Error(err.message);}toast('✅ Video guardado: '+title,'success');document.getElementById('vid-url').value='';document.getElementById('vid-title').value='';document.getElementById('vid-desc').value='';document.getElementById('vid-preview').style.display='none';loadFiles();}catch(e){toast('❌ Error: '+e.message,'error');}}
+
+// Delete
+function confirmDelete(group,name,sha){document.getElementById('confirm-msg').textContent=`¿Eliminar "${name.replace(/_/g,' ')}" del grupo ${group}?`;document.getElementById('confirm-modal').classList.add('open');document.getElementById('confirm-ok').onclick=()=>deleteFile(group,name,sha);}
+function closeConfirm(){document.getElementById('confirm-modal').classList.remove('open');}
+async function deleteFile(group,name,sha){closeConfirm();const c=getConfig();try{const res=await ghReq('DELETE','/repos/'+c.user+'/'+c.repo+'/contents/'+c.folder+'/'+group+'/'+name,{message:'🗑️ Eliminar: '+name,sha,branch:c.branch});if(!res.ok)throw new Error((await res.json()).message);toast('🗑️ Eliminado correctamente','success');loadFiles();}catch(e){toast('❌ Error: '+e.message,'error');}}
+function copyLink(url){if(!url)return toast('⚠️ Sin link','error');navigator.clipboard.writeText(url).then(()=>toast('📋 Link copiado','info'));}
+document.getElementById('confirm-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeConfirm();});
+
+// ══════════════════════════════════════════════════════
+//  ███████╗ GESTIÓN DE CLASES ██████████████████████████
+// ══════════════════════════════════════════════════════
+let clasesGroup='matutino';
+let clasesData=[]; // array of clase objects
+let clasesFileSha=null;
+let editClaseIdx=null;
+let editObjetivos=[];
+let editPasos=[];
+
+function initClasesPanel(){loadClasesFromGH();}
+function selectClasesGroup(g,btn){clasesGroup=g;document.querySelectorAll('#clases-group-tabs .inner-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');loadClasesFromGH();}
+
+async function loadClasesFromGH(){
+  clasesFileSha=null;
+  const tipo=document.getElementById('cl-tipo').value;
+  const wrap=document.getElementById('clases-list');
+  wrap.innerHTML='<div class="empty-state"><div class="es-icon">🔄</div><h4>Cargando...</h4></div>';
+  document.getElementById('clases-count').textContent='';
+
+  // Try path: clases/[grupo]/clases.json
+  const c=getConfig();
+  const path=`clases/${clasesGroup}/clases.json`;
+  const result=await ghGet(path);
+
+  if(result){
+    const all=result.data.clases||result.data||[];
+    clasesFileSha=result.sha;
+    if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria');
+    else clasesData=all.filter(cl=>cl.tipo==='teoria');
+    // Store full array for save
+    window._allClases=all;
+  } else {
+    clasesData=[];
+    window._allClases=[];
+  }
+  renderClasesList();
+}
+
+function renderClasesList(){
+  const wrap=document.getElementById('clases-list');
+  const tipo=document.getElementById('cl-tipo').value;
+  const count=clasesData.length;
+  document.getElementById('clases-count').textContent=count+' '+(tipo==='practica'?'prácticas':'temas de teoría')+' — '+clasesGroup;
+
+  if(!count){
+    wrap.innerHTML=`<div class="empty-state"><div class="es-icon">📭</div><h4>Sin clases aún</h4><p>Crea la primera con el botón <strong>"+ Nueva clase"</strong>.</p></div>`;
+    return;
+  }
+  wrap.innerHTML=clasesData.map((cl,i)=>`
+    <div class="clase-item">
+      <div class="ci-num">${cl.numero||String(i+1).padStart(2,'0')}</div>
+      <div class="ci-info">
+        <div class="ci-title">${cl.titulo||'Sin título'}</div>
+        <div class="ci-meta">${[cl.materia,cl.nivel].filter(Boolean).join(' · ')}</div>
+        <div class="ci-badges">
+          ${cl.categoria?`<span class="ci-badge">${cl.categoria}</span>`:''}
+          ${cl.pasos&&cl.pasos.length?`<span class="ci-badge" style="background:rgba(104,211,145,0.1);color:var(--accent2);border-color:rgba(104,211,145,0.2)">${cl.pasos.length} pasos</span>`:''}
+          ${cl.objetivos&&cl.objetivos.length?`<span class="ci-badge" style="background:rgba(183,148,244,0.1);color:var(--purple);border-color:rgba(183,148,244,0.2)">${cl.objetivos.length} objetivos</span>`:''}
+          ${cl.videoUrl?`<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.2)">📹 Video</span>`:''}
+        </div>
+      </div>
+      <div class="action-btns">
+        <button class="btn-sm btn-edit" onclick="openClaseModal(${i})">✏️ Editar</button>
+        <button class="btn-sm btn-delete" onclick="eliminarClase(${i})">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function openClaseModal(idx){
+  editClaseIdx=idx;
+  const cl=idx!==null?clasesData[idx]:{};
+  document.getElementById('clase-modal-title').innerHTML=(idx!==null?'✏️ Editar Clase':'➕ Nueva Clase')+' <button class="modal-close" onclick="closeClaseModal()">✕</button>';
+  document.getElementById('cm-numero').value=cl.numero||'';
+  document.getElementById('cm-tipo').value=cl.tipo||(document.getElementById('cl-tipo').value)||'practica';
+  document.getElementById('cm-titulo').value=cl.titulo||'';
+  document.getElementById('cm-materia').value=cl.materia||'';
+  document.getElementById('cm-nivel').value=cl.nivel||'';
+  document.getElementById('cm-categoria').value=cl.categoria||'';
+  document.getElementById('cm-video').value=cl.videoUrl||'';
+  document.getElementById('cm-descripcion').value=cl.descripcion||'';
+  document.getElementById('cm-herramienta').value=cl.herramientaUrl||'';
+  editObjetivos=[...(cl.objetivos||[''])];
+  editPasos=[...(cl.pasos||[{titulo:'',descripcion:''}])];
+  renderObjetivos();
+  renderPasos();
+  previewClaseVideo();
+  document.getElementById('clase-modal').classList.add('open');
+}
+function closeClaseModal(){document.getElementById('clase-modal').classList.remove('open');}
+
+function previewClaseVideo(){const url=document.getElementById('cm-video').value.trim();const embed=getEmbedUrl(url);const box=document.getElementById('cm-video-preview');const iframe=document.getElementById('cm-video-iframe');if(embed){iframe.src=embed;box.style.display='block';}else box.style.display='none';}
+
+function addObjetivo(){editObjetivos.push('');renderObjetivos();}
+function removeObjetivo(i){editObjetivos.splice(i,1);renderObjetivos();}
+function renderObjetivos(){
+  const w=document.getElementById('objetivos-list');
+  w.innerHTML=editObjetivos.map((o,i)=>`<div class="obj-row"><input type="text" value="${(o||'').replace(/"/g,'&quot;')}" oninput="editObjetivos[${i}]=this.value" placeholder="Ej: Conocer la interfaz del programa"/><button class="btn-remove-row" onclick="removeObjetivo(${i})">✕</button></div>`).join('');
+}
+
+function addPaso(){editPasos.push({titulo:'',descripcion:''});renderPasos();}
+function removePaso(i){editPasos.splice(i,1);renderPasos();}
+function renderPasos(){
+  const w=document.getElementById('pasos-list');
+  w.innerHTML=editPasos.map((p,i)=>`
+    <div class="step-block">
+      <div class="step-block-header">
+        <div class="step-num">${i+1}</div>
+        <strong style="font-size:0.85rem;flex:1">Paso ${i+1}</strong>
+        <button class="btn-remove-row" onclick="removePaso(${i})">✕</button>
+      </div>
+      <input type="text" value="${(p.titulo||'').replace(/"/g,'&quot;')}" oninput="editPasos[${i}].titulo=this.value" placeholder="Título del paso (ej: Abrir el programa)"/>
+      <textarea oninput="editPasos[${i}].descripcion=this.value" placeholder="Descripción detallada del paso...">${p.descripcion||''}</textarea>
+      <div class="extra-fields">
+        <input type="text" value="${(p.tip||'').replace(/"/g,'&quot;')}" oninput="editPasos[${i}].tip=this.value" placeholder="💡 Tip opcional"/>
+        <input type="text" value="${(p.ejemplo||'').replace(/"/g,'&quot;')}" oninput="editPasos[${i}].ejemplo=this.value" placeholder="📸 Ejemplo visual opcional"/>
+      </div>
+    </div>`).join('');
+}
+
+async function guardarClase(){
+  const titulo=document.getElementById('cm-titulo').value.trim();
+  if(!titulo)return toast('⚠️ El título es obligatorio','error');
+  const cl={
+    numero:   document.getElementById('cm-numero').value.trim(),
+    tipo:     document.getElementById('cm-tipo').value,
+    titulo,
+    materia:  document.getElementById('cm-materia').value.trim(),
+    nivel:    document.getElementById('cm-nivel').value.trim(),
+    categoria:document.getElementById('cm-categoria').value.trim(),
+    videoUrl: document.getElementById('cm-video').value.trim(),
+    descripcion:document.getElementById('cm-descripcion').value.trim(),
+    herramientaUrl:document.getElementById('cm-herramienta').value.trim(),
+    objetivos:editObjetivos.filter(o=>o.trim()),
+    pasos:    editPasos.filter(p=>p.titulo||p.descripcion),
+  };
+  // Remove empty strings
+  Object.keys(cl).forEach(k=>{if(cl[k]===''||cl[k]===null)delete cl[k];});
+  if(!cl.numero)cl.numero=String((window._allClases||[]).length+1).padStart(2,'0');
+
+  // Merge into full array
+  let all=window._allClases?[...window._allClases]:[];
+  if(editClaseIdx!==null){
+    // find in all array
+    const tipo=cl.tipo;
+    let globalIdx=editClaseIdx;
+    // rebuild: replace matching item
+    const filtered=all.filter(c=>(c.tipo||'practica')===cl.tipo);
+    const target=filtered[editClaseIdx];
+    if(target){const gi=all.indexOf(target);all[gi]=cl;}
+    else all.push(cl);
+  } else {
+    all.push(cl);
+  }
+  window._allClases=all;
+
+  await saveClasesToGH(all);
+  closeClaseModal();
+  // Reload data for display
+  const tipo=document.getElementById('cl-tipo').value;
+  clasesData=all.filter(c=>(tipo==='teoria'?c.tipo==='teoria':c.tipo!=='teoria'));
+  renderClasesList();
+}
+
+async function eliminarClase(i){
+  const titulo=clasesData[i]?.titulo||'esta clase';
+  if(!confirm(`¿Eliminar "${titulo}"?`))return;
+  const tipo=document.getElementById('cl-tipo').value;
+  let all=window._allClases?[...window._allClases]:[];
+  const filtered=all.filter(c=>(tipo==='teoria'?c.tipo==='teoria':c.tipo!=='teoria'));
+  const target=filtered[i];
+  if(target){const gi=all.indexOf(target);all.splice(gi,1);}
+  window._allClases=all;
+  await saveClasesToGH(all);
+  clasesData=all.filter(c=>(tipo==='teoria'?c.tipo==='teoria':c.tipo!=='teoria'));
+  renderClasesList();
+}
+
+async function saveClasesToGH(all){
+  const c=getConfig();
+  const path=`clases/${clasesGroup}/clases.json`;
+  const data={grupo:clasesGroup,clases:all,updated:new Date().toISOString()};
+  try{
+    await ghPut(path,data,clasesFileSha,'📚 Actualizar clases/'+clasesGroup+'/clases.json');
+    // Update SHA
+    const r=await ghGet(path);if(r)clasesFileSha=r.sha;
+    toast('✅ Clases guardadas en GitHub','success');
+  }catch(e){toast('❌ Error al guardar: '+e.message,'error');}
+}
+
+// ══════════════════════════════════════════════════════
+//  ███████╗ HERRAMIENTAS ████████████████████████████████
+// ══════════════════════════════════════════════════════
+let herramientasData=[];
+let herramientasFileSha=null;
+let editHerrIdx=null;
+let editHerrPasos=[];
+
+const HERRAMIENTAS_DEFAULT=[
+  {icono:'🎨',nombre:'Canva',subtitulo:'Diseño Gráfico',url:'https://www.canva.com/',descripcion:'Diseño gráfico profesional en línea. Afiches, presentaciones y más.',pasos:['Registrarse gratis en canva.com','Elegir formato (afiche, presentación…)','Personalizar con el panel lateral','Descargar en JPG, PNG o PDF']},
+  {icono:'✂️',nombre:'Photoroom',subtitulo:'Eliminar fondos',url:'https://www.photoroom.com/es/herramientas/eliminador-de-fondos',descripcion:'Elimina fondos con IA automáticamente. Sin instalación.',pasos:['Entrar a photoroom.com','Subir la imagen','El fondo se elimina solo','Descargar PNG transparente']},
+  {icono:'🖼️',nombre:'Photopea',subtitulo:'Editor de fotos',url:'https://www.photopea.com/',descripcion:'Editor de imágenes avanzado, similar a Photoshop, en el navegador.',pasos:['Ir a photopea.com','Abrir o crear nuevo documento','Usar las herramientas del panel izquierdo','Guardar/exportar tu trabajo']},
+  {icono:'🗄️',nombre:'DB Fiddle',subtitulo:'SQL Online',url:'https://www.db-fiddle.com/',descripcion:'Practica SQL en el navegador. MySQL, PostgreSQL y SQLite.',pasos:['Abrir db-fiddle.com','Elegir motor (MySQL)','Escribir CREATE TABLE a la izquierda','Consultas a la derecha → Run']},
+  {icono:'📐',nombre:'Draw.io',subtitulo:'Diagramas ER',url:'https://app.diagrams.net/',descripcion:'Diagramas Entidad-Relación y de red gratis.',pasos:['Ir a app.diagrams.net','Seleccionar Entity Relation','Arrastrar entidades y conectar','Exportar como imagen']},
+  {icono:'🌐',nombre:'Cisco Skills',subtitulo:'Redes',url:'https://skillsforall.com/',descripcion:'Cursos de Cisco con Packet Tracer incluido.',pasos:['Registrarse en skillsforall.com','Buscar "Networking Basics"','Completar módulos interactivos','Descargar Packet Tracer']},
+  {icono:'📊',nombre:'Office Online',subtitulo:'Word · Excel · PPT',url:'https://www.office.com/',descripcion:'Suite ofimática completa en el navegador.',pasos:['Ingresar a office.com','Elegir la app (Word/Excel/PPT)','Crear o subir archivo','Compartir enlace al docente']},
+];
+
+async function loadHerramientas(){
+  const result=await ghGet('datos/herramientas.json');
+  if(result){herramientasData=result.data.herramientas||result.data||[];herramientasFileSha=result.sha;}
+  else{herramientasData=[...HERRAMIENTAS_DEFAULT];herramientasFileSha=null;}
+  renderHerramientasList();
+}
+
+function renderHerramientasList(){
+  const wrap=document.getElementById('herramientas-list');
+  if(!wrap)return;
+  if(!herramientasData.length){wrap.innerHTML=`<div class="empty-state"><div class="es-icon">🛠</div><h4>Sin herramientas</h4><p>Agrega la primera.</p></div>`;return;}
+  wrap.innerHTML=herramientasData.map((h,i)=>`
+    <div class="tool-item">
+      <div class="tool-ico-disp">${h.icono||'🔗'}</div>
+      <div class="tool-info">
+        <div class="tool-name">${h.nombre||'Sin nombre'}</div>
+        <div class="tool-url">${h.url||''}</div>
+        <div class="tool-desc-disp">${h.subtitulo||''} ${h.pasos&&h.pasos.length?'· '+h.pasos.length+' pasos':''}</div>
+      </div>
+      <div class="action-btns">
+        <a class="btn-sm btn-view" href="${h.url||'#'}" target="_blank">🔗 Abrir</a>
+        <button class="btn-sm btn-edit" onclick="openHerramientaModal(${i})">✏️ Editar</button>
+        <button class="btn-sm btn-delete" onclick="eliminarHerramienta(${i})">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+function openHerramientaModal(idx){
+  editHerrIdx=idx;
+  const h=idx!==null?herramientasData[idx]:{};
+  document.getElementById('herr-modal-title').innerHTML=(idx!==null?'✏️ Editar Herramienta':'➕ Nueva Herramienta')+' <button class="modal-close" onclick="closeHerramientaModal()">✕</button>';
+  document.getElementById('hm-icono').value=h.icono||'';
+  document.getElementById('hm-nombre').value=h.nombre||'';
+  document.getElementById('hm-subtitulo').value=h.subtitulo||'';
+  document.getElementById('hm-url').value=h.url||'';
+  document.getElementById('hm-desc').value=h.descripcion||'';
+  editHerrPasos=[...(h.pasos||[''])];
+  renderHerrPasos();
+  document.getElementById('herramienta-modal').classList.add('open');
+}
+function closeHerramientaModal(){document.getElementById('herramienta-modal').classList.remove('open');}
+
+function addPasoHerr(){editHerrPasos.push('');renderHerrPasos();}
+function removePasoHerr(i){editHerrPasos.splice(i,1);renderHerrPasos();}
+function renderHerrPasos(){
+  const w=document.getElementById('herr-pasos-list');
+  w.innerHTML=editHerrPasos.map((p,i)=>`<div class="paso-herr-row"><span style="font-size:0.75rem;font-weight:800;color:var(--text-muted);min-width:20px">${i+1}.</span><input type="text" value="${(p||'').replace(/"/g,'&quot;')}" oninput="editHerrPasos[${i}]=this.value" placeholder="Ej: Registrarse en la plataforma"/><button class="btn-remove-row" onclick="removePasoHerr(${i})">✕</button></div>`).join('');
+}
+
+function guardarHerramienta(){
+  const nombre=document.getElementById('hm-nombre').value.trim();
+  const url=document.getElementById('hm-url').value.trim();
+  if(!nombre||!url)return toast('⚠️ Nombre y URL son obligatorios','error');
+  const h={icono:document.getElementById('hm-icono').value.trim()||'🔗',nombre,subtitulo:document.getElementById('hm-subtitulo').value.trim(),url,descripcion:document.getElementById('hm-desc').value.trim(),pasos:editHerrPasos.filter(p=>p.trim())};
+  if(editHerrIdx!==null)herramientasData[editHerrIdx]=h;
+  else herramientasData.push(h);
+  closeHerramientaModal();
+  renderHerramientasList();
+  toast('✅ Herramienta lista. Pulsa "Guardar en GitHub" para publicar.','info');
+}
+
+function eliminarHerramienta(i){
+  if(!confirm('¿Eliminar "'+herramientasData[i].nombre+'"?'))return;
+  herramientasData.splice(i,1);
+  renderHerramientasList();
+  toast('🗑️ Eliminado. Pulsa "Guardar en GitHub" para aplicar.','info');
+}
+
+async function saveHerramientasToGH(){
+  const data={herramientas:herramientasData,updated:new Date().toISOString()};
+  try{await ghPut('datos/herramientas.json',data,herramientasFileSha,'🛠 Actualizar herramientas');const r=await ghGet('datos/herramientas.json');if(r)herramientasFileSha=r.sha;toast('✅ Herramientas guardadas en GitHub','success');}
+  catch(e){toast('❌ Error: '+e.message,'error');}
+}
+
+// ══════════════════════════════════════════════════════
+//  IA
+// ══════════════════════════════════════════════════════
+function loadIA(url,btn){document.querySelectorAll('.ia-tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.getElementById('ia-frame').src=url;}
+
+// ══════════════════════════════════════════════════════
+//  RUEDA CROMÁTICA
+// ══════════════════════════════════════════════════════
+let currentHue=0,currentSat=1,currentLig=0.5,currentHarmony='complementario',wheelInitialized=false;
+let savedPalette=JSON.parse(localStorage.getItem('cented_palette')||'[]');
+
+function initColorWheel(){
+  if(wheelInitialized)return;wheelInitialized=true;drawWheel();
+  const canvas=document.getElementById('colorWheel');
+  function pick(e){const rect=canvas.getBoundingClientRect();const scaleX=canvas.width/rect.width,scaleY=canvas.height/rect.height;const x=((e.clientX||(e.touches&&e.touches[0].clientX)||0)-rect.left)*scaleX-canvas.width/2;const y=((e.clientY||(e.touches&&e.touches[0].clientY)||0)-rect.top)*scaleY-canvas.height/2;const r=Math.sqrt(x*x+y*y),maxR=canvas.width/2-5;if(r>maxR)return;currentHue=(Math.atan2(y,x)*(180/Math.PI)+360)%360;currentSat=Math.min(r/maxR,1);currentLig=parseFloat(document.getElementById('brightness').value)/100;updateColorDisplay();updateHarmony();}
+  canvas.addEventListener('mousedown',e=>{pick(e);canvas.addEventListener('mousemove',pick);});
+  canvas.addEventListener('mouseup',()=>canvas.removeEventListener('mousemove',pick));
+  canvas.addEventListener('touchstart',e=>{e.preventDefault();pick(e);},{passive:false});
+  canvas.addEventListener('touchmove',e=>{e.preventDefault();pick(e);},{passive:false});
+  updateColorDisplay();updateHarmony();renderSavedPalette();
+}
+function drawWheel(){
+  const canvas=document.getElementById('colorWheel');if(!canvas)return;
+  const ctx=canvas.getContext('2d'),cx=canvas.width/2,cy=canvas.height/2,r=cx-5;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let angle=0;angle<360;angle+=0.5){const sa=(angle-0.25)*Math.PI/180,ea=(angle+0.5)*Math.PI/180;const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,r);grad.addColorStop(0,`hsl(${angle},0%,${50*(parseFloat(document.getElementById('brightness').value)/100)*2}%)`);grad.addColorStop(1,`hsl(${angle},${document.getElementById('saturation').value}%,${50*(parseFloat(document.getElementById('brightness').value)/100)}%)`);ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,ea);ctx.closePath();ctx.fillStyle=grad;ctx.fill();}
+  const ov=ctx.createRadialGradient(cx,cy,0,cx,cy,r);ov.addColorStop(0,'rgba(255,255,255,0.6)');ov.addColorStop(1,'rgba(255,255,255,0)');ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=ov;ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=2;ctx.stroke();
+  const bri=parseFloat(document.getElementById('brightness').value)/100,sat=parseFloat(document.getElementById('saturation').value)/100;
+  const cr=currentSat*sat*(cx-5),cx2=cx+cr*Math.cos(currentHue*Math.PI/180),cy2=cy+cr*Math.sin(currentHue*Math.PI/180);
+  ctx.beginPath();ctx.arc(cx2,cy2,9,0,Math.PI*2);ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx2,cy2,6,0,Math.PI*2);ctx.fillStyle=hslToHex(currentHue,currentSat*100,bri*50+25);ctx.fill();
+  updateColorDisplay();
+}
+function updateColorDisplay(){
+  const bri=parseFloat(document.getElementById('brightness').value)/100,sat=parseFloat(document.getElementById('saturation').value)/100;
+  const l=bri*50+25,s=currentSat*100*sat,hex=hslToHex(currentHue,s,l),rgb=hexToRgb(hex);
+  const box=document.getElementById('selected-color-box');box.style.background=hex;
+  const tc=luminance(rgb.r,rgb.g,rgb.b)>0.4?'#000':'#fff';box.style.color=tc;box.textContent=hex.toUpperCase()+' — Clic para copiar';
+  document.getElementById('hex-val').textContent=hex.toUpperCase();document.getElementById('rgb-val').textContent=`rgb(${rgb.r},${rgb.g},${rgb.b})`;
+  const h=Math.round(currentHue),sv=Math.round(s),lv=Math.round(l);document.getElementById('hsl-val').textContent=`hsl(${h},${sv}%,${lv}%)`;
+  const c=parseFloat((1-rgb.r/255).toFixed(2)),m=parseFloat((1-rgb.g/255).toFixed(2)),y=parseFloat((1-rgb.b/255).toFixed(2)),k=parseFloat(Math.min(c,m,y).toFixed(2));
+  document.getElementById('cmyk-val').textContent=`C:${Math.round(c*100)} M:${Math.round(m*100)} Y:${Math.round(y*100)} K:${Math.round(k*100)}`;
+  const dark=document.getElementById('contrast-box'),light=document.getElementById('contrast-box2');
+  dark.style.background=hex;dark.style.color='#000';light.style.background=hex;light.style.color='#fff';
+  const lum=luminance(rgb.r,rgb.g,rgb.b),ratioD=((lum+0.05)/0.05).toFixed(1),ratioL=((1+0.05)/(lum+0.05)).toFixed(1);
+  dark.textContent=`Texto oscuro — Contraste ${ratioD}:1 ${ratioD>=4.5?'✅ AA':'⚠️ bajo'}`;
+  light.textContent=`Texto claro — Contraste ${ratioL}:1 ${ratioL>=4.5?'✅ AA':'⚠️ bajo'}`;
+  updateGradients(hex);
+}
+function updateHarmony(){setHarmony(currentHarmony,null);}
+function setHarmony(type,btn){
+  currentHarmony=type;if(btn){document.querySelectorAll('.h-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+  const bri=parseFloat(document.getElementById('brightness').value)/100,sat=parseFloat(document.getElementById('saturation').value)/100,l=bri*50+25,s=currentSat*100*sat;
+  let hues=[];
+  switch(type){case'complementario':hues=[currentHue,(currentHue+180)%360];break;case'analogos':hues=[currentHue,(currentHue+30)%360,(currentHue+60)%360,(currentHue-30+360)%360,(currentHue-60+360)%360];break;case'triadico':hues=[currentHue,(currentHue+120)%360,(currentHue+240)%360];break;case'tetradico':hues=[currentHue,(currentHue+90)%360,(currentHue+180)%360,(currentHue+270)%360];break;case'split':hues=[currentHue,(currentHue+150)%360,(currentHue+210)%360];break;case'monocromatico':hues=[currentHue,currentHue,currentHue,currentHue,currentHue];break;}
+  const ligs=type==='monocromatico'?[80,65,50,35,20]:Array(hues.length).fill(l);
+  const sats=type==='monocromatico'?[s*0.3,s*0.6,s,s*0.8,s*0.5]:Array(hues.length).fill(s);
+  const wrap=document.getElementById('harmony-palette');
+  wrap.innerHTML=hues.map((h,i)=>{const hex=hslToHex(h,sats[i],ligs[i]);const rgb=hexToRgb(hex);const tc=luminance(rgb.r,rgb.g,rgb.b)>0.4?'#000':'#fff';return`<div class="swatch-group"><div class="swatch" style="background:${hex}" onclick="selectHarmonyColor('${hex}');copyText('${hex}')" title="${hex}"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:800;color:${tc};opacity:0;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">Copiar</span></div><div class="swatch-val">${hex.toUpperCase()}</div></div>`;}).join('');
+}
+function selectHarmonyColor(hex){const rgb=hexToRgb(hex);const hsl=rgbToHsl(rgb.r,rgb.g,rgb.b);currentHue=hsl.h;currentSat=hsl.s/100;drawWheel();updateColorDisplay();updateHarmony();}
+function updateGradients(hex){const bri=parseFloat(document.getElementById('brightness').value)/100,sat=parseFloat(document.getElementById('saturation').value)/100,l=bri*50+25,s=currentSat*100*sat;const hex2=hslToHex((currentHue+180)%360,s,l),hex3=hslToHex((currentHue+30)%360,s,l);const wrap=document.getElementById('gradient-preview');const grads=[{name:'Lineal',css:`linear-gradient(135deg,${hex},${hex2})`},{name:'Análogo',css:`linear-gradient(90deg,${hex},${hex3},${hex2})`},{name:'Radial',css:`radial-gradient(circle,${hex},${hex2})`}];wrap.innerHTML=grads.map(g=>{const esc=g.css.replace(/'/g,"\\'");return`<div style="height:50px;border-radius:10px;background:${g.css};cursor:pointer;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.1)" onclick="copyText('${esc}')" title="Copiar CSS"><span style="position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);font-size:0.72rem;font-weight:800;color:rgba(255,255,255,0.9);text-shadow:0 1px 3px rgba(0,0,0,0.5)">${g.name} — clic para copiar</span></div>`;}).join('');}
+function addToSaved(){const hex=document.getElementById('hex-val').textContent;if(savedPalette.length>=12)return toast('⚠️ Máximo 12 colores','error');if(savedPalette.includes(hex))return toast('⚠️ Este color ya está','info');savedPalette.push(hex);localStorage.setItem('cented_palette',JSON.stringify(savedPalette));renderSavedPalette();toast('🎨 Color agregado','success');}
+function renderSavedPalette(){const wrap=document.getElementById('saved-swatches');if(!savedPalette.length){wrap.innerHTML='<p style="font-size:0.78rem;color:var(--text-dim)">Agrega colores con el botón</p>';return;}wrap.innerHTML=savedPalette.map((hex,i)=>{const rgb=hexToRgb(hex);const tc=luminance(rgb.r,rgb.g,rgb.b)>0.4?'#000':'#fff';return`<div class="swatch-group"><div class="swatch" style="background:${hex}" onclick="copyText('${hex}')" title="${hex}"><button style="position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:var(--danger);border:none;color:#fff;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center" onclick="event.stopPropagation();removeSaved(${i})">✕</button></div><div class="swatch-val">${hex}</div></div>`;}).join('');}
+function removeSaved(i){savedPalette.splice(i,1);localStorage.setItem('cented_palette',JSON.stringify(savedPalette));renderSavedPalette();}
+function clearSaved(){savedPalette=[];localStorage.setItem('cented_palette','[]');renderSavedPalette();toast('🗑️ Paleta limpiada','info');}
+function exportPalette(){if(!savedPalette.length)return toast('⚠️ Agrega colores primero','error');const css=`:root {\n${savedPalette.map((h,i)=>`  --color-${i+1}: ${h};`).join('\n')}\n}`;navigator.clipboard.writeText(css).then(()=>toast('📋 CSS de paleta copiado','success'));}
+function copyHex(){copyText(document.getElementById('hex-val').textContent);}
+function copyText(text){navigator.clipboard.writeText(text).then(()=>toast('📋 Copiado: '+text,'info')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('📋 Copiado: '+text,'info');});}
+
+// ══════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════
+function hslToHex(h,s,l){s/=100;l/=100;const a=s*Math.min(l,1-l);const f=n=>{const k=(n+h/30)%12;return l-a*Math.max(Math.min(k-3,9-k,1),-1)};return'#'+[f(0),f(8),f(4)].map(x=>{const hex=Math.round(x*255).toString(16);return hex.length===1?'0'+hex:hex}).join('');}
+function hexToRgb(hex){return{r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16)};}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return{h:h*360,s:s*100,l:l*100};}
+function luminance(r,g,b){const toL=c=>{c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4)};return 0.2126*toL(r)+0.7152*toL(g)+0.0722*toL(b);}
+function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});}
+function extIcon(ext){const m={pdf:'📄',doc:'📝',docx:'📝',ppt:'📊',pptx:'📊',xls:'📈',xlsx:'📈',zip:'📦',rar:'📦',png:'🖼️',jpg:'🖼️',jpeg:'🖼️',mp4:'🎬',mov:'🎬',avi:'🎬',txt:'📃',json:'🔗'};return m[ext]||'📎';}
+function extClass(ext){if(ext==='pdf')return'ext-pdf';if(['doc','docx'].includes(ext))return'ext-doc';if(['ppt','pptx'].includes(ext))return'ext-ppt';if(['zip','rar'].includes(ext))return'ext-zip';if(['mp4','mov','avi'].includes(ext))return'ext-vid';if(['png','jpg','jpeg','gif'].includes(ext))return'ext-img';return'ext-other';}
+function groupPill(g){const m={matutino:'<span class="group-pill pill-m">🌅 Matutino</span>',vespertino:'<span class="group-pill pill-v">🌇 Vespertino</span>',sabatino:'<span class="group-pill pill-s">📚 Sabatino</span>',todos:'<span class="group-pill pill-all">🌐 Todos</span>'};return m[g]||g;}
+function toast(msg,type='info'){const el=document.createElement('div');el.className='toast '+type;el.textContent=msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>{el.style.animation='slideOut 0.3s ease forwards';setTimeout(()=>el.remove(),300);},3500);}
+
+window.addEventListener('load',()=>{
+  const saved=localStorage.getItem('cented_token');
+  if(saved){document.getElementById('login-token').value=saved;GH_TOKEN=saved;}
+});
+</script>
+</body>
+</html>
