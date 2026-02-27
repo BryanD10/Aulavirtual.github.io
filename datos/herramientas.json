@@ -1,14 +1,14 @@
 {
   "herramientas": [
     {
-      "icono": "ð¨",
+      "icono": "🔗",
       "nombre": "Canva",
-      "subtitulo": "DiseÃ±o GrÃ¡fico",
+      "subtitulo": "Diseño Gráfico",
       "url": "https://www.canva.com/",
-      "descripcion": "DiseÃ±o grÃ¡fico profesional en lÃ­nea. Afiches, presentaciones y mÃ¡s.",
+      "descripcion": "Diseño gráfico profesional en línea. Afiches, presentaciones y más.",
       "pasos": [
         "Registrarse gratis en canva.com",
-        "Elegir formato (afiche, presentaciÃ³nâ¦)",
+        "Elegir formato (afiche, presentación…)",
         "Personalizar con el panel lateral",
         "Descargar en JPG, PNG o PDF"
       ]
@@ -27,11 +27,11 @@
       ]
     },
     {
-      "icono": "ð¼ï¸",
+      "icono": "🔗",
       "nombre": "Photopea",
       "subtitulo": "Editor de fotos",
       "url": "https://www.photopea.com/",
-      "descripcion": "Editor de imÃ¡genes avanzado, similar a Photoshop, en el navegador.",
+      "descripcion": "Editor de imágenes avanzado, similar a Photoshop, en el navegador.",
       "pasos": [
         "Ir a photopea.com",
         "Abrir o crear nuevo documento",
@@ -40,11 +40,11 @@
       ]
     },
     {
-      "icono": "ð",
+      "icono": "🔗",
       "nombre": "Office Online",
-      "subtitulo": "Word Â· Excel Â· PPT",
+      "subtitulo": "Word · Excel · PPT",
       "url": "https://www.office.com/",
-      "descripcion": "Suite ofimÃ¡tica completa en el navegador.",
+      "descripcion": "Suite ofimática completa en el navegador.",
       "pasos": [
         "Ingresar a office.com",
         "Elegir la app (Word/Excel/PPT)",
@@ -53,23 +53,23 @@
       ]
     },
     {
-      "icono": "ð¼ï¸",
+      "icono": "🔗",
       "nombre": "pinterest",
-      "subtitulo": "Busca inspiraciÃ³n e contenido de imÃ¡genes",
+      "subtitulo": "Busca inspiración e contenido de imágenes",
       "url": "https://ar.pinterest.com/",
       "descripcion": "",
       "pasos": []
     },
     {
-      "icono": "ð°",
+      "icono": "🔗",
       "nombre": "Dlbunny",
       "subtitulo": "Descarga de video/audio de YouTube",
       "url": "https://dlbunny.com/es/youtube",
-      "descripcion": "DLBunny es una popular herramienta de descarga gratuita de vÃ­deo corto que soporta mÃºltiples idiomas, incluyendo inglÃ©s, francÃ©s, alemÃ¡n, espaÃ±ol, Ã¡rabe, chino, japonÃ©s, coreano, vietnamita, etc. Puede usarlo para descargar sus vÃ­deos favoritos, imÃ¡genes o archivos de audio (completamente gratis).",
+      "descripcion": "DLBunny es una popular herramienta de descarga gratuita de vídeo corto que soporta múltiples idiomas, incluyendo inglés, francés, alemán, español, árabe, chino, japonés, coreano, vietnamita, etc. Puede usarlo para descargar sus vídeos favoritos, imágenes o archivos de audio (completamente gratis).",
       "pasos": []
     },
     {
-      "icono": "ð ",
+      "icono": "🔗",
       "nombre": "Google Fuentes",
       "subtitulo": "FUENTES",
       "url": "https://fonts.google.com/",
@@ -77,11 +77,11 @@
       "pasos": []
     },
     {
-      "icono": "ð¡",
+      "icono": "🔗",
       "nombre": "Dafont",
       "subtitulo": "FUENTES",
       "url": "https://www.dafont.com/es/",
-      "descripcion": "Explora y inspÃ­rate de fuentes",
+      "descripcion": "Explora y inspírate de fuentes",
       "pasos": []
     },
     {
@@ -93,13 +93,13 @@
       "pasos": []
     },
     {
-      "icono": "ð",
+      "icono": "🔗",
       "nombre": "Texturelabs",
       "subtitulo": "TEXTURA",
       "url": "https://texturelabs.org/",
-      "descripcion": "Descarga y busca texturas Ãºnicas para diseÃ±os",
+      "descripcion": "Descarga y busca texturas únicas para diseños",
       "pasos": []
     }
   ],
-  "updated": "2026-02-27T18:39:39.848Z"
+  "updated": "2026-02-27T19:13:04.000Z"
 }
