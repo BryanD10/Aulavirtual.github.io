@@ -484,7 +484,7 @@ function go(id, btn) {
 // ══════════════════════════════════════════════
 //  ACCORDION
 // ══════════════════════════════════════════════
-function tAcc(el){el.classList.toggle('open')}
+function tAcc(el,e){if(e)e.stopPropagation();el.classList.toggle('open')}
 function tPrac(card){card.classList.toggle('open');}
 
 // ══════════════════════════════════════════════
@@ -496,7 +496,9 @@ async function loadClases(){
     const r=await fetch(url);
     if(!r.ok)throw new Error();
     const d=await r.json();
-    const list=d.clases||d;
+    const allClases=d.clases||d;
+    // Filtrar solo las clases que son para este grupo (o para todos)
+    const list=allClases.filter(cl=>!cl.grupos||cl.grupos.length===0||cl.grupos.includes('matutino'));
     renderClases(list,'plist');
     document.getElementById('sn-clases').textContent=list.filter(c=>c.tipo!=='teoria').length||list.length;
     const tlist=list.filter(c=>c.tipo==='teoria');
@@ -518,11 +520,11 @@ function buildCard(c,i){
   const embed=getEmbed(c.videoUrl);
   const objs=(c.objetivos||[]).map(o=>`<div class="oi"><div class="och">✓</div>${o}</div>`).join('');
   const pasos=(c.pasos||[]).map((p,pi)=>`
-    <div class="sa" onclick="tAcc(this)">
+    <div class="sa" onclick="tAcc(this,event)">
       <div class="sa-hd"><span class="san">${pi+1}</span><span class="sat">${p.titulo}</span><span class="sac">▼</span></div>
       <div class="sa-bd">${p.descripcion}${p.tip?`<div class="tip">💡 ${p.tip}</div>`:''}${p.ejemplo?`<div class="ex"><strong>Ejemplo Visual</strong><p>${p.ejemplo}</p></div>`:''}</div>
     </div>`).join('');
-  return `<div class="pc rv" onclick="tPrac(this)">
+  if(c.visible===false){return `<div class="pc rv" style="opacity:.6;pointer-events:none;cursor:default"><div class="pc-hd"><div class="pcn" style="background:#e8e4de;color:#a8a29e">${i+1}</div><div class="pci"><h3 style="color:#a8a29e">${c.titulo}</h3><p style="color:#c7c0b8">${c.materia||""}</p></div><span style="font-size:.72rem;color:#a8a29e;background:#f5f4f0;padding:.2rem .75rem;border-radius:50px;border:1px solid #e8e4de;margin-left:auto;flex-shrink:0">🔒 No disponible aún</span></div></div>`;}return `<div class="pc rv" onclick="tPrac(this)">
     <div class="pc-hd">
       <div class="pcn">${i+1}</div>
       <div class="pci"><h3>${c.titulo}</h3><p>${c.materia||''}${c.nivel?' · '+c.nivel:''}</p></div>
