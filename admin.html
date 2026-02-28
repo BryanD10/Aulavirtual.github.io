@@ -1107,11 +1107,6 @@ function openClaseModal(idx){
   document.getElementById('cm-descripcion').value=cl.descripcion||'';
   document.getElementById('cm-herramienta').value=cl.herramientaUrl||'';
   setVisible(cl.visible!==false);
-  const _grps=cl.grupos||[];
-  ['matutino','vespertino','sabatino'].forEach(g=>{
-    const cb=document.getElementById('grp-'+g);
-    if(cb)cb.checked=_grps.length===0||_grps.includes(g);
-  });
   editObjetivos=[...(cl.objetivos||[''])];
   editPasos=[...(cl.pasos||[{titulo:'',descripcion:''}])];
   renderObjetivos();
@@ -1162,63 +1157,61 @@ function renderPasos(){
 
 async function limpiarClases(){
   if(!window._allClases||!window._allClases.length){toast('⚠️ Carga las clases primero','error');return;}
-  // Encontrar clases que tienen grupos[] que NO incluyen el grupo actual
+  // Eliminar clases que tienen grupos[] que excluyen el grupo actual
   const foraneas=window._allClases.filter(cl=>cl.grupos&&cl.grupos.length>0&&!cl.grupos.includes(clasesGroup));
-  if(!foraneas.length){toast('✅ No hay clases foráneas en este archivo','success');return;}
-  if(!confirm(`Se encontraron ${foraneas.length} clase(s) de otros grupos en el archivo de ${clasesGroup}.\nEstas se eliminarán del archivo actual.\n¿Continuar?`))return;
-  const limpias=window._allClases.filter(cl=>!cl.grupos||cl.grupos.length===0||cl.grupos.includes(clasesGroup));
+  // También limpiar campo grupos de las que sí pertenecen (ya no se usa)
+  const limpias=window._allClases
+    .filter(cl=>!cl.grupos||cl.grupos.length===0||cl.grupos.includes(clasesGroup))
+    .map(cl=>{const {grupos,...rest}=cl;return rest;}); // quitar campo grupos
+  if(!foraneas.length && limpias.length===window._allClases.length){
+    toast('✅ Archivo limpio, sin clases foráneas','success');return;
+  }
+  if(!confirm(`Se encontraron ${foraneas.length} clase(s) de otros grupos en el archivo de ${clasesGroup}.\nSe eliminarán y se limpiará el campo "grupos".\n¿Continuar?`))return;
   window._allClases=limpias;
   await saveClasesToGH(limpias);
-  clasesData=limpias.filter(cl=>document.getElementById('cl-tipo').value==='teoria'?cl.tipo==='teoria':cl.tipo!=='teoria');
-  renderClasesList();
-  toast(`✅ ${foraneas.length} clase(s) foráneas eliminadas de ${clasesGroup}`,'success');
+  await loadClasesFromGH();
+  toast(`✅ Listo: ${foraneas.length} foráneas eliminadas, archivo limpio`,'success');
 }
 async function guardarClase(){
   const titulo=document.getElementById('cm-titulo').value.trim();
   if(!titulo)return toast('⚠️ El título es obligatorio','error');
+  const tipo=document.getElementById('cm-tipo').value;
   const cl={
-    numero:   document.getElementById('cm-numero').value.trim(),
-    tipo:     document.getElementById('cm-tipo').value,
+    numero:      document.getElementById('cm-numero').value.trim(),
+    tipo,
     titulo,
-    materia:  document.getElementById('cm-materia').value.trim(),
-    nivel:    document.getElementById('cm-nivel').value.trim(),
-    categoria:document.getElementById('cm-categoria').value.trim(),
-    videoUrl: document.getElementById('cm-video').value.trim(),
-    descripcion:document.getElementById('cm-descripcion').value.trim(),
-    herramientaUrl:document.getElementById('cm-herramienta').value.trim(),
-    visible:document.getElementById('cm-visible').value!=='false',
-    grupos:['matutino','vespertino','sabatino'].filter(g=>{
-      const cb=document.getElementById('grp-'+g);return cb&&cb.checked;
-    }),
-    objetivos:editObjetivos.filter(o=>o.trim()),
-    pasos:    editPasos.filter(p=>p.titulo||p.descripcion),
+    materia:     document.getElementById('cm-materia').value.trim(),
+    nivel:       document.getElementById('cm-nivel').value.trim(),
+    categoria:   document.getElementById('cm-categoria').value.trim(),
+    videoUrl:    document.getElementById('cm-video').value.trim(),
+    descripcion: document.getElementById('cm-descripcion').value.trim(),
+    herramientaUrl: document.getElementById('cm-herramienta').value.trim(),
+    visible:     document.getElementById('cm-visible').value!=='false',
+    objetivos:   editObjetivos.filter(o=>o.trim()),
+    pasos:       editPasos.filter(p=>p.titulo||p.descripcion),
   };
-  // Remove empty strings
+  // Limpiar campos vacíos
   Object.keys(cl).forEach(k=>{if(cl[k]===''||cl[k]===null)delete cl[k];});
-  if(!cl.numero)cl.numero=String((window._allClases||[]).length+1).padStart(2,'0');
 
-  // Merge into full array
-  let all=window._allClases?[...window._allClases]:[];
-  if(editClaseIdx!==null){
-    // find in all array
-    const tipo=cl.tipo;
-    let globalIdx=editClaseIdx;
-    // rebuild: replace matching item
-    const filtered=all.filter(c=>(c.tipo||'practica')===cl.tipo);
-    const target=filtered[editClaseIdx];
-    if(target){const gi=all.indexOf(target);all[gi]=cl;}
+  // Trabajar solo con el array completo _allClases
+  let all = window._allClases ? [...window._allClases] : [];
+
+  if(!cl.numero) cl.numero = String(all.length+1).padStart(2,'0');
+
+  if(editClaseIdx !== null){
+    // Editar: encontrar el item en _allClases por índice en clasesData
+    const target = clasesData[editClaseIdx];
+    const gi = all.findIndex(x => x === target || (x.titulo===target.titulo && x.numero===target.numero));
+    if(gi >= 0) all[gi] = cl;
     else all.push(cl);
   } else {
     all.push(cl);
   }
-  window._allClases=all;
+  window._allClases = all;
 
   await saveClasesToGH(all);
   closeClaseModal();
-  // Reload data for display
-  const tipo=document.getElementById('cl-tipo').value;
-  clasesData=all.filter(c=>(tipo==='teoria'?c.tipo==='teoria':c.tipo!=='teoria'));
-  renderClasesList();
+  await loadClasesFromGH();
 }
 
 async function eliminarClase(i){
