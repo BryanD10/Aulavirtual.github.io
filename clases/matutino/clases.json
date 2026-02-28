@@ -50,16 +50,27 @@
     {
       "numero": "06",
       "tipo": "practica",
-      "titulo": "Serie EDI: Masterclass de Deconstrucción de Estilos y Composición Avanzada en Affinity",
+      "titulo": "VALIENDO EN LOS PARCIALES",
       "materia": "DISEÑO GRAFICO",
       "nivel": "AVANZADO",
-      "categoria": "PRACTICA 06",
+      "categoria": "Practica6",
+      "videoUrl": "https://youtu.be/4nWXujGi90Y?si=_KVZNkpD2-ff_qyn",
+      "descripcion": "sopilote cara de ayote",
       "visible": true,
       "grupos": [
         "vespertino"
       ],
-      "objetivos": [],
-      "pasos": []
+      "objetivos": [
+        "aprender para no valer "
+      ],
+      "pasos": [
+        {
+          "titulo": "cara de ayote si no te dormis te come el coyote",
+          "descripcion": "papapa",
+          "tip": "sapo",
+          "ejemplo": "dddd"
+        }
+      ]
     },
     {
       "numero": "01",
@@ -89,5 +100,5 @@
       ]
     }
   ],
-  "updated": "2026-02-28T03:39:41.727Z"
+  "updated": "2026-02-28T03:42:53.552Z"
 }
