@@ -563,6 +563,7 @@ select option{background:#0c1a2e}
         </select>
         <button class="btn-upload sm green" onclick="openClaseModal(null)">➕ Nueva clase</button>
         <button class="btn-sm btn-copy" style="padding:0.55rem 1rem;border-radius:9px" onclick="loadClasesFromGH()">🔄 Recargar</button>
+        <button class="btn-sm btn-delete" style="padding:0.55rem 1rem;border-radius:9px" onclick="limpiarClases()" title="Elimina clases de otros grupos que se hayan mezclado por error">🧹 Limpiar</button>
         <span id="clases-count" style="font-size:0.82rem;color:var(--text-dim);margin-left:auto"></span>
       </div>
 
@@ -1048,9 +1049,9 @@ async function loadClasesFromGH(){
   if(result){
     const all=result.data.clases||result.data||[];
     clasesFileSha=result.sha;
-    const filtrarGrupo=cl=>!cl.grupos||cl.grupos.length===0||cl.grupos.includes(clasesGroup);
-    if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria').filter(filtrarGrupo);
-    else clasesData=all.filter(cl=>cl.tipo==='teoria').filter(filtrarGrupo);
+    // Admin muestra TODAS las clases del archivo (el campo grupos solo afecta a los alumnos)
+    if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria');
+    else clasesData=all.filter(cl=>cl.tipo==='teoria');
     // Store full array for save
     window._allClases=all;
   } else {
@@ -1158,6 +1159,20 @@ function renderPasos(){
     </div>`).join('');
 }
 
+
+async function limpiarClases(){
+  if(!window._allClases||!window._allClases.length){toast('⚠️ Carga las clases primero','error');return;}
+  // Encontrar clases que tienen grupos[] que NO incluyen el grupo actual
+  const foraneas=window._allClases.filter(cl=>cl.grupos&&cl.grupos.length>0&&!cl.grupos.includes(clasesGroup));
+  if(!foraneas.length){toast('✅ No hay clases foráneas en este archivo','success');return;}
+  if(!confirm(`Se encontraron ${foraneas.length} clase(s) de otros grupos en el archivo de ${clasesGroup}.\nEstas se eliminarán del archivo actual.\n¿Continuar?`))return;
+  const limpias=window._allClases.filter(cl=>!cl.grupos||cl.grupos.length===0||cl.grupos.includes(clasesGroup));
+  window._allClases=limpias;
+  await saveClasesToGH(limpias);
+  clasesData=limpias.filter(cl=>document.getElementById('cl-tipo').value==='teoria'?cl.tipo==='teoria':cl.tipo!=='teoria');
+  renderClasesList();
+  toast(`✅ ${foraneas.length} clase(s) foráneas eliminadas de ${clasesGroup}`,'success');
+}
 async function guardarClase(){
   const titulo=document.getElementById('cm-titulo').value.trim();
   if(!titulo)return toast('⚠️ El título es obligatorio','error');
