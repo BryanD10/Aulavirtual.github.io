@@ -1344,9 +1344,17 @@ function eliminarHerramienta(i){
 }
 
 async function saveHerramientasToGH(){
+  const cfg=getConfig();
   const data={herramientas:herramientasData,updated:new Date().toISOString()};
-  try{await ghPut('datos/herramientas.json',data,herramientasFileSha,'🛠 Actualizar herramientas');const r=await ghGet('datos/herramientas.json');if(r)herramientasFileSha=r.sha;toast('✅ Herramientas guardadas en GitHub','success');}
-  catch(e){toast('❌ Error: '+e.message,'error');}
+  try{
+    // SHA fresco antes de guardar
+    const freshMeta=await ghReq('GET',`/repos/${cfg.user}/${cfg.repo}/contents/datos/herramientas.json`);
+    if(freshMeta.ok){const m=await freshMeta.json();herramientasFileSha=m.sha;}
+    await ghPut('datos/herramientas.json',data,herramientasFileSha,'🛠 Actualizar herramientas');
+    const r2=await ghReq('GET',`/repos/${cfg.user}/${cfg.repo}/contents/datos/herramientas.json`);
+    if(r2.ok){const m2=await r2.json();herramientasFileSha=m2.sha;}
+    toast('✅ Herramientas guardadas en GitHub','success');
+  }catch(e){toast('❌ Error: '+e.message,'error');}
 }
 
 // ══════════════════════════════════════════════════════
