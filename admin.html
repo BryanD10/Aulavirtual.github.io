@@ -1105,6 +1105,11 @@ function openClaseModal(idx){
   document.getElementById('cm-descripcion').value=cl.descripcion||'';
   document.getElementById('cm-herramienta').value=cl.herramientaUrl||'';
   setVisible(cl.visible!==false);
+  // Checkboxes de grupos (para copiar la clase a otros grupos)
+  ['matutino','vespertino','sabatino'].forEach(g=>{
+    const cb=document.getElementById('grp-'+g);
+    if(cb){cb.checked=(g===clasesGroup);}
+  });
   editObjetivos=[...(cl.objetivos||[''])];
   editPasos=[...(cl.pasos||[{titulo:'',descripcion:''}])];
   renderObjetivos();
@@ -1191,30 +1196,73 @@ async function guardarClase(){
   // Limpiar campos vacíos
   Object.keys(cl).forEach(k=>{if(cl[k]===''||cl[k]===null)delete cl[k];});
 
-  // Trabajar solo con el array completo _allClases
-  let all = window._allClases ? [...window._allClases] : [];
+  // Determinar a qué grupos se copia
+  const todosGrupos=['matutino','vespertino','sabatino'];
+  const gruposSeleccionados=todosGrupos.filter(g=>{
+    const cb=document.getElementById('grp-'+g);return cb&&cb.checked;
+  });
+  // Si no marcó ninguno, solo al grupo activo
+  const destinos=gruposSeleccionados.length>0?gruposSeleccionados:[clasesGroup];
 
-  if(!cl.numero) cl.numero = String(all.length+1).padStart(2,'0');
+  if(!cl.numero) cl.numero=String((window._allClases||[]).length+1).padStart(2,'0');
 
-  if(editClaseIdx !== null){
-    // Editar: encontrar el item en _allClases por índice en clasesData
-    const target = clasesData[editClaseIdx];
-    const gi = all.findIndex(x => x === target || (x.titulo===target.titulo && x.numero===target.numero));
-    if(gi >= 0) all[gi] = cl;
-    else all.push(cl);
-  } else {
-    all.push(cl);
+  // Actualizar el grupo activo en memoria
+  let allActivo=window._allClases?[...window._allClases]:[];
+  if(editClaseIdx!==null){
+    const target=clasesData[editClaseIdx];
+    const gi=allActivo.findIndex(x=>x===target||(x.titulo===target.titulo&&x.numero===target.numero));
+    if(gi>=0)allActivo[gi]=cl; else allActivo.push(cl);
+  } else if(destinos.includes(clasesGroup)){
+    allActivo.push(cl);
   }
-  window._allClases = all;
+  window._allClases=allActivo;
 
-  await saveClasesToGH(all);
+  // Guardar en cada grupo seleccionado
+  const grupoOriginal=clasesGroup;
+  let errores=[];
+  const gruposExtra=destinos.filter(g=>g!==grupoOriginal);
+
+  // Guardar en grupo activo
+  const ok=await saveClasesToGH(allActivo);
+  if(!ok)errores.push(grupoOriginal);
+
+  // Copiar a otros grupos seleccionados
+  for(const g of gruposExtra){
+    try{
+      // Leer JSON del otro grupo
+      const cfg=getConfig();
+      const path=`clases/${g}/clases.json`;
+      const meta=await ghReq('GET',`/repos/${cfg.user}/${cfg.repo}/contents/${path}`);
+      let otroAll=[]; let oSha=null;
+      if(meta.ok){
+        const m=await meta.json();
+        oSha=m.sha;
+        const bytes=Uint8Array.from(atob(m.content.replace(/\n/g,'')),ch=>ch.charCodeAt(0));
+        const d=JSON.parse(new TextDecoder('utf-8').decode(bytes));
+        otroAll=d.clases||d||[];
+      }
+      // Agregar/actualizar la clase en ese grupo
+      const existe=otroAll.findIndex(x=>x.titulo===cl.titulo&&x.numero===cl.numero);
+      if(existe>=0)otroAll[existe]=cl; else otroAll.push(cl);
+      // Guardar
+      const data={grupo:g,clases:otroAll,updated:new Date().toISOString()};
+      const putR=await ghPut(path,data,oSha,'📚 Copiar clase a '+g);
+      if(!putR.ok){const e=await putR.json();errores.push(g+': '+e.message);}
+    }catch(e){errores.push(g+': '+e.message);}
+  }
+
   closeClaseModal();
-  // Actualizar vista local inmediatamente sin esperar caché de GitHub
-  window._allClases = all;
-  const tipoActual = document.getElementById('cl-tipo').value;
-  clasesData = all.filter(cl => tipoActual==='teoria' ? cl.tipo==='teoria' : cl.tipo!=='teoria');
+  // Actualizar vista local
+  const tipoActual=document.getElementById('cl-tipo').value;
+  clasesData=allActivo.filter(cl=>tipoActual==='teoria'?cl.tipo==='teoria':cl.tipo!=='teoria');
   renderClasesList();
-  toast('✅ Clase guardada correctamente','success');
+
+  if(errores.length){
+    toast('⚠️ Guardado con errores: '+errores.join(', '),'error');
+  } else {
+    const msg=gruposExtra.length?`✅ Clase guardada y copiada a: ${destinos.join(', ')}`:'✅ Clase guardada';
+    toast(msg,'success');
+  }
 }
 
 async function eliminarClase(i){
