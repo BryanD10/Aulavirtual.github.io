@@ -1022,6 +1022,20 @@ function fixEncObj(obj){
 function initClasesPanel(){loadClasesFromGH();}
 function selectClasesGroup(g,btn){clasesGroup=g;document.querySelectorAll('#clases-group-tabs .inner-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');loadClasesFromGH();}
 
+
+// Lee un JSON de GitHub por API (sin caché, decodificando UTF-8 correctamente)
+async function ghGetJSON(path){
+  const cfg=getConfig();
+  try{
+    const r=await ghReq('GET',`/repos/${cfg.user}/${cfg.repo}/contents/${path}`);
+    if(!r.ok)return null;
+    const meta=await r.json();
+    const raw=meta.content.replace(/\n/g,'');
+    const bytes=Uint8Array.from(atob(raw),ch=>ch.charCodeAt(0));
+    const json=JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    return{data:json, sha:meta.sha};
+  }catch(e){return null;}
+}
 async function loadClasesFromGH(){
   clasesFileSha=null;
   const tipo=document.getElementById('cl-tipo').value;
@@ -1029,30 +1043,15 @@ async function loadClasesFromGH(){
   wrap.innerHTML='<div class="empty-state"><div class="es-icon">🔄</div><h4>Cargando...</h4></div>';
   document.getElementById('clases-count').textContent='';
 
-  // Try path: clases/[grupo]/clases.json
-  const c=getConfig();
   const path=`clases/${clasesGroup}/clases.json`;
-  const c2=getConfig();
-  let allRaw=[];let clasesSha=null;
-  try{
-    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/${path}?t=`+Date.now();
-    const rr=await fetch(rawUrl);
-    if(rr.ok){
-      const dd=JSON.parse(await rr.text());
-      allRaw=dd.clases||dd||[];
-      const mr=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/${path}`);
-      if(mr.ok){const m=await mr.json();clasesSha=m.sha;}
-    }
-  }catch(e){}
-  const result=allRaw.length?{data:{clases:allRaw},sha:clasesSha}:null;
+  // Usar API de GitHub (sin caché) en vez de raw.githubusercontent
+  const result=await ghGetJSON(path);
 
   if(result){
     const all=result.data.clases||result.data||[];
     clasesFileSha=result.sha;
-    // Admin muestra TODAS las clases del archivo (el campo grupos solo afecta a los alumnos)
     if(tipo==='practica') clasesData=all.filter(cl=>cl.tipo!=='teoria');
     else clasesData=all.filter(cl=>cl.tipo==='teoria');
-    // Store full array for save
     window._allClases=all;
   } else {
     clasesData=[];
@@ -1080,7 +1079,6 @@ function renderClasesList(){
         <div class="ci-badges">
           ${cl.visible===false?`<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.3)">🔒 Oculta</span>`:`<span class="ci-badge vis-badge" style="background:rgba(104,211,145,0.1);color:#68d391;border-color:rgba(104,211,145,0.3)">✅ Visible</span>`}
           ${cl.categoria?`<span class="ci-badge">${cl.categoria}</span>`:''}
-          ${cl.grupos&&cl.grupos.length&&cl.grupos.length<3?`<span class="ci-badge" style="background:rgba(99,179,237,0.1);color:var(--accent);border-color:rgba(99,179,237,0.3)">${cl.grupos.join(' · ')}</span>`:''}
           ${cl.pasos&&cl.pasos.length?`<span class="ci-badge" style="background:rgba(104,211,145,0.1);color:var(--accent2);border-color:rgba(104,211,145,0.2)">${cl.pasos.length} pasos</span>`:''}
           ${cl.objetivos&&cl.objetivos.length?`<span class="ci-badge" style="background:rgba(183,148,244,0.1);color:var(--purple);border-color:rgba(183,148,244,0.2)">${cl.objetivos.length} objetivos</span>`:''}
           ${cl.videoUrl?`<span class="ci-badge" style="background:rgba(252,129,129,0.1);color:var(--danger);border-color:rgba(252,129,129,0.2)">📹 Video</span>`:''}
@@ -1211,7 +1209,12 @@ async function guardarClase(){
 
   await saveClasesToGH(all);
   closeClaseModal();
-  await loadClasesFromGH();
+  // Actualizar vista local inmediatamente sin esperar caché de GitHub
+  window._allClases = all;
+  const tipoActual = document.getElementById('cl-tipo').value;
+  clasesData = all.filter(cl => tipoActual==='teoria' ? cl.tipo==='teoria' : cl.tipo!=='teoria');
+  renderClasesList();
+  toast('✅ Clase guardada correctamente','success');
 }
 
 async function eliminarClase(i){
@@ -1229,15 +1232,20 @@ async function eliminarClase(i){
 }
 
 async function saveClasesToGH(all){
-  const c=getConfig();
+  const cfg=getConfig();
   const path=`clases/${clasesGroup}/clases.json`;
   const data={grupo:clasesGroup,clases:all,updated:new Date().toISOString()};
   try{
-    await ghPut(path,data,clasesFileSha,'📚 Actualizar clases/'+clasesGroup+'/clases.json');
-    // Update SHA
-    const r=await ghGet(path);if(r)clasesFileSha=r.sha;
-    toast('✅ Clases guardadas en GitHub','success');
-  }catch(e){toast('❌ Error al guardar: '+e.message,'error');}
+    // 1. Obtener SHA fresco (evita conflicto 422)
+    const metaR=await ghReq('GET',`/repos/${cfg.user}/${cfg.repo}/contents/${path}`);
+    if(metaR.ok){const m=await metaR.json();clasesFileSha=m.sha;}
+    else if(metaR.status!==404){const e=await metaR.json();throw new Error(e.message);}
+    // 2. Guardar
+    const putR=await ghPut(path,data,clasesFileSha,'📚 Guardar '+clasesGroup);
+    // 3. Leer SHA nuevo del response
+    if(putR.ok){try{const pd=await putR.json();if(pd.content&&pd.content.sha)clasesFileSha=pd.content.sha;}catch(e){}}
+    return true;
+  }catch(e){toast('❌ Error al guardar: '+e.message,'error');return false;}
 }
 
 // ══════════════════════════════════════════════════════
@@ -1274,19 +1282,15 @@ async function repararHerramientas(){
   }catch(e){toast('❌ '+e.message,'error');}
 }
 async function loadHerramientas(){
-  const c2=getConfig();
-  try{
-    const rawUrl=`https://raw.githubusercontent.com/${c2.user}/${c2.repo}/${c2.branch}/datos/herramientas.json?t=`+Date.now();
-    const r=await fetch(rawUrl);
-    if(r.ok){
-      const d=JSON.parse(await r.text());
-      herramientasData=d.herramientas||d||[];
-      const mr=await ghReq('GET',`/repos/${c2.user}/${c2.repo}/contents/datos/herramientas.json`);
-      if(mr.ok){const m=await mr.json();herramientasFileSha=m.sha;}
-      renderHerramientasList();return;
-    }
-  }catch(e){}
-  herramientasData=[...HERRAMIENTAS_DEFAULT];herramientasFileSha=null;
+  // Usar API de GitHub (sin caché)
+  const result=await ghGetJSON('datos/herramientas.json');
+  if(result){
+    herramientasData=result.data.herramientas||result.data||[];
+    herramientasFileSha=result.sha;
+  } else {
+    herramientasData=[...HERRAMIENTAS_DEFAULT];
+    herramientasFileSha=null;
+  }
   renderHerramientasList();
 }
 
