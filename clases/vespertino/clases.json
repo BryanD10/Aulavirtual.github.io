@@ -1,27 +1,5 @@
 {
   "grupo": "vespertino",
-  "clases": [
-    {
-      "numero": "06",
-      "tipo": "practica",
-      "titulo": "GUÍA DE PRÁCTICAS - DISEÑO GRÁFICO EN AFFINITY",
-      "materia": "DISEÑO GRAFICO",
-      "nivel": "AVANZADO",
-      "categoria": "Practica6",
-      "videoUrl": "https://youtu.be/4nWXujGi90Y?si=_KVZNkpD2-ff_qyn",
-      "visible": true,
-      "objetivos": [
-        "aprender para no valer "
-      ],
-      "pasos": [
-        {
-          "titulo": "cara de ayote si no te dormis te come el coyote",
-          "descripcion": "",
-          "tip": "sapo",
-          "ejemplo": "dddd"
-        }
-      ]
-    }
-  ],
-  "updated": "2026-02-28T04:52:51.997Z"
+  "clases": [],
+  "updated": "2026-03-01T02:47:54.576Z"
 }
