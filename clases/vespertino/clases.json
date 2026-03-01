@@ -143,7 +143,48 @@
           "descripcion": ""
         }
       ]
+    },
+    {
+      "numero": "04",
+      "tipo": "practica",
+      "titulo": "Retoque Digital: Blanqueamiento Dental Profesional",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "BASICO",
+      "categoria": "PRACTICA 4",
+      "videoUrl": "https://youtu.be/0RTz0-za-7E",
+      "descripcion": "En esta práctica, los estudiantes aprenderán una técnica esencial de post-producción fotográfica: corregir el tono amarillento de los dientes. Aprenderán a aislar áreas específicas y utilizar ajustes de HSL (Tono, Saturación y Luminosidad) para lograr resultados realistas y profesionales que mejoran la estética de cualquier retrato.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/10EnaWxCORPm0uVx2Ur7Uh5kz-hVbnXRO?usp=drive_link",
+      "visible": true,
+      "objetivos": [
+        "Configurar la mesa de trabajo basándose en las dimensiones originales del archivo de imagen.",
+        "Dominar la selección manual de áreas pequeñas y detalladas con el Pincel Selector.",
+        "Manipular canales de color específicos (Amarillos) para eliminar saturación no deseada.",
+        "Aplicar capas de ajuste anidadas para evitar afectar el resto de la piel o el rostro."
+      ],
+      "pasos": [
+        {
+          "titulo": "Dimensionar el Lienzo",
+          "descripcion": "1. Antes de abrir Affinity, localiza la imagen de la modelo en tu computadora.\n\n2. Haz clic derecho sobre el archivo, selecciona \"Propiedades\" y ve a la pestaña \"Detalles\".\n\n3. Anota los píxeles de Ancho y Alto (ejemplo: 1500 x 1000 px).\n\n4. En Affinity, ve a Archivo > Nuevo e ingresa esas medidas exactas.\n\n5. Asegúrate de marcar la casilla de \"Fondo transparente\" y presiona \"Crear\"."
+        },
+        {
+          "titulo": "Selección de los Dientes (Uso de Pincel Selector)",
+          "descripcion": "1. Pega la imagen en tu lienzo (Control + V).\n\n2. Selecciona la herramienta Pincel de Selección (Selection Brush).\n\n3. Pinta con mucho cuidado únicamente sobre los dientes. ⚠️ REGLA DE ORO: Evita usar la selección automática del video para que tu PC no se trabe.\n\n4. Si seleccionas parte de los labios o encías, mantén presionada la tecla Alt y pinta sobre el error para restarlo.\n\n5. Una vez tengas solo los dientes seleccionados, presiona Control + J para crear una capa nueva con solo esa parte."
+        },
+        {
+          "titulo": "Ajuste de Color HSL (Eliminar el Amarillo)",
+          "descripcion": "1. Selecciona la nueva capa de los dientes que acabas de crear.\n\n2. Presiona Control + U para abrir el panel de HSL (o búscalo en la pestaña de Ajustes).\n\n3. En el círculo de colores del panel, haz clic específicamente en el Color Amarillo.\n\n4. Desplaza la barra de Saturación hacia la izquierda (bájala) hasta que el color amarillo desaparezca.\n\n5. Desplaza la barra de Luminosidad hacia la derecha (súbela un poco) para dar brillo a los dientes.",
+          "tip": "# AQUI DEPENDERA SI EL RESULTADO ES CORRECTO O MALO DE TUS HABILIDADES COMO DISEÑADOR O DISEÑADORA GRAFICA"
+        },
+        {
+          "titulo": "Anidación de Ajustes (Evitar Manchas en el Rostro)",
+          "descripcion": "1. Si notas que al subir la luminosidad el resto de la cara se ve extraña o con \"manchones\", es porque el ajuste está afectando a todo el lienzo.\n\n2. En el panel de Capas, toma la capa de ajuste HSL y arrástrala justo encima de la miniatura de la capa de los dientes (debe quedar \"metida\" dentro).\n\n3. Esto garantiza que el blanqueamiento solo ocurra en los dientes y no toque la piel de la modelo."
+        },
+        {
+          "titulo": "Acabado Natural y Comparación",
+          "descripcion": "1. No subas demasiado la luminosidad; los dientes demasiado blancos se ven falsos. Busca un equilibrio natural.\n\n2. Haz clic en el ícono del \"ojo\" en tu capa de dientes para ver el antes y el después.\n\n3. Presiona Control + D para quitar cualquier línea punteada y exportar tu trabajo final."
+        }
+      ]
     }
   ],
-  "updated": "2026-03-01T03:57:28.790Z"
+  "updated": "2026-03-01T23:15:16.770Z"
 }
