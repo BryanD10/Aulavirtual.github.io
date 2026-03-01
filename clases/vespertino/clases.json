@@ -1,5 +1,49 @@
 {
   "grupo": "vespertino",
-  "clases": [],
-  "updated": "2026-03-01T02:47:54.576Z"
+  "clases": [
+    {
+      "numero": "03",
+      "tipo": "practica",
+      "titulo": "Cambio de Color Profesional (Dominando el Mapa de Degradado)",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "BASICO",
+      "categoria": "PRACTICA 03",
+      "videoUrl": "https://youtu.be/iBZpuK5wp9k",
+      "descripcion": "En esta sesión, los estudiantes aprenderán a transformar el color de un objeto específico dentro de una fotografía sin perder el realismo de las luces y sombras. Se utilizará la técnica de \"Mapa de Degradado\", que permite mapear nuevos colores sobre los valores de luminosidad originales de la imagen.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/1_Rjn5Iune4Fp3mWzt-3dtmb-QNkW8hXi?usp=drive_link",
+      "visible": false,
+      "objetivos": [
+        "Configurar la mesa de trabajo basándose en los metadatos reales del archivo de imagen.",
+        "Realizar selecciones precisas y seguras mediante el Pincel Selector para optimizar el uso del procesador.",
+        "Comprender y aplicar el ajuste de Mapa de Degradado para el cambio de color.",
+        "Manipular valores HSL (Tono, Saturación y Luminosidad) para lograr un acabado realista."
+      ],
+      "pasos": [
+        {
+          "titulo": "Dimensionar el Lienzo según la Imagen",
+          "descripcion": "1.Antes de abrir Affinity, busca el archivo de la imagen del modelo en tu carpeta de descargas.\n\n2.Haz clic derecho sobre el archivo, selecciona \"Propiedades\" y ve a la pestaña \"Detalles\".\n\n3.Anota las dimensiones exactas de Ancho y Alto en píxeles.\n\n4.Abre Affinity, ve a Archivo > Nuevo y escribe esas mismas dimensiones en el ancho y alto del lienzo.\n\n5.Dale a \"Crear\". De esta forma, la mesa de trabajo cazará perfectamente con tu imagen y no perderás calidad.",
+          "tip": "# RECUERDA ACTIVAR FONDO TRASPARENTE "
+        },
+        {
+          "titulo": "Selección Manual con el Pincel Selector",
+          "descripcion": "1.Pega tu imagen en el lienzo (Control + V).\n\n2.Busca en la barra de herramientas el Pincel Selector (Selection Brush Tool).\n\n3.Pinta con cuidado por dentro del objeto que quieres cambiar de color (ejemplo: la camisa).\n\n4.⚠️ REGLA DE ORO: No utilices la herramienta de \"Selección Automática de Objeto\" del video, ya que consume mucho procesador y puede congelar tu PC. Hazlo manualmente con el Pincel Selector.",
+          "tip": "Si el pincel selecciona algo de más, mantén presionada la tecla Alt mientras pintas para restar esa parte de la selección."
+        },
+        {
+          "titulo": "Aplicar el Mapa de Degradado",
+          "descripcion": "1.Con el objeto seleccionado (deben verse las líneas punteadas o \"hormiguitas\"), ve al panel de Ajustes (Adjustments).\n\n2.Busca y haz clic en la opción Mapa de degradado (Gradient Map).\n\n3.Verás que el objeto cambia de color de forma extraña; no te asustes, es normal. Aparecerá una ventana con una barra que tiene tres puntos (nodos)."
+        },
+        {
+          "titulo": "Ajuste de Colores y Realismo (HSL)",
+          "descripcion": "1.Haz clic en el primer punto de la barra (representa las Sombras).\n\n2.Haz clic en el cuadro de color y selecciona el tono oscuro que desees.\n\n3.Cambia el modo de selección de color a Controles deslizantes HSL.\n\n3.Repite el proceso con el punto del medio (Medios Tonos) y el último punto (Luces), eligiendo versiones más claras del mismo color.\n\n4.Para que se vea real, en las Sombras baja un poco la luminosidad (L) y en las Luces súbela un poco.",
+          "tip": "# OCUPRA LA RUEDA CROMATICA PARA SELECIONAR EL COLOR DE REFERENCIA"
+        },
+        {
+          "titulo": "Perfeccionamiento del Brillo y Textura",
+          "descripcion": "1.Mueve el punto central de la barra de degradado hacia la izquierda o derecha para ajustar cómo se distribuye la luz en el objeto.\n\n2.Si el color se ve muy plano, puedes agregar un cuarto punto en la barra haciendo un clic en el centro para tener más control sobre los tonos.\n\n3.Una vez estés satisfecho con el resultado, presiona Control + D para quitar la selección."
+        }
+      ]
+    }
+  ],
+  "updated": "2026-03-01T03:13:33.990Z"
 }
