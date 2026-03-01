@@ -41,6 +41,10 @@
           "titulo": "DETALLES FINALES",
           "descripcion": "- Usa el Pincel con color Negro (para ocultar) o Blanco (para mostrar) en la máscara para suavizar los bordes donde el texto se une con la fruta.\n\n- Agrega una elipse negra debajo con 'Desenfoque Gaussiano' para crear la sombra.",
           "tip": "# Recuerda que el diseño Gráfico el Negro es destructivo y el blanco es regenerativo"
+        },
+        {
+          "titulo": "TIENES QUE ENTREGAR 2 FRUTAS O OBJECTOS MAS A DEMAS DEL PROPORCIONADO POR EL DOCENTE EN TOTAL A ENTREGAR : 3",
+          "descripcion": ""
         }
       ]
     },
@@ -131,5 +135,5 @@
       ]
     }
   ],
-  "updated": "2026-03-01T03:39:23.273Z"
+  "updated": "2026-03-01T03:49:30.906Z"
 }
