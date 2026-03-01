@@ -43,7 +43,50 @@
           "tip": "# Recuerda que el diseño Gráfico el Negro es destructivo y el blanco es regenerativo"
         }
       ]
+    },
+    {
+      "numero": "02",
+      "tipo": "practica",
+      "titulo": "Efecto Texto + Foto Impactante (Corte Tipográfico)",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "BASICO",
+      "categoria": "PRACTICA 02",
+      "videoUrl": "https://youtu.be/_n5YWmGI2y8",
+      "descripcion": "En esta práctica, los estudiantes aprenderán a dividir un retrato por la mitad para fusionarlo con un bloque de texto motivador. Se trabajará la precisión en la selección, la jerarquía tipográfica y el uso de efectos de capa para dar profundidad al diseño final.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/10EnaWxCORPm0uVx2Ur7Uh5kz-hVbnXRO?usp=drive_link",
+      "visible": true,
+      "objetivos": [
+        "Dominar la división simétrica de imágenes mediante la herramienta Marco Rectangular.",
+        "Aislar elementos complejos utilizando el Pincel Selector de forma eficiente.",
+        "Ajustar jerarquía tipográfica (interlineado y mayúsculas) para cubrir áreas específicas."
+      ],
+      "pasos": [
+        {
+          "titulo": "Dimensionar el Lienzo según la Imagen",
+          "descripcion": "1. Antes de abrir Affinity, busca en tu computadora la imagen descargada del modelo.\n\n2. Haz clic derecho sobre la imagen, selecciona \"Propiedades\" y ve a la pestaña \"Detalles\".\n\n3. Anota el Ancho y el Alto en píxeles (ejemplo: 1200 x 1800 px).\n\n4. En Affinity, ve a Archivo > Nuevo y coloca exactamente esas medidas en las dimensiones del lienzo.\n\n5. Asegúrate de que el fondo sea transparente y dale a \"Crear\".",
+          "tip": "Esto garantiza que tu imagen no se estire ni se vea borrosa (pixeleada) al trabajarla."
+        },
+        {
+          "titulo": "División Exacta con Marco Rectangular",
+          "descripcion": "1.Pega la imagen en tu nuevo lienzo (Control + V).\n\n2. Activa las reglas con Control + R y arrastra una guía vertical desde la izquierda hasta el centro exacto del rostro.\n\n3. Selecciona la herramienta Marco Rectangular (tecla M).\n\n4. Dibuja un rectángulo que cubra toda la mitad derecha de la cara, asegurándote de que el borde del marco \"pegue\" justo en la línea guía que pusiste.\n\n5. Con esa selección activa, presiona Control + J para duplicar solo esa mitad en una capa nueva.",
+          "tip": "Haz lo mismo con la otra mitad para tener el rostro dividido en dos piezas movibles."
+        },
+        {
+          "titulo": "Selección de Sujeto (Uso de Pincel Selector)",
+          "descripcion": "1. Si necesitas quitar el fondo, utiliza únicamente la herramienta Pincel Selector.\n\n2. Ve dando clics o pintando suavemente por dentro del cuerpo del modelo.\n\n3. ⚠️ IMPORTANTE: No uses la opción de \"Selección Automática de Objeto\", ya que esto exige mucho a la computadora y puede hacer que el programa se cierre o se trabe.",
+          "tip": "Ajusta el tamaño del pincel con las teclas de paréntesis [ y ] para entrar en zonas pequeñas como el cabello o las orejas."
+        },
+        {
+          "titulo": "Creación del Bloque de Texto",
+          "descripcion": "1. Usa la herramienta Marco de Texto para crear un cuadro que ocupe la mitad del lienzo.\n\n2. Escribe la frase: \"Cree en ti mismo y en todo lo que eres\".\n\n3. Selecciona el texto y cámbialo a fuente Impact.\n\n4. En el panel de Carácter, selecciona la opción \"Todo en Mayúsculas\".\n\n5. Ajusta el Interlineado (el espacio vertical entre líneas) para que las palabras queden bien juntas y cubran todo el largo de la cara del modelo.",
+          "tip": "Comando para seleccionar herramienta de Texto : T"
+        },
+        {
+          "titulo": "Fondo y Acabados Profesionales (FX)",
+          "descripcion": "1. Crea una capa nueva y ponla al fondo. Usa la herramienta Relleno para hacer un degradado elíptico de color negro.\n\n2. Ve a la capa de texto y haz clic en el botón fx (Efectos de capa).\n\n3. Activa la Sombra Exterior: sube la opacidad y ajusta el \"Radio\" para que el texto parezca tener sombra sobre el fondo.\n\n4. Activa el Contorno: añade un borde negro muy fino para que las letras se definan mejor."
+        }
+      ]
     }
   ],
-  "updated": "2026-03-01T02:28:01.127Z"
+  "updated": "2026-03-01T02:45:07.669Z"
 }
