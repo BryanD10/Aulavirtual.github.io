@@ -12,9 +12,6 @@
       "descripcion": "En esta práctica, integraremos texto de forma orgánica en un objeto (una banana) para que parezca parte física del mismo, adaptándose a su volumen y curvatura.",
       "herramientaUrl": "https://drive.google.com/drive/folders/1_Rjn5Iune4Fp3mWzt-3dtmb-QNkW8hXi?usp=drive_link",
       "visible": true,
-      "grupos": [
-        "matutino"
-      ],
       "objetivos": [],
       "pasos": [
         {
@@ -48,5 +45,5 @@
       ]
     }
   ],
-  "updated": "2026-03-01T02:25:59.413Z"
+  "updated": "2026-03-01T02:28:01.127Z"
 }
