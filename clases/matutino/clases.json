@@ -135,9 +135,13 @@
         {
           "titulo": "Perfeccionamiento del Brillo y Textura",
           "descripcion": "1.Mueve el punto central de la barra de degradado hacia la izquierda o derecha para ajustar cómo se distribuye la luz en el objeto.\n\n2.Si el color se ve muy plano, puedes agregar un cuarto punto en la barra haciendo un clic en el centro para tener más control sobre los tonos.\n\n3.Una vez estés satisfecho con el resultado, presiona Control + D para quitar la selección."
+        },
+        {
+          "titulo": "TIENES QUE ENTREGAR LOS 6 DISEÑOS PROPORCIONADO POR EL DOCENTE EN TOTAL A ENTREGAR : 6",
+          "descripcion": ""
         }
       ]
     }
   ],
-  "updated": "2026-03-01T03:52:10.975Z"
+  "updated": "2026-03-01T03:54:44.226Z"
 }
