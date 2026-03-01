@@ -2,16 +2,16 @@
   "grupo": "vespertino",
   "clases": [
     {
-      "numero": "03",
+      "numero": "01",
       "tipo": "practica",
       "titulo": "Cambio de Color Profesional (Dominando el Mapa de Degradado)",
       "materia": "DISEÑO GRAFICO",
       "nivel": "BASICO",
-      "categoria": "PRACTICA 03",
+      "categoria": "PRACTICA 01",
       "videoUrl": "https://youtu.be/iBZpuK5wp9k",
       "descripcion": "En esta sesión, los estudiantes aprenderán a transformar el color de un objeto específico dentro de una fotografía sin perder el realismo de las luces y sombras. Se utilizará la técnica de \"Mapa de Degradado\", que permite mapear nuevos colores sobre los valores de luminosidad originales de la imagen.",
       "herramientaUrl": "https://drive.google.com/drive/folders/1_Rjn5Iune4Fp3mWzt-3dtmb-QNkW8hXi?usp=drive_link",
-      "visible": false,
+      "visible": true,
       "objetivos": [
         "Configurar la mesa de trabajo basándose en los metadatos reales del archivo de imagen.",
         "Realizar selecciones precisas y seguras mediante el Pincel Selector para optimizar el uso del procesador.",
@@ -45,5 +45,5 @@
       ]
     }
   ],
-  "updated": "2026-03-01T03:13:33.990Z"
+  "updated": "2026-03-01T03:13:55.080Z"
 }
