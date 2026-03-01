@@ -88,6 +88,10 @@
         {
           "titulo": "Fondo y Acabados Profesionales (FX)",
           "descripcion": "1. Crea una capa nueva y ponla al fondo. Usa la herramienta Relleno para hacer un degradado elíptico de color negro.\n\n2. Ve a la capa de texto y haz clic en el botón fx (Efectos de capa).\n\n3. Activa la Sombra Exterior: sube la opacidad y ajusta el \"Radio\" para que el texto parezca tener sombra sobre el fondo.\n\n4. Activa el Contorno: añade un borde negro muy fino para que las letras se definan mejor."
+        },
+        {
+          "titulo": "TIENES QUE ENTREGAR 1 DISEÑO (YA SEA DE UN PERSONAJE Y TEXTO, INSPIRADOR PARECIDO) MAS A DEMAS DEL PROPORCIONADO POR EL DOCENTE EN TOTAL A ENTREGAR : 2",
+          "descripcion": ""
         }
       ]
     },
@@ -135,5 +139,5 @@
       ]
     }
   ],
-  "updated": "2026-03-01T03:49:30.906Z"
+  "updated": "2026-03-01T03:52:10.975Z"
 }
