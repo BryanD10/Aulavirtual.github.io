@@ -45,12 +45,12 @@
       ]
     },
     {
-      "numero": "02",
+      "numero": "03",
       "tipo": "practica",
       "titulo": "Composición Creativa: Botella de Frutas (Efecto Sliced)",
       "materia": "DISEÑO GRAFICO",
       "nivel": "INTERMEDIO",
-      "categoria": "Practica 2",
+      "categoria": "Practica 3",
       "videoUrl": "https://youtu.be/VHHMjFvRu4w",
       "descripcion": "En esta práctica, los estudiantes aprenderán a fragmentar un objeto (una botella) y rellenar los espacios con rodajas de fruta (kiwi) para crear un diseño publicitario impactante. Se enfocarán en la gestión de capas, el uso de máscaras para suavizar bordes y la creación de sombras manuales para dar realismo a la composición.",
       "herramientaUrl": "https://drive.google.com/drive/folders/10EnaWxCORPm0uVx2Ur7Uh5kz-hVbnXRO?usp=drive_link",
@@ -133,5 +133,5 @@
       ]
     }
   ],
-  "updated": "2026-03-01T03:40:00.729Z"
+  "updated": "2026-03-01T03:40:15.762Z"
 }
