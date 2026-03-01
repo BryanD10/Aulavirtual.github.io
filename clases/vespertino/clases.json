@@ -90,6 +90,10 @@
         {
           "titulo": "Sombras y Profundidad (Efecto Final)",
           "descripcion": "1.Para que no parezca un dibujo plano, debemos crear sombras.\n\n2.Mantén presionado Control y haz clic en la miniatura de la capa del kiwi (esto creará una selección exacta).\n\n3.Con un pincel negro suave (baja opacidad), pinta un poco en la parte superior del kiwi para simular la sombra que proyecta la botella sobre él.\n\n4.Añade las hojas de menta y aplícales un Desenfoque Gaussiano (en el panel de filtros/reloj de arena) a las que estén más lejos para crear profundidad de campo."
+        },
+        {
+          "titulo": "TIENES QUE ENTREGAR LOS 4 DISEÑOS PROPORCIONADO POR EL DOCENTE EN TOTAL A ENTREGAR : 4",
+          "descripcion": ""
         }
       ]
     },
@@ -141,5 +145,5 @@
       ]
     }
   ],
-  "updated": "2026-03-01T03:56:00.460Z"
+  "updated": "2026-03-01T03:57:28.790Z"
 }
