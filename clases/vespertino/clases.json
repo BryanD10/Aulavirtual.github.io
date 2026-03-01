@@ -43,7 +43,52 @@
           "descripcion": "1.Mueve el punto central de la barra de degradado hacia la izquierda o derecha para ajustar cómo se distribuye la luz en el objeto.\n\n2.Si el color se ve muy plano, puedes agregar un cuarto punto en la barra haciendo un clic en el centro para tener más control sobre los tonos.\n\n3.Una vez estés satisfecho con el resultado, presiona Control + D para quitar la selección."
         }
       ]
+    },
+    {
+      "numero": "02",
+      "tipo": "practica",
+      "titulo": "Composición Creativa: Botella de Frutas (Efecto Sliced)",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "INTERMEDIO",
+      "categoria": "Practica 2",
+      "videoUrl": "https://youtu.be/VHHMjFvRu4w",
+      "descripcion": "En esta práctica, los estudiantes aprenderán a fragmentar un objeto (una botella) y rellenar los espacios con rodajas de fruta (kiwi) para crear un diseño publicitario impactante. Se enfocarán en la gestión de capas, el uso de máscaras para suavizar bordes y la creación de sombras manuales para dar realismo a la composición.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/10EnaWxCORPm0uVx2Ur7Uh5kz-hVbnXRO?usp=drive_link",
+      "visible": true,
+      "objetivos": [
+        "Configurar el lienzo de trabajo basándose en las propiedades reales del archivo de imagen.",
+        "Realizar recortes precisos de objetos complejos mediante el Pincel Selector.",
+        "Dividir elementos de forma geométrica con la herramienta Marco Rectangular.",
+        "Aplicar sombras y desenfoques de profundidad para integrar múltiples elementos en una sola escena."
+      ],
+      "pasos": [
+        {
+          "titulo": "Dimensionar el Lienzo",
+          "descripcion": "1.Antes de abrir Affinity, busca la imagen de la botella en tu carpeta.\n\n2.Haz clic derecho sobre el archivo, selecciona \"Propiedades\" y ve a la pestaña \"Detalles\".\n\n3.Anota el Ancho y el Alto en píxeles.\n\n4.Abre Affinity, ve a Archivo > Nuevo y escribe esas mismas dimensiones.\n\n5.Asegúrate de que el fondo sea transparente y presiona \"Crear\". Así, tu imagen encajará perfectamente sin estirarse."
+        },
+        {
+          "titulo": "Recorte con el Pincel Selector",
+          "descripcion": "1.Pega la imagen de la botella en el lienzo (Control + V).\n\n2.Selecciona la herramienta Pincel de Selección (Selection Brush).\n\n3.Pinta con cuidado por dentro de la botella. ⚠️ RECUERDA: No uses la \"Selección Automática\" del video para evitar que la PC se congele.\n\n4.Si te sales del borde, mantén presionada la tecla Alt mientras pintas para corregir.\n\n5.Presiona Control + J para duplicar la botella sin fondo y borra la capa original.",
+          "tip": "PUEDES OCUPAR photoroom",
+          "ejemplo": "https://www.photoroom.com/es/herramientas/eliminador-de-fondos"
+        },
+        {
+          "titulo": "División con Marco Rectangular",
+          "descripcion": "1.Selecciona la herramienta Marco Rectangular (tecla M).\n\n2.Dibuja un rectángulo que cubra la tapa y el cuello de la botella. Presiona Control + J.\n\n3.Vuelve a la capa de la botella completa y dibuja otro rectángulo más abajo para la segunda pieza. Presiona Control + J.\n\n4.Repite esto hasta tener la botella dividida en 3 o 4 partes independientes.\n\n5.Separa las piezas en el lienzo, rotándolas un poco para dejar espacio para la fruta.",
+          "tip": "# RECUERDA RASTERIZAR LA CAPA"
+        },
+        {
+          "titulo": "Integración del Kiwi (Máscaras)",
+          "descripcion": "1.Trae la imagen del kiwi y recórtala también con el Pincel Selector.\n\n2.Coloca el kiwi justo en los huecos de la botella. Importante: Mueve la capa del kiwi para que quede debajo de las piezas de la botella.\n\n3.Para que la unión se vea real, añade una Máscara de Capa al kiwi.\n\n4.Usa el Pincel de Pintura con color Negro y la \"Dureza\" al 0% para borrar suavemente los bordes del kiwi y que se fundan con el cristal de la botella.",
+          "tip": "# OCUPA LA MALLA DE DORMACION ",
+          "ejemplo": "# la malla de deformación ya la utilizaste en practicas pasadas "
+        },
+        {
+          "titulo": "Sombras y Profundidad (Efecto Final)",
+          "descripcion": "1.Para que no parezca un dibujo plano, debemos crear sombras.\n\n2.Mantén presionado Control y haz clic en la miniatura de la capa del kiwi (esto creará una selección exacta).\n\n3.Con un pincel negro suave (baja opacidad), pinta un poco en la parte superior del kiwi para simular la sombra que proyecta la botella sobre él.\n\n4.Añade las hojas de menta y aplícales un Desenfoque Gaussiano (en el panel de filtros/reloj de arena) a las que estén más lejos para crear profundidad de campo."
+        }
+      ]
     }
   ],
-  "updated": "2026-03-01T03:23:53.889Z"
+  "updated": "2026-03-01T03:38:59.922Z"
 }
