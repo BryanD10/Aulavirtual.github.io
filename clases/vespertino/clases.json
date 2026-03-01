@@ -184,7 +184,49 @@
           "descripcion": "1. No subas demasiado la luminosidad; los dientes demasiado blancos se ven falsos. Busca un equilibrio natural.\n\n2. Haz clic en el ícono del \"ojo\" en tu capa de dientes para ver el antes y el después.\n\n3. Presiona Control + D para quitar cualquier línea punteada y exportar tu trabajo final."
         }
       ]
+    },
+    {
+      "numero": "05",
+      "tipo": "practica",
+      "titulo": "Retoque de Piel Profesional: Separación de Frecuencias",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "INTERMEDIO",
+      "categoria": "PRACTICA 05",
+      "videoUrl": "https://youtu.be/-_hfMLLlSH8",
+      "descripcion": "En esta práctica, los estudiantes dominarán la técnica de \"Separación de Frecuencias\", que consiste en dividir una imagen en dos capas: una que contiene solo la textura (poros, vellos, arrugas) y otra que contiene solo el color (tonos de piel, sombras). Esto permite borrar lunares o cicatrices en la capa de textura sin manchar el color, y corregir manchas de color sin borrar la textura natural de la piel.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/10EnaWxCORPm0uVx2Ur7Uh5kz-hVbnXRO?usp=drive_link",
+      "visible": true,
+      "objetivos": [
+        "Configurar el lienzo basándose en las dimensiones reales del archivo descargado.",
+        "Aplicar el filtro avanzado de Separación de Frecuencias.",
+        "Utilizar la herramienta Pincel de Clonar para corregir texturas en la frecuencia alta.",
+        "Gestionar capas de píxeles no destructivas para corregir tonos en la frecuencia baja."
+      ],
+      "pasos": [
+        {
+          "titulo": "Dimensionar el Lienzo",
+          "descripcion": "1. Antes de iniciar, busca la foto del modelo en tu carpeta.\n\n2. Haz clic derecho sobre el archivo, ve a \"Propiedades\" y luego a \"Detalles\".\n\n3. Anota los píxeles de Ancho y Alto.\n\n4. En Affinity, crea un documento nuevo con esas medidas exactas.\n\n5. Marca la casilla \"Fondo transparente\" y dale a \"Crear\"."
+        },
+        {
+          "titulo": "Aplicar Separación de Frecuencias",
+          "descripcion": "1. Pega la imagen en tu lienzo (Control + V).\n\n2. Ve al menú superior: Filtros > Separación de frecuencias.\n\n3. Aparecerá un cuadro con dos vistas. Ajusta el \"Radio\" hasta que en la vista de la izquierda (textura) veas claramente los poros pero casi nada de color.\n\n4. Presiona \"Aplicar\". Ahora en tu panel de capas tendrás dos: Frecuencia Alta (Textura) y Frecuencia Baja (Color)."
+        },
+        {
+          "titulo": "Limpieza de Textura (Capa Alta)",
+          "descripcion": "1. Selecciona la capa Frecuencia Alta.\n\n2. Busca la herramienta Pincel de clonar (Cloning Brush). (estudio pixel)\n\n3. Mantén presionada la tecla Alt y haz clic en una zona de piel limpia que esté cerca de la imperfección para tomar una muestra.\n\n4. Suelta Alt y haz clics suaves sobre el lunar o cicatriz. Verás cómo desaparece manteniendo los poros de la piel.\n\n5. RECUERDA : Toma muestras constantes (Alt + Clic) de áreas cercanas para que la textura coincida perfectamente.",
+          "tip": "# CAPA ALTA"
+        },
+        {
+          "titulo": "Suavizado de Color (Capa Baja)",
+          "descripcion": "1. Crea una Capa de Píxeles nueva y colócala justo encima de la \"Frecuencia Baja\".\n\n2. Selecciona la herramienta Pincel de pintura (Paint Brush). (estudio pixel)\n\n3. Configura el pincel: Opacidad al 100%, pero el Flujo muy bajo (3% o 5%) y la Dureza al 0%.\n\n4. Usa el Selector de color (Cuentagotas) para tomar un tono de piel bonito de la cara.\n\n5. Pinta muy suavemente sobre las manchas o zonas rojas para unificar el color. Como el flujo es bajo, puedes ir \"maquillando\" la piel poco a poco.",
+          "tip": "# CAPA BAJA"
+        },
+        {
+          "titulo": "Revisión Final y Comparación",
+          "descripcion": "1. Activa y desactiva el grupo de capas para ver el cambio.\n\n2. Notarás que las imperfecciones se han ido, pero la piel NO se ve borrosa; se siguen viendo los detalles naturales.\n\n3. Si alguna zona se ve muy \"gris\", vuelve al Paso 4 y añade un poco más de color piel con el pincel de flujo bajo."
+        }
+      ]
     }
   ],
-  "updated": "2026-03-01T23:15:16.770Z"
+  "updated": "2026-03-01T23:22:11.149Z"
 }
