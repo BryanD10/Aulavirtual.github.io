@@ -226,7 +226,69 @@
           "descripcion": "1. Activa y desactiva el grupo de capas para ver el cambio.\n\n2. Notarás que las imperfecciones se han ido, pero la piel NO se ve borrosa; se siguen viendo los detalles naturales.\n\n3. Si alguna zona se ve muy \"gris\", vuelve al Paso 4 y añade un poco más de color piel con el pincel de flujo bajo."
         }
       ]
+    },
+    {
+      "numero": "06",
+      "tipo": "practica",
+      "titulo": "15 EDI - Retos de Diseño Editorial",
+      "materia": "DISEÑO GRAFICO",
+      "nivel": "AVANZADO",
+      "categoria": "PRACTICA 06",
+      "descripcion": "Serie intensiva de 15 retos de diseño (EDI) para dominar Affinity Photo y Designer. Cada reto enseña técnicas específicas de composición, tipografía y efectos visuales, aplicando el proceso de diseño profesional (Ideación, Verificación y Ejecución) visto en clase.",
+      "herramientaUrl": "https://drive.google.com/drive/folders/1FpqgMkmJXxgr-KERkOkP5XD_vsRK3B2p?usp=drive_link",
+      "visible": true,
+      "objetivos": [
+        "Dominar Photo Persona y Designer Persona para flujos de trabajo híbridos.",
+        "Implementar el proceso de diseño: Ideación basada en investigación sistemática y verificación de calidad.",
+        "Aplicar teoría del color y texturas avanzadas para evocar sentimientos específicos (ej. \"Retro Japanese\" o \"Iconic Style\").",
+        "Crear composiciones editoriales profesionales desde cero utilizando recursos web integrados."
+      ],
+      "pasos": [
+        {
+          "titulo": "Investigación e Ideación (El \"Porqué\")",
+          "descripcion": "1. Antes de abrir Affinity, investiga el mensaje del EDI (ej. el EDI 1 busca transmitir el estilo \"Retro Japanese / City Pop\").\n\n2. Entra a Pinterest y busca al menos 3 sujetos u objetos diferentes que encajen con ese sentimiento. No te quedes con la primera imagen; compara cuál transmite mejor el mensaje.\n\n3. Descarga tus fuentes en Google Fonts (estilo profesional) o DaFont (estilos raros/texturizados).\n\n4. Si necesitas logos icónicos (como el de BMW para el EDI 8), búscalos en Seeklogo.",
+          "tip": "Usa a Gemini o Copilot en el aula para que te ayuden a encontrar fuentes parecidas o investigar la historia de los objetos icónicos que usarás."
+        },
+        {
+          "titulo": "Dimensionamiento Real del Lienzo",
+          "descripcion": "1. Busca en tu carpeta la imagen de referencia (la guía del EDI).\n\n2. Haz clic derecho sobre el archivo > Propiedades > pestaña Detalles.\n\n3. Anota los píxeles de Ancho y Alto.\n\n4. En Affinity, crea el nuevo documento con esas medidas exactas para que el lienzo cace perfecto con el diseño original.",
+          "tip": " Una vez creado el lienzo, coloca la imagen de referencia a un lado de tu mesa de trabajo para consultarla constantemente durante la ejecución."
+        },
+        {
+          "titulo": "Construcción de Capas: Fondo y Tipografía",
+          "descripcion": " \n \n",
+          "tip": "Si el diseño es \"Retro\", evita usar colores brillantes digitales; busca tonos que parezcan tinta sobre papel viejo."
+        },
+        {
+          "titulo": "1. Fondo",
+          "descripcion": "Crea el fondo usando colores que evoquen la época o el estilo (ej. verdes menta o melocotón apagados para City Pop)."
+        },
+        {
+          "titulo": " 2. Fuentes",
+          "descripcion": "Escribe tus textos principales. Ajusta el Tracking (espaciado) en el panel de Carácter para que las letras se vean compactas y profesionales."
+        },
+        {
+          "titulo": "3. Jerarquía",
+          "descripcion": " Recuerda el proceso de la Clase 3-6; los textos más grandes deben ser el gancho visual y tienen que tener su balance recuerda la teoría de la composición ."
+        },
+        {
+          "titulo": "El Sujeto Protagonista (Recorte Seguro)",
+          "descripcion": "1. Inserta tu imagen descargada en Affinity.\n\n2. Selecciona la herramienta Pincel Selector y recorre el borde del sujeto manualmente.\n\n3. ⚠️ IMPORTANTE: No uses la selección automática para no congelar la computadora.\n\n4. Una vez seleccionado, presiona Control + J para duplicar solo al sujeto.\n\n5. Posiciónalo según tu referencia, jugando con las capas para que algunos textos queden por detrás o por delante.",
+          "tip": "Puedes usar Photoroom como opción rápida, pero el recorte manual en Affinity es el recomendado para aprender."
+        },
+        {
+          "titulo": "Texturas y Verificación Final",
+          "descripcion": "1. Ve a TextureLabs y busca texturas de papel, grano o \"halftone\" (puntos).\n\n2. Coloca la textura arriba de todas tus capas.\n\n3. Cambia el modo de fusión a Superponer o Luz Suave y baja la opacidad al 20-30%. Esto unificará todo el diseño.",
+          "tip": "Haz la Verificación: ¿Tu diseño transmite lo mismo que la investigación inicial?. Si algo no cuadra, ajusta los colores o la posición."
+        },
+        {
+          "titulo": "EJEMPLO Y RECUERDA",
+          "descripcion": "Para el EDI 8 (BMW), no busques el modelo exacto si es difícil, pero busca un modelo de la misma marca que sea icónico y relevante para mantener la esencia del diseño. (QUE A TI COMO DISEÑADORA O DISEÑADOR GRAFICO TE EVOQUE ESE SENTIMIENTO, DE SER UNICO Y NO SOLO PARA EDI8M NOOO, QUE SEA EN GENERAL QUE BUSQUES TRASMITIR UN VERDADERO MENSAJE QUE NO SOLO LO VEAS COMO INSERTAR FUENTE Y 3 IMAGENES... ",
+          "tip": "Recuerda que tenemos tiempo indefinido para realizar de MANERA PROFESIONAL (COMO LO QUE TU ERES YA) CADA DISEÑO",
+          "ejemplo": "Demuestra tu potencial que yo VEO EN TI y no agobies tu mism@ si no lo has intentado y fracaso por que te recuerdo que EL DISEÑO GRAFICO ES PRUEBA Y ERROR POR CADA 10 BEUNAS IDEAS, HUBIERON 40 MALAS "
+        }
+      ]
     }
   ],
-  "updated": "2026-03-01T23:22:11.149Z"
+  "updated": "2026-03-02T00:05:57.988Z"
 }
