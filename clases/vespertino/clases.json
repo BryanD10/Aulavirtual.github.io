@@ -299,7 +299,18 @@
       "objetivos": [],
       "pasos": [],
       "numero": "07"
+    },
+    {
+      "tipo": "teoria",
+      "titulo": "Centro de ayuda > TEXTO",
+      "materia": "DISEÑO GRAFICO",
+      "videoUrl": "https://www.affinity.studio/es_es/help/?query=TEXTO",
+      "herramientaUrl": "https://www.affinity.studio/es_es/help/?query=TEXTO",
+      "visible": true,
+      "objetivos": [],
+      "pasos": [],
+      "numero": "08"
     }
   ],
-  "updated": "2026-03-06T19:10:19.070Z"
+  "updated": "2026-03-06T21:35:27.850Z"
 }
