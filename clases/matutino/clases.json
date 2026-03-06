@@ -141,7 +141,18 @@
           "descripcion": ""
         }
       ]
+    },
+    {
+      "tipo": "teoria",
+      "titulo": "Centro de ayuda > CAPAS",
+      "materia": "DISEÑO GRAFICO",
+      "videoUrl": "https://www.affinity.studio/es_es/help/?query=CAPAS",
+      "herramientaUrl": "https://www.affinity.studio/es_es/help/?query=CAPAS",
+      "visible": true,
+      "objetivos": [],
+      "pasos": [],
+      "numero": "07"
     }
   ],
-  "updated": "2026-03-06T17:51:24.113Z"
+  "updated": "2026-03-06T19:10:20.283Z"
 }
