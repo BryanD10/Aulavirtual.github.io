@@ -288,7 +288,18 @@
           "ejemplo": "Demuestra tu potencial que yo VEO EN TI y no te agobies tu mism@ si no lo has intentado y fracaso por que te recuerdo que EL DISEÑO GRAFICO ES PRUEBA Y ERROR POR CADA 10 BUENDAS IDEAS, HUBIERON 20 MALAS  Y 40 FRACASOS PERO yo creo en ti ."
         }
       ]
+    },
+    {
+      "tipo": "teoria",
+      "titulo": "Centro de ayuda > CAPAS",
+      "materia": "DISEÑO GRAFICO",
+      "videoUrl": "https://www.affinity.studio/es_es/help/?query=CAPAS",
+      "herramientaUrl": "https://www.affinity.studio/es_es/help/?query=CAPAS",
+      "visible": true,
+      "objetivos": [],
+      "pasos": [],
+      "numero": "07"
     }
   ],
-  "updated": "2026-03-02T00:10:46.176Z"
+  "updated": "2026-03-06T19:10:19.070Z"
 }
