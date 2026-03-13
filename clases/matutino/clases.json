@@ -141,18 +141,7 @@
           "descripcion": ""
         }
       ]
-    },
-    {
-      "tipo": "teoria",
-      "titulo": "Centro de ayuda > TEXTO",
-      "materia": "DISEÑO GRAFICO",
-      "videoUrl": "https://www.affinity.studio/es_es/help/?query=TEXTO",
-      "herramientaUrl": "https://www.affinity.studio/es_es/help/?query=TEXTO",
-      "visible": true,
-      "objetivos": [],
-      "pasos": [],
-      "numero": "08"
     }
   ],
-  "updated": "2026-03-13T21:45:28.128Z"
+  "updated": "2026-03-13T21:45:31.453Z"
 }
