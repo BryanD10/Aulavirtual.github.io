@@ -144,17 +144,6 @@
     },
     {
       "tipo": "teoria",
-      "titulo": "Centro de ayuda > CAPAS",
-      "materia": "DISEÑO GRAFICO",
-      "videoUrl": "https://www.affinity.studio/es_es/help/?query=CAPAS",
-      "herramientaUrl": "https://www.affinity.studio/es_es/help/?query=CAPAS",
-      "visible": true,
-      "objetivos": [],
-      "pasos": [],
-      "numero": "07"
-    },
-    {
-      "tipo": "teoria",
       "titulo": "Centro de ayuda > TEXTO",
       "materia": "DISEÑO GRAFICO",
       "videoUrl": "https://www.affinity.studio/es_es/help/?query=TEXTO",
@@ -165,5 +154,5 @@
       "numero": "08"
     }
   ],
-  "updated": "2026-03-06T21:35:28.660Z"
+  "updated": "2026-03-13T21:45:28.128Z"
 }
